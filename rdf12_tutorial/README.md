@@ -2,6 +2,14 @@
 
 This tutorial introduces RDF 1.2 features and demonstrates how to work with RDF data using the [rudof](https://github.com/rudof-project/rudof) tool.
 
+## 📚 Tutorial Structure
+
+- **[Quick Start Guide](QUICKSTART.md)** - Get started in 5 minutes
+- **[Main Tutorial](README.md)** - This comprehensive guide (you are here)
+- **[Advanced Topics](ADVANCED.md)** - RDF-star, named graphs, and optimization
+- **[Exercises](EXERCISES.md)** - Hands-on practice problems
+- **[Examples](examples/)** - Ready-to-use RDF files and schemas
+
 ## Table of Contents
 
 1. [Introduction to RDF 1.2](#introduction-to-rdf-12)
