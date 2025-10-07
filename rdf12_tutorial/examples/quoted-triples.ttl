@@ -1,0 +1,27 @@
+@prefix ex: <http://example.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# RDF-star: Quoted triples allow us to make statements about statements
+
+# Statement: Bob likes Pizza
+ex:Bob ex:likes ex:Pizza .
+
+# Alice says that Bob likes Pizza (metadata about a statement)
+ex:Alice ex:says << ex:Bob ex:likes ex:Pizza >> .
+
+# We can add more metadata to the same statement
+<< ex:Bob ex:likes ex:Pizza >> ex:confidence 0.9 ;
+    ex:source ex:Survey2024 ;
+    ex:timestamp "2024-03-15T10:30:00"^^xsd:dateTime .
+
+# Another example: Movie ratings with provenance
+ex:Movie1 ex:title "The Matrix" .
+ex:Charlie ex:rates << ex:Movie1 ex:rating 5 >> .
+
+<< ex:Movie1 ex:rating 5 >> ex:reviewDate "2024-01-10"^^xsd:date ;
+    ex:reviewer ex:Charlie ;
+    ex:reviewText "Excellent movie!" .
+
+# Nested quoted triples (making statements about statements about statements)
+ex:Diana ex:believes << ex:Alice ex:says << ex:Bob ex:likes ex:Pizza >> >> .

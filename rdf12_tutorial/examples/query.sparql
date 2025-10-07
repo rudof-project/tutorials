@@ -1,0 +1,33 @@
+# Example SPARQL queries for the basic.ttl file
+
+# Query 1: Find all people and their names
+SELECT ?person ?name
+WHERE {
+    ?person a <http://xmlns.com/foaf/0.1/Person> ;
+            <http://xmlns.com/foaf/0.1/name> ?name .
+}
+
+# Query 2: Find people who know someone
+# SELECT ?person ?name ?friend
+# WHERE {
+#     ?person a <http://xmlns.com/foaf/0.1/Person> ;
+#             <http://xmlns.com/foaf/0.1/name> ?name ;
+#             <http://xmlns.com/foaf/0.1/knows> ?friend .
+# }
+
+# Query 3: Find all employees of organizations
+# SELECT ?org ?orgName ?employee
+# WHERE {
+#     ?org a <http://example.org/Organization> ;
+#          <http://example.org/name> ?orgName ;
+#          <http://example.org/employee> ?employee .
+# }
+
+# Query 4: Find people older than 29
+# SELECT ?person ?name ?age
+# WHERE {
+#     ?person a <http://xmlns.com/foaf/0.1/Person> ;
+#             <http://xmlns.com/foaf/0.1/name> ?name ;
+#             <http://xmlns.com/foaf/0.1/age> ?age .
+#     FILTER (?age > 29)
+# }

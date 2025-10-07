@@ -1,0 +1,21 @@
+PREFIX ex: <http://example.org/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# ShEx schema for validating person data
+
+ex:Person {
+    a [ foaf:Person ] ;
+    foaf:name xsd:string ;
+    foaf:age xsd:integer ? ;
+    foaf:mbox IRI ? ;
+    ex:birthDate xsd:date ? ;
+    foaf:knows @ex:Person *
+}
+
+ex:Organization {
+    a [ ex:Organization ] ;
+    ex:name xsd:string ;
+    ex:founded xsd:date ? ;
+    ex:employee @ex:Person +
+}
