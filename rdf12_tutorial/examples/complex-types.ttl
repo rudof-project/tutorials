@@ -1,0 +1,65 @@
+@prefix ex: <http://example.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# Demonstrating various XSD datatypes supported in RDF 1.2
+
+ex:DataTypesExample a ex:TypesDemo .
+
+# String types
+ex:DataTypesExample ex:stringValue "Hello World" ;
+    ex:typedString "Typed String"^^xsd:string ;
+    ex:normalizedString "Normalized String"^^xsd:normalizedString .
+
+# Numeric types
+ex:DataTypesExample ex:integerValue 42 ;
+    ex:intValue 100^^xsd:int ;
+    ex:longValue 9223372036854775807^^xsd:long ;
+    ex:shortValue 32767^^xsd:short ;
+    ex:byteValue 127^^xsd:byte ;
+    ex:decimalValue 123.45^^xsd:decimal ;
+    ex:floatValue 3.14159^^xsd:float ;
+    ex:doubleValue 2.718281828459045^^xsd:double .
+
+# Boolean
+ex:DataTypesExample ex:booleanTrue true ;
+    ex:booleanFalse false ;
+    ex:typedBoolean "true"^^xsd:boolean .
+
+# Date and time types
+ex:DataTypesExample ex:dateValue "2024-03-15"^^xsd:date ;
+    ex:timeValue "10:30:00"^^xsd:time ;
+    ex:dateTimeValue "2024-03-15T10:30:00"^^xsd:dateTime ;
+    ex:dateTimeWithZone "2024-03-15T10:30:00Z"^^xsd:dateTime ;
+    ex:durationValue "P1Y2M3DT4H5M6S"^^xsd:duration .
+
+# Unsigned numeric types
+ex:DataTypesExample ex:unsignedInt 4294967295^^xsd:unsignedInt ;
+    ex:unsignedLong 18446744073709551615^^xsd:unsignedLong ;
+    ex:unsignedShort 65535^^xsd:unsignedShort ;
+    ex:unsignedByte 255^^xsd:unsignedByte ;
+    ex:positiveInteger 123456^^xsd:positiveInteger ;
+    ex:nonNegativeInteger 0^^xsd:nonNegativeInteger .
+
+# Binary data
+ex:DataTypesExample ex:hexBinary "48656c6c6f"^^xsd:hexBinary ;
+    ex:base64Binary "SGVsbG8gV29ybGQ="^^xsd:base64Binary .
+
+# Other types
+ex:DataTypesExample ex:anyURI "https://example.org"^^xsd:anyURI ;
+    ex:language "en-US"^^xsd:language .
+
+# Collections with typed values
+ex:Measurement1 a ex:Measurement ;
+    ex:temperature "23.5"^^xsd:decimal ;
+    ex:unit "Celsius" ;
+    ex:timestamp "2024-03-15T14:30:00Z"^^xsd:dateTime ;
+    ex:accuracy "0.1"^^xsd:decimal ;
+    ex:isValid true .
+
+ex:Measurement2 a ex:Measurement ;
+    ex:temperature "74.3"^^xsd:decimal ;
+    ex:unit "Fahrenheit" ;
+    ex:timestamp "2024-03-15T14:30:00Z"^^xsd:dateTime ;
+    ex:accuracy "0.2"^^xsd:decimal ;
+    ex:isValid true .

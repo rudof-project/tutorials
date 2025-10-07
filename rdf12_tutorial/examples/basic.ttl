@@ -1,0 +1,22 @@
+@prefix ex: <http://example.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Basic person information
+ex:Alice a foaf:Person ;
+    foaf:name "Alice Smith" ;
+    foaf:age 30 ;
+    foaf:mbox <mailto:alice@example.org> ;
+    ex:birthDate "1993-05-15"^^xsd:date .
+
+ex:Bob a foaf:Person ;
+    foaf:name "Bob Jones" ;
+    foaf:age 28 ;
+    foaf:knows ex:Alice .
+
+# Basic organization
+ex:ACME a ex:Organization ;
+    ex:name "ACME Corporation" ;
+    ex:founded "2000-01-01"^^xsd:date ;
+    ex:employee ex:Alice ;
+    ex:employee ex:Bob .

@@ -1,0 +1,124 @@
+@prefix ex: <http://example.org/catalog/> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# A practical example: Book catalog with reviews and ratings
+
+# Books
+ex:Book1 a schema:Book ;
+    schema:name "The Semantic Web Primer"@en ;
+    schema:author ex:Author1 ;
+    schema:isbn "978-0262018289" ;
+    schema:datePublished "2012-06-08"^^xsd:date ;
+    schema:numberOfPages 296 ;
+    schema:publisher ex:MITPress ;
+    schema:inLanguage "en" ;
+    schema:genre "Computer Science"@en ;
+    schema:description """An introduction to the Semantic Web 
+    and its underlying technologies."""@en ;
+    ex:price 45.00 ;
+    ex:currency "USD" ;
+    ex:inStock true .
+
+ex:Book2 a schema:Book ;
+    schema:name "Learning SPARQL"@en ;
+    schema:author ex:Author2 ;
+    schema:isbn "978-1449371432" ;
+    schema:datePublished "2013-07-11"^^xsd:date ;
+    schema:numberOfPages 386 ;
+    schema:publisher ex:OReilly ;
+    schema:inLanguage "en" ;
+    schema:genre "Computer Science"@en ;
+    schema:description "Querying and updating with SPARQL 1.1"@en ;
+    ex:price 39.99 ;
+    ex:currency "USD" ;
+    ex:inStock true .
+
+ex:Book3 a schema:Book ;
+    schema:name "Linked Data: Evolving the Web into a Global Data Space"@en ;
+    schema:author ex:Author3 ;
+    schema:author ex:Author4 ;
+    schema:isbn "978-1608454303" ;
+    schema:datePublished "2011-02-01"^^xsd:date ;
+    schema:numberOfPages 136 ;
+    schema:publisher ex:MorganClaypool ;
+    schema:inLanguage "en" ;
+    schema:genre "Computer Science"@en ;
+    ex:price 29.95 ;
+    ex:currency "USD" ;
+    ex:inStock false .
+
+# Authors
+ex:Author1 a schema:Person ;
+    schema:name "Grigoris Antoniou" ;
+    schema:nationality "Greece" .
+
+ex:Author2 a schema:Person ;
+    schema:name "Bob DuCharme" ;
+    schema:url <https://bobdc.com/> .
+
+ex:Author3 a schema:Person ;
+    schema:name "Tom Heath" .
+
+ex:Author4 a schema:Person ;
+    schema:name "Christian Bizer" .
+
+# Publishers
+ex:MITPress a schema:Organization ;
+    schema:name "MIT Press" ;
+    schema:url <https://mitpress.mit.edu/> .
+
+ex:OReilly a schema:Organization ;
+    schema:name "O'Reilly Media" ;
+    schema:url <https://www.oreilly.com/> .
+
+ex:MorganClaypool a schema:Organization ;
+    schema:name "Morgan & Claypool Publishers" .
+
+# Customer reviews using RDF-star for metadata
+ex:Customer1 a schema:Person ;
+    schema:name "Alice Johnson" .
+
+ex:Customer2 a schema:Person ;
+    schema:name "Bob Smith" .
+
+# Review 1 for Book1
+ex:Customer1 ex:wrote << ex:Book1 schema:aggregateRating 5 >> .
+
+<< ex:Book1 schema:aggregateRating 5 >> 
+    schema:reviewBody """Excellent introduction to the Semantic Web. 
+    Clear explanations and good examples."""@en ;
+    schema:reviewRating 5 ;
+    schema:datePublished "2024-01-15"^^xsd:date ;
+    schema:author ex:Customer1 .
+
+# Review 2 for Book1
+ex:Customer2 ex:wrote << ex:Book1 schema:aggregateRating 4 >> .
+
+<< ex:Book1 schema:aggregateRating 4 >> 
+    schema:reviewBody "Good book, but some sections are a bit outdated."@en ;
+    schema:reviewRating 4 ;
+    schema:datePublished "2024-02-20"^^xsd:date ;
+    schema:author ex:Customer2 .
+
+# Review for Book2
+ex:Customer1 ex:wrote << ex:Book2 schema:aggregateRating 5 >> .
+
+<< ex:Book2 schema:aggregateRating 5 >> 
+    schema:reviewBody """The best book for learning SPARQL. 
+    Practical examples and clear explanations."""@en ;
+    schema:reviewRating 5 ;
+    schema:datePublished "2024-03-01"^^xsd:date ;
+    schema:author ex:Customer1 .
+
+# Book series and relationships
+ex:Book1 dcterms:isPartOf ex:SemanticWebSeries .
+ex:Book3 dcterms:isPartOf ex:SemanticWebSeries .
+
+ex:SemanticWebSeries a schema:BookSeries ;
+    schema:name "Semantic Web Book Series" .
+
+# Related books
+ex:Book1 schema:relatedLink ex:Book2 ;
+    schema:relatedLink ex:Book3 .

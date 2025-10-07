@@ -1,0 +1,39 @@
+@prefix ex: <http://example.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Multi-lingual labels and descriptions
+
+ex:Product1 a ex:Product ;
+    rdfs:label "Computer"@en ;
+    rdfs:label "Ordenador"@es ;
+    rdfs:label "Ordinateur"@fr ;
+    rdfs:label "Computer"@de ;
+    rdfs:label "コンピュータ"@ja ;
+    rdfs:label "计算机"@zh ;
+    ex:description "A high-performance laptop"@en ;
+    ex:description "Un portátil de alto rendimiento"@es ;
+    ex:description "Un ordinateur portable haute performance"@fr .
+
+# RDF 1.2 directional language tags for right-to-left languages
+ex:Product2 a ex:Product ;
+    rdfs:label "Tablet"@en ;
+    rdfs:label "لوحي"@ar ;
+    ex:description "A modern tablet device"@en ;
+    ex:description "جهاز لوحي حديث"@ar .
+
+# Mixed content with different languages
+ex:Book1 a ex:Book ;
+    ex:title "Learning RDF"@en ;
+    ex:title "Aprendiendo RDF"@es ;
+    ex:author "John Smith" ;
+    ex:abstract """This book teaches the fundamentals 
+    of RDF and semantic web technologies."""@en ;
+    ex:abstract """Este libro enseña los fundamentos
+    de RDF y las tecnologías de la web semántica."""@es .
+
+# Language tags with regional variants
+ex:App1 a ex:Application ;
+    rdfs:label "Calendar"@en-US ;
+    rdfs:label "Calendar"@en-GB ;
+    rdfs:label "Calendário"@pt-BR ;
+    rdfs:label "Calendário"@pt-PT .

@@ -1,0 +1,5 @@
+# ShapeMap for validating basic.ttl
+
+<http://example.org/Alice>@<http://example.org/Person>
+<http://example.org/Bob>@<http://example.org/Person>
+<http://example.org/ACME>@<http://example.org/Organization>
