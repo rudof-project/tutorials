@@ -13,13 +13,13 @@ ex:DataTypesExample ex:stringValue "Hello World" ;
 
 # Numeric types
 ex:DataTypesExample ex:integerValue 42 ;
-    ex:intValue 100^^xsd:int ;
-    ex:longValue 9223372036854775807^^xsd:long ;
-    ex:shortValue 32767^^xsd:short ;
-    ex:byteValue 127^^xsd:byte ;
-    ex:decimalValue 123.45^^xsd:decimal ;
-    ex:floatValue 3.14159^^xsd:float ;
-    ex:doubleValue 2.718281828459045^^xsd:double .
+    ex:intValue "100"^^xsd:int ;
+    ex:longValue "9223372036854775807"^^xsd:long ;
+    ex:shortValue "32767"^^xsd:short ;
+    ex:byteValue "127"^^xsd:byte ;
+    ex:decimalValue "123.45"^^xsd:decimal ;
+    ex:floatValue "3.14159"^^xsd:float ;
+    ex:doubleValue "2.718281828459045"^^xsd:double .
 
 # Boolean
 ex:DataTypesExample ex:booleanTrue true ;
@@ -34,12 +34,12 @@ ex:DataTypesExample ex:dateValue "2024-03-15"^^xsd:date ;
     ex:durationValue "P1Y2M3DT4H5M6S"^^xsd:duration .
 
 # Unsigned numeric types
-ex:DataTypesExample ex:unsignedInt 4294967295^^xsd:unsignedInt ;
-    ex:unsignedLong 18446744073709551615^^xsd:unsignedLong ;
-    ex:unsignedShort 65535^^xsd:unsignedShort ;
-    ex:unsignedByte 255^^xsd:unsignedByte ;
-    ex:positiveInteger 123456^^xsd:positiveInteger ;
-    ex:nonNegativeInteger 0^^xsd:nonNegativeInteger .
+ex:DataTypesExample ex:unsignedInt "4294967295"^^xsd:unsignedInt ;
+    ex:unsignedLong "18446744073709551615"^^xsd:unsignedLong ;
+    ex:unsignedShort "65535"^^xsd:unsignedShort ;
+    ex:unsignedByte "255"^^xsd:unsignedByte ;
+    ex:positiveInteger "123456"^^xsd:positiveInteger ;
+    ex:nonNegativeInteger "0"^^xsd:nonNegativeInteger .
 
 # Binary data
 ex:DataTypesExample ex:hexBinary "48656c6c6f"^^xsd:hexBinary ;
