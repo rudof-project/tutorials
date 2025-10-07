@@ -21,7 +21,7 @@ bibtex_bibfiles:
 # Information about where the book exists on the web
 repository:
   url: https://github.com/rudof-project/tutorials
-  path_to_book: docs
+  path_to_book: .
   branch: main
 
 # Add GitHub buttons to your book
