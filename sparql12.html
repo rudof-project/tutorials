@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Shaping Knowledge Graphs &#8212; Shaping Knowledge Graphs</title>
+    <title>SPARQL 1.2 &#8212; Shaping Knowledge Graphs</title>
   
   
   
@@ -57,10 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sparql12';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Short introduction to Rudof" href="rudof.html" />
+    <link rel="next" title="Using rudof to compare schemas" href="compare.html" />
+    <link rel="prev" title="RDF 1.2" href="rdf12.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -143,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -174,13 +173,13 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Shaping Knowledge Graphs
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="rudof.html">Short introduction to Rudof</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rdf.html">RDF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparql.html">SPARQL</a></li>
@@ -188,7 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="shacl.html">SHACL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dctap.html">Introduction to DCTAP</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rdf12.html">RDF 1.2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sparql12.html">SPARQL 1.2</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">SPARQL 1.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compare.html">Using rudof to compare schemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_description.html">Service descriptions</a></li>
 </ul>
@@ -237,6 +236,37 @@
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rudof-project/tutorials/blob/master/rudof/sparql12.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-source-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
     <i class="fab fa-github"></i>
@@ -262,7 +292,7 @@
       
       
       
-      <li><a href="https://github.com/rudof-project/tutorials/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/rudof-project/tutorials/issues/new?title=Issue%20on%20page%20%2Fsparql12.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -292,7 +322,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/sparql12.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -302,7 +332,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -363,7 +393,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -374,11 +406,21 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Shaping Knowledge Graphs</h1>
+    <h1>SPARQL 1.2</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-configure-rudof">Install and configure rudof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-some-rdf-1-2-content">Creating some RDF 1.2 content</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">SPARQL 1.2</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -388,23 +430,103 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="shaping-knowledge-graphs">
-<h1>Shaping Knowledge Graphs<a class="headerlink" href="#shaping-knowledge-graphs" title="Link to this heading">#</a></h1>
-<p>This is a Jupyter book that introduces Knowledge Graphs concepts using <a class="reference external" href="https://rudof-project.github.io/rudof/">rudof</a></p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="rudof.html">Short introduction to Rudof</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rdf.html">RDF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sparql.html">SPARQL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="shex.html">ShEx</a></li>
-<li class="toctree-l1"><a class="reference internal" href="shacl.html">SHACL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dctap.html">Introduction to DCTAP</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rdf12.html">RDF 1.2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sparql12.html">SPARQL 1.2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="compare.html">Using rudof to compare schemas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="service_description.html">Service descriptions</a></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="sparql-1-2">
+<h1>SPARQL 1.2<a class="headerlink" href="#sparql-1-2" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/github/%3Cyourusername%3E/%3Cyourrepo%3E/blob/main/book/notebooks/example.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<p>This document contains a short introduction to <a class="reference external" href="https://www.w3.org/TR/rdf11-primer/">RDF</a> using <a class="reference external" href="https://rudof-project.github.io/">rudof</a>.</p>
+<section id="install-and-configure-rudof">
+<h2>Install and configure rudof<a class="headerlink" href="#install-and-configure-rudof" title="Link to this heading">#</a></h2>
+<p>The library is available as <code class="docutils literal notranslate"><span class="pre">pyrudof</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pyrudof
+</pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.120)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The main entry point if a class called <code class="docutils literal notranslate"><span class="pre">Rudof</span></code> through which most of the functionality is provided.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rudof</span><span class="p">,</span> <span class="n">RudofConfig</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In order to initialize that class, it is possible to pass a RudofConfig instance which contains configuration parameters for customization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span> <span class="o">=</span> <span class="n">Rudof</span><span class="p">(</span><span class="n">RudofConfig</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>ipython
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ipython in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (9.6.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: decorator in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (5.2.1)
+Requirement already satisfied: ipython-pygments-lexers in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (1.1.1)
+Requirement already satisfied: jedi&gt;=0.16 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (0.19.2)
+Requirement already satisfied: matplotlib-inline in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (0.1.7)
+Requirement already satisfied: pexpect&gt;4.3 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (4.9.0)
+Requirement already satisfied: prompt_toolkit&lt;3.1.0,&gt;=3.0.41 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (3.0.52)
+Requirement already satisfied: pygments&gt;=2.4.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (2.19.2)
+Requirement already satisfied: stack_data in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (0.6.3)
+Requirement already satisfied: traitlets&gt;=5.13.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (5.14.3)
+Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.4 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from jedi&gt;=0.16-&gt;ipython) (0.8.5)
+Requirement already satisfied: ptyprocess&gt;=0.5 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from pexpect&gt;4.3-&gt;ipython) (0.7.0)
+Requirement already satisfied: wcwidth in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython) (0.2.14)
+Requirement already satisfied: executing&gt;=1.2.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (2.2.1)
+Requirement already satisfied: asttokens&gt;=2.1.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (3.0.0)
+Requirement already satisfied: pure-eval in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (0.2.3)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-some-rdf-1-2-content">
+<h2>Creating some RDF 1.2 content<a class="headerlink" href="#creating-some-rdf-1-2-content" title="Link to this heading">#</a></h2>
+<p>Rudof has added support for <a class="reference external" href="https://www.w3.org/TR/rdf12-primer">RDF 1.2</a>. It is possible, for example, to load some RDF 1.2 files and visualize them.</p>
+<p>RDF 1.2 introduces <a class="reference external" href="https://www.w3.org/TR/rdf12-primer/#section-triple-terms">triple terms</a> which denote statements that can be the object of some triples.</p>
+<p>For example, we can state that <code class="docutils literal notranslate"><span class="pre">:bob</span></code> is interested in <code class="docutils literal notranslate"><span class="pre">:MonaLisa</span></code> since <code class="docutils literal notranslate"><span class="pre">4th</span> <span class="pre">October</span> <span class="pre">1998</span></code> using the following code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2"> prefix : &lt;http://example.org/&gt;</span>
+<span class="s2"> prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
+<span class="s2"> prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+
+<span class="s2"> :aliceBelief a :Statement ;</span>
+<span class="s2">    rdf:reifies &lt;&lt;( :bob :knows :dave  )&gt;&gt; ;</span>
+<span class="s2">    :since 2025 ;</span>
+<span class="s2">    :accordingTo :dave  .</span>
+<span class="s2"> &quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h2>SPARQL 1.2<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -437,12 +559,21 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="rdf12.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">RDF 1.2</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="rudof.html"
+       href="compare.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Short introduction to Rudof</p>
+        <p class="prev-next-title">Using rudof to compare schemas</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -452,6 +583,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-configure-rudof">Install and configure rudof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-some-rdf-1-2-content">Creating some RDF 1.2 content</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">SPARQL 1.2</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
