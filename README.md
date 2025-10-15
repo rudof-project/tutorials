@@ -12,7 +12,7 @@ pip install -r requirements.txt
 ### 2. Build the book
 
 ```bash
-jupyter-book build book/
+jupyter-book build rudof
 ```
 
 ### 3. Run notebooks on Google Colab

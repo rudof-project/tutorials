@@ -1,0 +1,82 @@
+@startuml
+
+<style>
+.reifier {
+BackGroundColor Yellow
+LineThickness 1
+LineColor Black
+
+}
+.literal {
+BackGroundColor Cyan
+LineThickness 1
+LineColor Black
+
+}
+.uri {
+BackGroundColor White
+LineThickness 1
+LineColor Blue
+RoundCorner 25
+
+}
+.bnode {
+BackGroundColor Gray
+LineThickness 1
+LineColor Blue
+RoundCorner 25
+
+}
+.asserted {
+BackGroundColor White
+LineThickness 2
+LineColor Black
+
+}
+.non_asserted {
+BackGroundColor White
+LineThickness 2
+LineColor Blue
+RoundCorner 0
+
+}
+</style>
+hide stereotype
+
+rectangle "[[http://example.com/bob :bob]]" <<uri>> as 5
+
+
+
+rectangle "[[http://example.com/t :t]]" <<uri>> as 3
+
+
+
+rectangle "[[http://example.com/alice :alice]]" <<uri>> as 0
+
+
+
+rectangle "[[<http://example.com/name> :name]]" <<uri>> as 1
+
+rectangle " " <<asserted>> as 9
+
+
+rectangle ""2021-07-07"^^xsd:date" <<literal>> as 7
+
+rectangle ""Alice"" <<literal>> as 2
+
+3 --> 7 : [[http://example.com/recorded :recorded]]
+
+0 --> 2 : [[http://example.com/name :name]]
+
+3 --> 9 : [[http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies reifies]]
+
+3 --> 5 : [[http://example.com/statedBy :statedBy]]
+
+9-->0: subject 
+
+9-->1: predicate 
+
+9-->2: object 
+
+@enduml
+

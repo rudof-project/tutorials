@@ -1,0 +1,17 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: rudof
+- file: rdf
+- file: sparql
+- file: shex
+- file: shacl
+- file: dctap
+- file: rdf12
+- file: sparql12
+- file: compare
+- file: service_description
+
