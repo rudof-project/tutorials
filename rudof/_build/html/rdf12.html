@@ -416,7 +416,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-configure-rudof">Install and configure rudof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminaries-install-and-configure-rudof">Preliminaries: Install and configure rudof</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#support-for-rdf-1-2">Support for RDF 1.2</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-triple-terms-directly">Declaring triple terms directly</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reifying-triples">Reifying triples</a></li>
@@ -436,10 +436,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="rdf-1-2">
 <h1>RDF 1.2<a class="headerlink" href="#rdf-1-2" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="https://colab.research.google.com/github/%3Cyourusername%3E/%3Cyourrepo%3E/blob/main/book/notebooks/example.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <p>This document contains a short introduction to <a class="reference external" href="https://www.w3.org/TR/rdf11-primer/">RDF</a> using <a class="reference external" href="https://rudof-project.github.io/">rudof</a>.</p>
-<section id="install-and-configure-rudof">
-<h2>Install and configure rudof<a class="headerlink" href="#install-and-configure-rudof" title="Link to this heading">#</a></h2>
+<section id="preliminaries-install-and-configure-rudof">
+<h2>Preliminaries: Install and configure rudof<a class="headerlink" href="#preliminaries-install-and-configure-rudof" title="Link to this heading">#</a></h2>
 <p>The library is available as <code class="docutils literal notranslate"><span class="pre">pyrudof</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -544,47 +543,44 @@ Requirement already satisfied: pure-eval in /home/labra/src/python/rudof/tutoria
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 11 nodes and 4 edges
-Node 6: Iri: :bob (http://example.org/bob)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 1, as_object_in_triple: 0 }
-Node 0: Iri: :aliceBelief (http://example.org/aliceBelief)
-     count: UsageCount { as_predicate: 0, as_subject: 4, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 10: Iri: :Statement (http://example.org/Statement)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
 Node 7: Predicate: :knows (&lt;http://example.org/knows&gt;)
      count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 1, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 4: Literal: 2025
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>: 0, as_object_in_triple: 0 }
+Node 3: Predicate: rdf:type (&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;)
+     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
 Node 5: Reifies
      count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 2: Iri: :dave (http://example.org/dave)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 1 }
-Node 9: Predicate: rdf:type (&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;)
+Node 1: Predicate: :since (&lt;http://example.org/since&gt;)
      count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 1: Predicate: :accordingTo (&lt;http://example.org/accordingTo&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 8: NonAssertedTriple
+Node 2: Literal: 2025
      count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 3: Predicate: :since (&lt;http://example.org/since&gt;)
+Node 8: Iri: :dave (http://example.org/dave)
+     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 1 }
+Node 9: NonAssertedTriple
+     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
+Node 0: Iri: :aliceBelief (http://example.org/aliceBelief)
+     count: UsageCount { as_predicate: 0, as_subject: 4, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
+Node 4: Iri: :Statement (http://example.org/Statement)
+     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
+Node 10: Predicate: :accordingTo (&lt;http://example.org/accordingTo&gt;)
      count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Edge :since (http://example.org/since): 0 --&gt; 4
-Edge reifies: 0 --&gt; 8
-Edge rdf:type (http://www.w3.org/1999/02/22-rdf-syntax-ns#type): 0 --&gt; 10
-Edge :accordingTo (http://example.org/accordingTo): 0 --&gt; 2
+Node 6: Iri: :bob (http://example.org/bob)
+     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 1, as_object_in_triple: 0 }
+Edge rdf:type (http://www.w3.org/1999/02/22-rdf-syntax-ns#type): 0 --&gt; 4
+Edge :since (http://example.org/since): 0 --&gt; 2
+Edge :accordingTo (http://example.org/accordingTo): 0 --&gt; 8
+Edge reifies: 0 --&gt; 9
 Starting conversion...
-Converting node Iri: :bob (http://example.org/bob) with node id 6 to plantuml
-Converting node Iri: :aliceBelief (http://example.org/aliceBelief) with node id 0 to plantuml
-Converting node Iri: :Statement (http://example.org/Statement) with node id 10 to plantuml
 Converting node Predicate: :knows (&lt;http://example.org/knows&gt;) with node id 7 to plantuml
-Converting node Literal: 2025 with node id 4 to plantuml
+Converting node Predicate: rdf:type (&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;) with node id 3 to plantuml
 Converting node Reifies with node id 5 to plantuml
-Converting node Iri: :dave (http://example.org/dave) with node id 2 to plantuml
-Converting node Predicate: rdf:type (&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;) with node id 9 to plantuml
-Converting node Predicate: :accordingTo (&lt;http://example.org/accordingTo&gt;) with node id 1 to plantuml
-Converting node NonAssertedTriple with node id 8 to plantuml
-Converting node Predicate: :since (&lt;http://example.org/since&gt;) with node id 3 to plantuml
+Converting node Predicate: :since (&lt;http://example.org/since&gt;) with node id 1 to plantuml
+Converting node Literal: 2025 with node id 2 to plantuml
+Converting node Iri: :dave (http://example.org/dave) with node id 8 to plantuml
+Converting node NonAssertedTriple with node id 9 to plantuml
+Converting node Iri: :aliceBelief (http://example.org/aliceBelief) with node id 0 to plantuml
+Converting node Iri: :Statement (http://example.org/Statement) with node id 4 to plantuml
+Converting node Predicate: :accordingTo (&lt;http://example.org/accordingTo&gt;) with node id 10 to plantuml
+Converting node Iri: :bob (http://example.org/bob) with node id 6 to plantuml
 </pre></div>
 </div>
 </div>
@@ -609,7 +605,7 @@ Converting node Predicate: :since (&lt;http://example.org/since&gt;) with node i
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e41f6869c1969fe9ace3c6a95d360f556b625e088fd50a1a13c5805bb90f9596.png" src="_images/e41f6869c1969fe9ace3c6a95d360f556b625e088fd50a1a13c5805bb90f9596.png" />
+<img alt="_images/f0bb828df2588068eaaa3d859e6f0bdbff0f55a7a26f0c7ae9d8e35657cc317a.png" src="_images/f0bb828df2588068eaaa3d859e6f0bdbff0f55a7a26f0c7ae9d8e35657cc317a.png" />
 </div>
 </div>
 <p>In <a class="reference external" href="https://www.w3.org/TR/rdf12-turtle/">RDF 1.2 turtle syntax</a>, there are several possibilities to define triple terms.</p>
@@ -646,22 +642,25 @@ Converting node Predicate: :since (&lt;http://example.org/since&gt;) with node i
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 10 nodes and 3 edges
+Node 6: Literal: &quot;Designer&quot;
+     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 1 }
+Node 5: Predicate: :jobTitle (&lt;http://www.example.org/jobTitle&gt;)
+     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 1, as_subject_in_triple: 0, as_object_in_triple: 0 }
 Node 2: Literal: &quot;Smith&quot;
      count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 1: Predicate: :familyName (&lt;http://www.example.org/familyName&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
 Node 7: NonAssertedTriple
      count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
 Node 8: Predicate: :accordingTo (&lt;http://www.example.org/accordingTo&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 5: Predicate: :jobTitle (&lt;http://www.example.org/jobTitle&gt;)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 1, as_subject_in_triple: 0, as_object_in_triple: 0 }
+     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_tr
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iple: 0 }
 Node 9: Iri: :eric (http://www.example.org/eric)
      count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 6: Literal: &quot;Designer&quot;
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 1 }
 Node 3: BlankNode: anno
      count: UsageCount { as_predicate: 0, as_subject: 2, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
+Node 1: Predicate: :familyName (&lt;http://www.example.org/familyName&gt;)
+     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
 Node 4: Reifies
      count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
 Node 0: BlankNode: e38
@@ -670,14 +669,14 @@ Edge :familyName (http://www.example.org/familyName): 0 --&gt; 2
 Edge reifies: 3 --&gt; 7
 Edge :accordingTo (http://www.example.org/accordingTo): 3 --&gt; 9
 Starting conversion...
+Converting node Literal: &quot;Designer&quot; with node id 6 to plantuml
+Converting node Predicate: :jobTitle (&lt;http://www.example.org/jobTitle&gt;) with node id 5 to plantuml
 Converting node Literal: &quot;Smith&quot; with node id 2 to plantuml
-Converting node Predicate: :familyName (&lt;http://www.example.org/familyName&gt;) with node id 1 to plantuml
 Converting node NonAssertedTriple with node id 7 to plantuml
 Converting node Predicate: :accordingTo (&lt;http://www.example.org/accordingTo&gt;) with node id 8 to plantuml
-Converting node Predicate: :jobTitle (&lt;http://www.example.org/jobTitle&gt;) with node id 5 to plantuml
 Converting node Iri: :eric (http://www.example.org/eric) with node id 9 to plantuml
-Converting node Literal: &quot;Designer&quot; with node id 6 to plantuml
 Converting node BlankNode: anno with node id 3 to plantuml
+Converting node Predicate: :familyName (&lt;http://www.example.org/familyName&gt;) with node id 1 to plantuml
 Converting node Reifies with node id 4 to plantuml
 Converting node BlankNode: e38 with node id 0 to plantuml
 </pre></div>
@@ -703,7 +702,7 @@ Converting node BlankNode: e38 with node id 0 to plantuml
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1aa80346f8cb3c2de85122921c5210742653bc1b9cf5b2a544ca2806baed5327.png" src="_images/1aa80346f8cb3c2de85122921c5210742653bc1b9cf5b2a544ca2806baed5327.png" />
+<img alt="_images/b264eabf463f524f1c8a8c82f86a98233823826c851bdc69a2f7749e11b067cc.png" src="_images/b264eabf463f524f1c8a8c82f86a98233823826c851bdc69a2f7749e11b067cc.png" />
 </div>
 </div>
 </section>
@@ -742,46 +741,46 @@ Converting node BlankNode: e38 with node id 0 to plantuml
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 10 nodes and 3 edges
-Node 4: Predicate: :accordingTo (&lt;http://www.example.org/accordingTo&gt;)
+Node 8: Predicate: :accordingTo (&lt;http://www.example.org/accordingTo&gt;)
      count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 3: BlankNode: d01ec065a4c8669dbee3d5dbc6a9fa9e
+Node 3: BlankNode: eb86f6ac630f40e0b812f692b502634d
      count: UsageCount { as_predicate: 0, as_subject: 2, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 8: Literal: &quot;Assistant Designer&quot;
+Node 9: Iri: :employee22 (http://www.example.org/employee22)
+     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
+Node 5: Predicate: :jobTitle (&lt;http://www.example.org/jobTitle&gt;)
+     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 1, as_subject_in_triple: 0, as_object_in_triple: 0 }
+Node 6: Literal: &quot;Assistant Designer&quot;
      count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 1 }
 Node 0: Iri: :employee38 (http://www.example.org/employee38)
      count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 1, as_object_in_triple: 0 }
-Node 9: NonAssertedTriple
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 7: Predicate: :jobTitle (&lt;http://www.example.org/jobTitle&gt;)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 1, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 5: Iri: :employee22 (http://www.example.org/employee22)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
 Node 1: Predicate: :familyName (&lt;http://www.example.org/familyName&gt;)
      count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 6: Reifies
+Node 4: Reifies
      count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
+Node 7: NonAssertedTriple
+     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
 Node 2: Literal: &quot;Smith&quot;
      count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Edge reifies: 3 --&gt; 9
-Edge :accordingTo (http://www.example.org/accordingTo): 3 --&gt; 5
+Edge reifies: 3 --&gt; 7
+Edge :accordingTo (http://www.example.org/accordingTo): 3 --&gt; 9
 Edge :familyName (http://www.example.org/familyName): 0 --&gt; 2
 Starting conversion...
-Converting node Predicate: :accordingTo (&lt;http://www.example.org/accordingTo&gt;) with node id 4 to plantuml
-Converting node BlankNode: d01ec065a4c8669dbee3d5dbc6a9fa9e with node id 3 to plantuml
-Converting node Literal: &quot;Assistant Designer&quot; with node id 8 to plantuml
+Converting node Predicate: :accordingTo (&lt;http://www.example.org/accordingTo&gt;) with node id 8 to plantuml
+Converting node BlankNode: eb86f6ac630f40e0b812f692b502634d with node id 3 to plantuml
+Converting node Iri: :employee22 (http://www.example.org/employee22) with node id 9 to plantuml
+Converting node Predicate: :jobTitle (&lt;http://www.example.org/jobTitle&gt;) with node id 5 to plantuml
+Converting node Literal: &quot;Assistant Designer&quot; with node id 6 to plantuml
 Converting node Iri: :employee38 (http://www.example.org/employee38) with node id 0 to plantuml
-Converting node NonAssertedTriple with node id 9 to plantuml
-Converting node Predicate: :jobTitle (&lt;http://www.example.org/jobTitle&gt;) with node id 7 to plantuml
-Converting node Iri: :employee22 (http://www.example.org/employee22) with node id 5 to plantuml
 Converting node Predicate: :familyName (&lt;http://www.example.org/familyName&gt;) with node id 1 to plantuml
-Converting node Reifies with node id 6 to plantuml
+Converting node Reifies with node id 4 to plantuml
+Converting node NonAssertedTriple with node id 7 to plantuml
 Converting node Literal: &quot;Smith&quot; with node id 2 to plantuml
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/7623d9000eca025375d5f7edeb486ddda9d117b1883f7c51d32bf4defbb10e71.png" src="_images/7623d9000eca025375d5f7edeb486ddda9d117b1883f7c51d32bf4defbb10e71.png" />
+<img alt="_images/d1524eb5a4bfd1ab408658fe36af9f5e5242888f40219ed83f318e57bc0e0e75.png" src="_images/d1524eb5a4bfd1ab408658fe36af9f5e5242888f40219ed83f318e57bc0e0e75.png" />
 </div>
 </div>
 </section>
@@ -821,47 +820,47 @@ Converting node Literal: &quot;Smith&quot; with node id 2 to plantuml
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 10 nodes and 4 edges
-Node 5: Iri: :bob (http://example.com/bob)
+Node 9: AssertedTriple
      count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 6: Predicate: :recorded (&lt;http://example.com/recorded&gt;)
+Node 5: Literal: &quot;2021-07-07&quot;^^xsd:date
+     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
+Node 6: Predicate: :statedBy (&lt;http://example.com/statedBy&gt;)
      count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 3: Iri: :t (http://example.com/t)
-     count: UsageCount { as_predicate: 0, as_subject: 3, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 4: Predicate: :statedBy (&lt;http://example.com/statedBy&gt;)
+Node 8: Reifies
+     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
+Node 4: Predicate: :recorded (&lt;http://example.com/recorded&gt;)
      count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
 Node 0: Iri: :alice (http://example.com/alice)
      count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 1, as_object_in_triple: 0 }
-Node 8: Reifies
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
+Node 3: Iri: :t (http://example.com/t)
+     count: UsageCount { as_predicate: 0, as_subject: 3, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
 Node 1: Predicate: :name (&lt;http://example.com/name&gt;)
      count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 1, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 9: AssertedTriple
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 7: Literal: &quot;2021-07-07&quot;^^xsd:date
+Node 7: Iri: :bob (http://example.com/bob)
      count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
 Node 2: Literal: &quot;Alice&quot;
      count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 1 }
-Edge :recorded (http://example.com/recorded): 3 --&gt; 7
-Edge :name (http://example.com/name): 0 --&gt; 2
+Edge :recorded (http://example.com/recorded): 3 --&gt; 5
+Edge :statedBy (http://example.com/statedBy): 3 --&gt; 7
 Edge reifies: 3 --&gt; 9
-Edge :statedBy (http://example.com/statedBy): 3 --&gt; 5
+Edge :name (http://example.com/name): 0 --&gt; 2
 Starting conversion...
-Converting node Iri: :bob (http://example.com/bob) with node id 5 to plantuml
-Converting node Predicate: :recorded (&lt;http://example.com/recorded&gt;) with node id 6 to plantuml
-Converting node Iri: :t (http://example.com/t) with node id 3 to plantuml
-Converting node Predicate: :statedBy (&lt;http://example.com/statedBy&gt;) with node id 4 to plantuml
-Converting node Iri: :alice (http://example.com/alice) with node id 0 to plantuml
-Converting node Reifies with node id 8 to plantuml
-Converting node Predicate: :name (&lt;http://example.com/name&gt;) with node id 1 to plantuml
 Converting node AssertedTriple with node id 9 to plantuml
-Converting node Literal: &quot;2021-07-07&quot;^^xsd:date with node id 7 to plantuml
+Converting node Literal: &quot;2021-07-07&quot;^^xsd:date with node id 5 to plantuml
+Converting node Predicate: :statedBy (&lt;http://example.com/statedBy&gt;) with node id 6 to plantuml
+Converting node Reifies with node id 8 to plantuml
+Converting node Predicate: :recorded (&lt;http://example.com/recorded&gt;) with node id 4 to plantuml
+Converting node Iri: :alice (http://example.com/alice) with node id 0 to plantuml
+Converting node Iri: :t (http://example.com/t) with node id 3 to plantuml
+Converting node Predicate: :name (&lt;http://example.com/name&gt;) with node id 1 to plantuml
+Converting node Iri: :bob (http://example.com/bob) with node id 7 to plantuml
 Converting node Literal: &quot;Alice&quot; with node id 2 to plantuml
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/ec0533e8121e323f2a52366aab73c1265662fe4367da0fa1e2f63c52931bb0e3.png" src="_images/ec0533e8121e323f2a52366aab73c1265662fe4367da0fa1e2f63c52931bb0e3.png" />
+<img alt="_images/d3af25a853c0996be14cf0b898e40c46e6455631f568a754e53f8c4c9608d8ea.png" src="_images/d3af25a853c0996be14cf0b898e40c46e6455631f568a754e53f8c4c9608d8ea.png" />
 </div>
 </div>
 <p>Notice that in the visualization, we differentiate between a statement that is part of the graph which is represented by a box from a statement that is not part of the graph, which is represented by a cloud symbol.</p>
@@ -933,7 +932,7 @@ Converting node Literal: &quot;Alice&quot; with node id 2 to plantuml
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-configure-rudof">Install and configure rudof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminaries-install-and-configure-rudof">Preliminaries: Install and configure rudof</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#support-for-rdf-1-2">Support for RDF 1.2</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-triple-terms-directly">Declaring triple terms directly</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reifying-triples">Reifying triples</a></li>

@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'dctap';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SPARQL 1.2" href="sparql_12.html" />
+    <link rel="next" title="RDF 1.2" href="rdf12.html" />
     <link rel="prev" title="SHACL" href="shacl.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -186,8 +186,9 @@
 <li class="toctree-l1"><a class="reference internal" href="shex.html">ShEx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shacl.html">SHACL</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to DCTAP</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sparql_12.html">SPARQL 1.2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="compare.html">Introduction to RDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rdf12.html">RDF 1.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparql12.html">SPARQL 1.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compare.html">Using rudof to compare schemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_description.html">Service descriptions</a></li>
 </ul>
 
@@ -415,6 +416,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-dctap">What is DCTAP?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-dctap-to-shex">Converting DCTAP to ShEx</a></li>
 </ul>
             </nav>
@@ -429,8 +431,24 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-dctap">
 <h1>Introduction to DCTAP<a class="headerlink" href="#introduction-to-dctap" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="https://colab.research.google.com/github/%3Cyourusername%3E/%3Cyourrepo%3E/blob/main/book/notebooks/example.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <p>This document contains a short introduction to DCTAP using <a class="reference external" href="https://rudof-project.github.io/">rudof</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pyrudof
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rudof</span><span class="p">,</span> <span class="n">RudofConfig</span>
+<span class="n">rudof</span> <span class="o">=</span> <span class="n">Rudof</span><span class="p">(</span><span class="n">RudofConfig</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.120)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="what-is-dctap">
+<h2>What is DCTAP?<a class="headerlink" href="#what-is-dctap" title="Link to this heading">#</a></h2>
+</section>
 <section id="converting-dctap-to-shex">
 <h2>Converting DCTAP to ShEx<a class="headerlink" href="#converting-dctap-to-shex" title="Link to this heading">#</a></h2>
 <p>Rudof can be used to convert <a class="reference external" href="https://www.dublincore.org/specifications/dctap/">DCTAP</a> files to ShEx.</p>
@@ -451,16 +469,6 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_dctap_str</span><span class="p">(</span><span class="n">dctap_str</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">rudof</span><span class="o">.</span><span class="n">read_dctap_str</span><span class="p">(</span><span class="n">dctap_str</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;rudof&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -521,14 +529,21 @@ Shape(Company)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>prefix sh: &lt;http://www.w3.org/ns/shacl#&gt;
-prefix : &lt;http://example.org/&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
 prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
-prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix : &lt;http://example.org/&gt;
 prefix dc: &lt;http://purl.org/dc/elements/1.1/&gt;
-prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-:Person { :name xsd:string; :birthdate xsd:date ?; :worksFor @:Company * }
-:Company { :name xsd:string; :employee @:Person * }
+prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix sh: &lt;http://www.w3.org/ns/shacl#&gt;
+:<span class=" -Color -Color-Black">Person</span> {
+    :<span class=" -Color -Color-Black">name</span> <span class=" -Color -Color-Blue">xsd</span>:<span class=" -Color -Color-Black">string</span>;
+    :<span class=" -Color -Color-Black">birthdate</span> <span class=" -Color -Color-Blue">xsd</span>:<span class=" -Color -Color-Black">date</span> ?;
+    :<span class=" -Color -Color-Black">worksFor</span> @:<span class=" -Color -Color-Black">Company</span> *
+}
+:<span class=" -Color -Color-Black">Company</span> {
+    :<span class=" -Color -Color-Black">name</span> <span class=" -Color -Color-Blue">xsd</span>:<span class=" -Color -Color-Black">string</span>;
+    :<span class=" -Color -Color-Black">employee</span> @:<span class=" -Color -Color-Black">Person</span> *
+}
 </pre></div>
 </div>
 </div>
@@ -576,11 +591,11 @@ prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
       </div>
     </a>
     <a class="right-next"
-       href="sparql_12.html"
+       href="rdf12.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">SPARQL 1.2</p>
+        <p class="prev-next-title">RDF 1.2</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -600,6 +615,7 @@ prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-dctap">What is DCTAP?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-dctap-to-shex">Converting DCTAP to ShEx</a></li>
 </ul>
   </nav></div>
