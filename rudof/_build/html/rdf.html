@@ -433,6 +433,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="rdf">
 <h1>RDF<a class="headerlink" href="#rdf" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/github/rudof-project/tutorials/blob/main/rudof/rdf.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <p>This document contains a short introduction to <a class="reference external" href="https://www.w3.org/TR/rdf11-primer/">RDF</a> using <a class="reference external" href="https://rudof-project.github.io/">rudof</a>.</p>
 <section id="preliminaries-install-and-configure-rudof">
 <h2>Preliminaries: install and configure rudof<a class="headerlink" href="#preliminaries-install-and-configure-rudof" title="Link to this heading">#</a></h2>
@@ -528,23 +529,23 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;http://example.org/v&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/v&gt; &lt;http://example.org/knows&gt; _:1 .
-&lt;http://example.org/v&gt; &lt;http://example.org/name&gt; &quot;Emily&quot; .
-&lt;http://example.org/u&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/u&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
-&lt;http://example.org/u&gt; &lt;http://example.org/name&gt; &quot;Dave&quot; .
-&lt;http://example.org/alice&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/bob&gt; .
-&lt;http://example.org/z&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/z&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
-&lt;http://example.org/y&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;http://example.org/x&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
+&lt;http://example.org/x&gt; &lt;http://example.org/name&gt; &quot;Alice&quot; .
+&lt;http://example.org/x&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
 &lt;http://example.org/y&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/z&gt; .
 &lt;http://example.org/y&gt; &lt;http://example.org/name&gt; &quot;Bob&quot; .
-&lt;http://example.org/x&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/x&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
-&lt;http://example.org/x&gt; &lt;http://example.org/name&gt; &quot;Alice&quot; .
-_:1 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
+&lt;http://example.org/y&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
+&lt;http://example.org/z&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
+&lt;http://example.org/z&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
+&lt;http://example.org/v&gt; &lt;http://example.org/knows&gt; _:1 .
+&lt;http://example.org/v&gt; &lt;http://example.org/name&gt; &quot;Emily&quot; .
+&lt;http://example.org/v&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
+&lt;http://example.org/u&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
+&lt;http://example.org/u&gt; &lt;http://example.org/name&gt; &quot;Dave&quot; .
+&lt;http://example.org/u&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
+&lt;http://example.org/alice&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/bob&gt; .
 _:1 &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
+_:1 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
 </pre></div>
 </div>
 </div>
@@ -597,9 +598,9 @@ _:1 &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?x -&gt; &lt;http://example.org/bob&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?x -&gt; &lt;http://example.org/alice&gt;
 
-?x -&gt; &lt;http://example.org/alice&gt;
+?x -&gt; &lt;http://example.org/bob&gt;
 </pre></div>
 </div>
 </div>
