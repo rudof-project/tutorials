@@ -449,7 +449,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>The main entry point if a class called <code class="docutils literal notranslate"><span class="pre">Rudof</span></code> through which most of the functionality is provided.</p>
+<p>The main entry point if a class called <a class="reference external" href="https://pyrudof.readthedocs.io/en/stable/library.html#rudof"><code class="docutils literal notranslate"><span class="pre">Rudof</span></code></a> through which most of the functionality is provided.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rudof</span><span class="p">,</span> <span class="n">RudofConfig</span>
@@ -457,7 +457,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>In order to initialize that class, it is possible to pass a RudofConfig instance which contains configuration parameters for customization.</p>
+<p>In order to initialize that class, it is possible to pass a <a class="reference external" href="https://pyrudof.readthedocs.io/en/stable/library.html#pyrudof.RudofConfig"><code class="docutils literal notranslate"><span class="pre">RudofConfig</span></code></a> instance which contains configuration parameters for customization. An instance of <code class="docutils literal notranslate"><span class="pre">RudofConfig</span></code> can be obtained from the default initialization method or can be read from a TOML file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span> <span class="o">=</span> <span class="n">Rudof</span><span class="p">(</span><span class="n">RudofConfig</span><span class="p">())</span>
@@ -468,6 +468,14 @@ document.write(`
 </section>
 <section id="rdf-data-model">
 <h2>RDF data model<a class="headerlink" href="#rdf-data-model" title="Link to this heading">#</a></h2>
+<p>RDF is based on statements or triples of the form <code class="docutils literal notranslate"><span class="pre">&lt;subject&gt;</span> <span class="pre">&lt;predicate&gt;</span> <span class="pre">&lt;object&gt;</span></code> where the predicates are identified by IRIs and in the most basic form, subjects and objects are also IRIs. An example could be: <code class="docutils literal notranslate"><span class="pre">&lt;http://example.org/alice&gt;</span> <span class="pre">&lt;http://example.org/knows&gt;</span> <span class="pre">&lt;http:/example.org/bob&gt;</span></code>. In <code class="docutils literal notranslate"><span class="pre">rudof</span></code>, it is possible to load a set of triples with as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&lt;http://example.org/alice&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/bob&gt; .&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="handling-rdf-data">
 <h2>Handling RDF data<a class="headerlink" href="#handling-rdf-data" title="Link to this heading">#</a></h2>
@@ -520,20 +528,21 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;http://example.org/x&gt; &lt;http://example.org/name&gt; &quot;Alice&quot; .
-&lt;http://example.org/x&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/x&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
-&lt;http://example.org/y&gt; &lt;http://example.org/name&gt; &quot;Bob&quot; .
-&lt;http://example.org/y&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/y&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/z&gt; .
-&lt;http://example.org/z&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/z&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
-&lt;http://example.org/v&gt; &lt;http://example.org/name&gt; &quot;Emily&quot; .
-&lt;http://example.org/v&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;http://example.org/v&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
 &lt;http://example.org/v&gt; &lt;http://example.org/knows&gt; _:1 .
-&lt;http://example.org/u&gt; &lt;http://example.org/name&gt; &quot;Dave&quot; .
+&lt;http://example.org/v&gt; &lt;http://example.org/name&gt; &quot;Emily&quot; .
 &lt;http://example.org/u&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
 &lt;http://example.org/u&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
+&lt;http://example.org/u&gt; &lt;http://example.org/name&gt; &quot;Dave&quot; .
+&lt;http://example.org/alice&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/bob&gt; .
+&lt;http://example.org/z&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
+&lt;http://example.org/z&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
+&lt;http://example.org/y&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
+&lt;http://example.org/y&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/z&gt; .
+&lt;http://example.org/y&gt; &lt;http://example.org/name&gt; &quot;Bob&quot; .
+&lt;http://example.org/x&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
+&lt;http://example.org/x&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
+&lt;http://example.org/x&gt; &lt;http://example.org/name&gt; &quot;Alice&quot; .
 _:1 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
 _:1 &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
 </pre></div>
@@ -588,9 +597,9 @@ _:1 &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?x -&gt; &lt;http://example.org/alice&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?x -&gt; &lt;http://example.org/bob&gt;
 
-?x -&gt; &lt;http://example.org/bob&gt;
+?x -&gt; &lt;http://example.org/alice&gt;
 </pre></div>
 </div>
 </div>
