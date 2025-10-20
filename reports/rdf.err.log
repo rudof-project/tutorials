@@ -25,14 +25,42 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](
-https://colab.research.google.com/github/rudof-project/tutorials/blob/main/rudof/rdf.ipynb)
+query = """prefix : <http://example.org/>
+select ? where {
+  ?x a :Person
+}
+"""
+
+results = rudof.run_query_str(query)
+
 ------------------
 
+----- stdout -----
+RudofError: Error running query prefix : <http://example.org/>
+select ? where {
+  ?x a :Person
+}
+: error at 2:16: expected DISTINCT
+From<RudofError>: Error running query prefix : <http://example.org/>
+select ? where {
+  ?x a :Person
+}
+: error at 2:16: expected DISTINCT
+------------------
 
-  [36mCell[39m[36m [39m[32mIn[1][39m[32m, line 1[39m
-[31m    [39m[31m[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]([39m
-     ^
-[31mSyntaxError[39m[31m:[39m invalid syntax
+[31m---------------------------------------------------------------------------[39m
+[31mValueError[39m                                Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[10][39m[32m, line 7[39m
+[32m      1[39m query = [33m"""[39m[33mprefix : <http://example.org/>[39m
+[32m      2[39m [33mselect ? where [39m[33m{[39m
+[32m      3[39m [33m  ?x a :Person[39m
+[32m      4[39m [33m}[39m
+[32m      5[39m [33m"""[39m
+[32m----> [39m[32m7[39m results = [43mrudof[49m[43m.[49m[43mrun_query_str[49m[43m([49m[43mquery[49m[43m)[49m
 
+[31mValueError[39m: Error running query prefix : <http://example.org/>
+select ? where {
+  ?x a :Person
+}
+: error at 2:16: expected DISTINCT
 
