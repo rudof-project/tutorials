@@ -3,6 +3,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# Jupyter notebook build files
+_build/ 
+
 # C extensions
 *.so
 
