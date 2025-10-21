@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -416,9 +416,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdf-as-a-data-model">RDF as a data model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-rdf-data">Handling RDF data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-sparql-queries">Running SPARQL queries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminaries">Preliminaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparql-queries-with-local-rdf-data">SPARQL queries with local RDF data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparql-queries-with-an-endpoint">SPARQL queries with an endpoint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#federated-queries">Federated queries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construct-queries">CONSTRUCT queries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-for-learning-sparql">Resources for learning SPARQL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-of-sparql-endpoints">Lists of SPARQL endpoints</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -432,9 +439,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="sparql">
 <h1>SPARQL<a class="headerlink" href="#sparql" title="Link to this heading">#</a></h1>
-<p>This document contains a short introduction to <a class="reference external" href="https://www.w3.org/TR/rdf11-primer/">RDF</a> using <a class="reference external" href="https://rudof-project.github.io/">rudof</a>.</p>
-<section id="rdf-as-a-data-model">
-<h2>RDF as a data model<a class="headerlink" href="#rdf-as-a-data-model" title="Link to this heading">#</a></h2>
+<p>This document contains a short introduction to <a class="reference external" href="https://www.w3.org/TR/sparql11-query/">SPARQL</a> using <a class="reference external" href="https://rudof-project.github.io/">rudof</a>.</p>
+<section id="preliminaries">
+<h2>Preliminaries<a class="headerlink" href="#preliminaries" title="Link to this heading">#</a></h2>
 <p>The library is available as <code class="docutils literal notranslate"><span class="pre">pyrudof</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -465,108 +472,45 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="handling-rdf-data">
-<h2>Handling RDF data<a class="headerlink" href="#handling-rdf-data" title="Link to this heading">#</a></h2>
+<section id="sparql-queries-with-local-rdf-data">
+<h2>SPARQL queries with local RDF data<a class="headerlink" href="#sparql-queries-with-local-rdf-data" title="Link to this heading">#</a></h2>
+<p>As SPARQL is an RDF query language, we first need some RDF data.</p>
+<p>rudof can run queries against local RDF data or RDF that is available through some SPARQL endpoint.</p>
+<p>Let’s start with some local RDF data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">prefix : &lt;http://example.org/&gt;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rdf</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">prefix :    &lt;http://example.org/&gt;</span>
 <span class="s2">prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
 
-<span class="s2">:x a :Person     ;</span>
-<span class="s2">   :name &quot;Alice&quot; ;</span>
-<span class="s2">   :knows :y     .</span>
-<span class="s2">:y a :Person     ;</span>
-<span class="s2">   :name &quot;Bob&quot;   ;</span>
-<span class="s2">   :knows :z     .</span>
-<span class="s2">:z a :Person     ;</span>
-<span class="s2">   :knows :x     .</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The RDF data can easily be merged with other data.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">prefix : &lt;http://example.org/&gt;</span>
-<span class="s2">prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
-
-<span class="s2">:u a :Person     ;</span>
-<span class="s2">   :name &quot;Dave&quot; ;</span>
-<span class="s2">   :knows :y     .</span>
-<span class="s2">:v a :Person     ;</span>
-<span class="s2">   :name &quot;Emily&quot; ;</span>
-<span class="s2">   :knows _:1    .</span>
-<span class="s2">_:1 a :Person     ;</span>
-<span class="s2">   :knows :x     .</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>And the data can be serialized to different formats.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">RDFFormat</span>
-<span class="nb">str</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">serialize_data</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="n">RDFFormat</span><span class="o">.</span><span class="n">NTriples</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;http://example.org/z&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/z&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
-&lt;http://example.org/v&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/v&gt; &lt;http://example.org/name&gt; &quot;Emily&quot; .
-&lt;http://example.org/v&gt; &lt;http://example.org/knows&gt; _:1 .
-&lt;http://example.org/x&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/x&gt; &lt;http://example.org/name&gt; &quot;Alice&quot; .
-&lt;http://example.org/x&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
-&lt;http://example.org/y&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/y&gt; &lt;http://example.org/name&gt; &quot;Bob&quot; .
-&lt;http://example.org/y&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/z&gt; .
-&lt;http://example.org/u&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/u&gt; &lt;http://example.org/name&gt; &quot;Dave&quot; .
-&lt;http://example.org/u&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
-_:1 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-_:1 &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="running-sparql-queries">
-<h2>Running SPARQL queries<a class="headerlink" href="#running-sparql-queries" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rudof</span><span class="p">,</span> <span class="n">RudofConfig</span><span class="p">,</span> <span class="n">QuerySolutions</span>
-<span class="n">rudof</span> <span class="o">=</span> <span class="n">Rudof</span><span class="p">(</span><span class="n">RudofConfig</span><span class="p">())</span>
-<span class="n">rudof</span><span class="o">.</span><span class="n">reset_all</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rdf</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;prefix : &lt;http://example.org/&gt;</span>
 <span class="s2">:alice a :Person ;</span>
-<span class="s2"> :name &quot;Alice&quot;   ;</span>
-<span class="s2"> :knows :bob     .</span>
+<span class="s2"> :name      &quot;Alice&quot;                ;</span>
+<span class="s2"> :birthDate &quot;2005-03-01&quot;^^xsd:date ;</span>
+<span class="s2"> :worksFor  :acme                   .</span>
 <span class="s2">:bob a :Person   ;</span>
-<span class="s2"> :name &quot;Robert&quot;  .</span>
+<span class="s2"> :name      &quot;Robert Smith&quot;         ;</span>
+<span class="s2"> :birthDate &quot;2003-01-02&quot;^^xsd:date ;</span>
+<span class="s2"> :worksFor  :acme  .</span>
+<span class="s2">:acme a :Company ;</span>
+<span class="s2"> :name &quot;Acme Inc.&quot; .</span>
 <span class="s2">&quot;&quot;&quot;</span>
 <span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="n">rdf</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>We can run SPARQL queries as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;prefix : &lt;http://example.org/&gt;</span>
-<span class="s2">select * where {</span>
-<span class="s2">  ?x a :Person</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">PREFIX : &lt;http://example.org/&gt;</span>
+
+<span class="s2">SELECT ?person ?name ?date ?company WHERE {</span>
+<span class="s2">  ?person a          :Person ;</span>
+<span class="s2">          :name      ?name   ;</span>
+<span class="s2">          :birthDate ?date   ;</span>
+<span class="s2">          :worksFor  ?c   .</span>
+<span class="s2">  ?c      :name      ?company .</span>
 <span class="s2">}</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
@@ -578,19 +522,279 @@ _:1 &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
 <p>Show the results:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?x -&gt; &lt;http://example.org/bob&gt;
-
-?x -&gt; &lt;http://example.org/alice&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solutions: QuerySolutions { solutions: [QuerySolution { variables: [VarName { str: &quot;person&quot; }, VarName { str: &quot;name&quot; }, VarName { str: &quot;date&quot; }, VarName { str: &quot;company&quot; }], values: [Some(NamedNode(NamedNode { iri: &quot;http://example.org/bob&quot; })), Some(Literal(Literal(String(&quot;Robert Smith&quot;)))), Some(Literal(Literal(TypedLiteral { value: &quot;2003-01-02&quot;, datatype: NamedNode { iri: &quot;http://www.w3.org/2001/XMLSchema#date&quot; } }))), Some(Literal(Literal(String(&quot;Acme Inc.&quot;))))] }, QuerySolution { variables: [VarName { str: &quot;person&quot; }, VarName { str: &quot;name&quot; }, VarName { str: &quot;date&quot; }, VarName { str: &quot;company&quot; }], values: [Some(NamedNode(NamedNode { iri: &quot;http://example.org/alice&quot; })), Some(Literal(Literal(String(&quot;Alice&quot;)))), Some(Literal(Literal(TypedLiteral { value: &quot;2005-03-01&quot;, datatype: NamedNode { iri: &quot;http://www.w3.org/2001/XMLSchema#date&quot; } }))), Some(Literal(Literal(String(&quot;Acme Inc.&quot;))))] }] }
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">reset_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="sparql-queries-with-an-endpoint">
+<h2>SPARQL queries with an endpoint<a class="headerlink" href="#sparql-queries-with-an-endpoint" title="Link to this heading">#</a></h2>
+<p>It is also possible to run SPARQL queries against SPARQL endpoints.</p>
+<p>SPARQL endpoints are usually identified by an IRI.</p>
+<p>rudof contains a list of popular SPARQL endpoints which can also be identified by name, like wikidata, whose IRI is: <a class="reference external" href="https://query.wikidata.org/sparql">https://query.wikidata.org/sparql</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">PREFIX wd: &lt;http://www.wikidata.org/entity/&gt;</span>
+<span class="s2">PREFIX wdt: &lt;http://www.wikidata.org/prop/direct/&gt;</span>
+<span class="s2">SELECT ?person ?occupation WHERE {</span>
+<span class="s2">    ?p wdt:P31 wd:Q5 ;</span>
+<span class="s2">          wdt:P106 ?o ;</span>
+<span class="s2">          rdfs:label ?person ;</span>
+<span class="s2">          wdt:P19 wd:Q14317 .</span>
+<span class="s2">  ?o rdfs:label ?occupation</span>
+<span class="s2">  FILTER (lang(?person) = &quot;en&quot; &amp;&amp; lang(?occupation) = &quot;en&quot;)</span>
+<span class="s2">}</span>
+<span class="s2">LIMIT 10</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">use_endpoint</span><span class="p">(</span><span class="s2">&quot;https://query.wikidata.org/sparql&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">rudof</span><span class="o">.</span><span class="n">use_endpoint</span><span class="p">(</span><span class="s2">&quot;https://query.wikidata.org/sparql&quot;</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: &#39;builtins.Rudof&#39; object has no attribute &#39;use_endpoint&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">run_query_str</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭────┬──────────────────────────────────────────┬────────────────────────╮
+│    │ ?person                                  │ ?occupation            │
+├────┼──────────────────────────────────────────┼────────────────────────┤
+│ 1  │ &quot;Luis López-Doriga&quot;en                    │ &quot;politician&quot;en         │
+├────┼──────────────────────────────────────────┼────────────────────────┤
+│ 2  │ &quot;Leticia Sánchez Ruiz&quot;en                 │ &quot;writer&quot;en             │
+├────┼──────────────────────────────────────────┼────────────────────────┤
+│ 3  │ &quot;Luis Menéndez-Pidal y Álvarez&quot;en        │ &quot;architect&quot;en          │
+├────┼──────────────────────────────────────────┼────────────────────────┤
+│ 4  │ &quot;Elena Fernández&quot;en                      │ &quot;actor&quot;en              │
+├────┼──────────────────────────────────────────┼────────────────────────┤
+│ 5  │ &quot;Alberto Rionda&quot;en                       │ &quot;composer&quot;en           │
+├────┼──────────────────────────────────────────┼────────────────────────┤
+│ 6  │ &quot;Fernando Alonso&quot;en                      │ &quot;Formula One driver&quot;en │
+├────┼──────────────────────────────────────────┼────────────────────────┤
+│ 7  │ &quot;Carlos Tartiere de las Alas Pumariño&quot;en │ &quot;businessperson&quot;en     │
+├────┼──────────────────────────────────────────┼────────────────────────┤
+│ 8  │ &quot;Alberto Rionda&quot;en                       │ &quot;guitarist&quot;en          │
+├────┼──────────────────────────────────────────┼────────────────────────┤
+│ 9  │ &quot;Luis López-Doriga&quot;en                    │ &quot;Catholic priest&quot;en    │
+├────┼──────────────────────────────────────────┼────────────────────────┤
+│ 10 │ &quot;Fernando Alonso&quot;en                      │ &quot;vegetarian&quot;en         │
+╰────┴──────────────────────────────────────────┴────────────────────────╯
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">use_endpoint</span><span class="p">(</span><span class="s2">&quot;https://query.wikidata.org/sparql&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">reset_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="federated-queries">
+<h2>Federated queries<a class="headerlink" href="#federated-queries" title="Link to this heading">#</a></h2>
+<p>TBD</p>
+</section>
+<section id="construct-queries">
+<h2>CONSTRUCT queries<a class="headerlink" href="#construct-queries" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">QueryResultFormat</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is also possible to run SPARQL CONSTRUCT queries which can be used to return RDF results.</p>
+<p>For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">PREFIX wd:  &lt;http://www.wikidata.org/entity/&gt;</span>
+<span class="s2">PREFIX wdt: &lt;http://www.wikidata.org/prop/direct/&gt;</span>
+<span class="s2">PREFIX :    &lt;http://example.org/&gt;</span>
+
+<span class="s2">CONSTRUCT {</span>
+<span class="s2">   ?p a     :Person ;</span>
+<span class="s2">      :name ?person ;</span>
+<span class="s2">      :occupation ?occupation</span>
+<span class="s2">} WHERE {</span>
+<span class="s2">    ?p wdt:P31 wd:Q5 ;</span>
+<span class="s2">          wdt:P106 ?o ;</span>
+<span class="s2">          rdfs:label ?person ;</span>
+<span class="s2">          wdt:P19 wd:Q14317 .</span>
+<span class="s2">  ?o rdfs:label ?occupation</span>
+<span class="s2">  FILTER (lang(?person) = &quot;en&quot; &amp;&amp; lang(?occupation) = &quot;en&quot;)</span>
+<span class="s2">}</span>
+<span class="s2">LIMIT 10</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We indicate rudof that we will use Wikidata’s endpoint:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">use_endpoint</span><span class="p">(</span><span class="s2">&quot;https://query.wikidata.org/sparql&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">run_query_construct_str</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">QueryResultFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>@prefix wd: &lt;http://www.wikidata.org/entity/&gt; .
+@prefix wdt: &lt;http://www.wikidata.org/prop/direct/&gt; .
+@prefix : &lt;http://example.org/&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix sesame: &lt;http://www.openrdf.org/schema/sesame#&gt; .
+@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+@prefix fn: &lt;http://www.w3.org/2005/xpath-functions#&gt; .
+@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+@prefix dc: &lt;http://purl.org/dc/elements/1.1/&gt; .
+@prefix hint: &lt;http://www.bigdata.com/queryHints#&gt; .
+@prefix bd: &lt;http://www.bigdata.com/rdf#&gt; .
+@prefix bds: &lt;http://www.bigdata.com/rdf/search#&gt; .
+@prefix psn: &lt;http://www.wikidata.org/prop/statement/value-normalized/&gt; .
+@prefix pqn: &lt;http://www.wikidata.org/prop/qualifier/value-normalized/&gt; .
+@prefix prn: &lt;http://www.wikidata.org/prop/reference/value-normalized/&gt; .
+@prefix mwapi: &lt;https://www.mediawiki.org/ontology#API/&gt; .
+@prefix gas: &lt;http://www.bigdata.com/rdf/gas#&gt; .
+@prefix wdsubgraph: &lt;https://query.wikidata.org/subgraph/&gt; .
+@prefix wdtn: &lt;http://www.wikidata.org/prop/direct-normalized/&gt; .
+@prefix psv: &lt;http://www.wikidata.org/prop/statement/value/&gt; .
+@prefix ps: &lt;http://www.wikidata.org/prop/statement/&gt; .
+@prefix pqv: &lt;http://www.wikidata.org/prop/qualifier/value/&gt; .
+@prefix pq: &lt;http://www.wikidata.org/prop/qualifier/&gt; .
+@prefix prv: &lt;http://www.wikidata.org/prop/reference/value/&gt; .
+@prefix pr: &lt;http://www.wikidata.org/prop/reference/&gt; .
+@prefix wdno: &lt;http://www.wikidata.org/prop/novalue/&gt; .
+@prefix p: &lt;http://www.wikidata.org/prop/&gt; .
+@prefix wikibase: &lt;http://wikiba.se/ontology#&gt; .
+@prefix wdata: &lt;http://www.wikidata.org/wiki/Special:EntityData/&gt; .
+@prefix wds: &lt;http://www.wikidata.org/entity/statement/&gt; .
+@prefix wdv: &lt;http://www.wikidata.org/value/&gt; .
+@prefix wdref: &lt;http://www.wikidata.org/reference/&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+@prefix prov: &lt;http://www.w3.org/ns/prov#&gt; .
+@prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .
+@prefix geo: &lt;http://www.opengis.net/ont/geosparql#&gt; .
+@prefix geof: &lt;http://www.opengis.net/def/geosparql/function/&gt; .
+@prefix mediawiki: &lt;https://www.mediawiki.org/ontology#&gt; .
+@prefix ontolex: &lt;http://www.w3.org/ns/lemon/ontolex#&gt; .
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix wikibaseqs: &lt;http://wikiba.se/queryService#&gt; .
+
+wd:Q5973925 a :Person ;
+	:name &quot;Leticia SÃ¡nchez Ruiz&quot;@en ;
+	:occupation &quot;writer&quot;@en .
+
+wd:Q5983811 a :Person ;
+	:name &quot;Luis LÃ³pez-Doriga&quot;@en ;
+	:occupation &quot;politician&quot;@en .
+
+wd:Q5983724 a :Person ;
+	:name &quot;Luis JosÃ© de Ãvila&quot;@en ;
+	:occupation &quot;journalist&quot;@en .
+
+wd:Q5983811 :occupation &quot;Catholic priest&quot;@en , &quot;theologian&quot;@en .
+
+wd:Q6001860 a :Person ;
+	:name &quot;Marta Azcona&quot;@en ;
+	:occupation &quot;screenwriter&quot;@en .
+
+wd:Q6003214 a :Person ;
+	:name &quot;Mary Paz Pondal&quot;@en ;
+	:occupation &quot;actor&quot;@en .
+
+wd:Q10514 a :Person ;
+	:name &quot;Fernando Alonso&quot;@en ;
+	:occupation &quot;vegetarian&quot;@en .
+
+wd:Q27688 a :Person ;
+	:name &quot;Javier Paredes&quot;@en ;
+	:occupation &quot;association football player&quot;@en .
+
+wd:Q10514 :occupation &quot;Formula One driver&quot;@en .
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<section id="resources-for-learning-sparql">
+<h3>Resources for learning SPARQL<a class="headerlink" href="#resources-for-learning-sparql" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://learningsparql.com/">Learning SPARQL</a> book and blog by Bob Ducharne.</p></li>
+<li><p><a class="reference external" href="https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial">SPARQL tutorial</a> from Wikidata</p></li>
+</ul>
+</section>
+<section id="lists-of-sparql-endpoints">
+<h3>Lists of SPARQL endpoints<a class="headerlink" href="#lists-of-sparql-endpoints" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.wikidata.org/wiki/Wikidata:Lists/SPARQL_endpoints">SPARQL endpoints</a> collected in Wikidata</p></li>
+<li><p><a class="reference external" href="https://www.w3.org/wiki/SparqlEndpoints">SPARQL endpoints</a> collected at W3C.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -658,9 +862,16 @@ _:1 &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdf-as-a-data-model">RDF as a data model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-rdf-data">Handling RDF data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-sparql-queries">Running SPARQL queries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminaries">Preliminaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparql-queries-with-local-rdf-data">SPARQL queries with local RDF data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparql-queries-with-an-endpoint">SPARQL queries with an endpoint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#federated-queries">Federated queries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construct-queries">CONSTRUCT queries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-for-learning-sparql">Resources for learning SPARQL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-of-sparql-endpoints">Lists of SPARQL endpoints</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
