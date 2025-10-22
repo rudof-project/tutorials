@@ -1,5 +1,10 @@
 # rudof tutorials
 
+This repository contains the source code of some [Jupiter books](https://rudof-project.github.io/tutorials/intro.html) that can be used as small tutorials of [rudof](https://rudof-project.github.io/). 
+
+Some links:
+* [Jupiter-books reference](https://jupyterbook.org/en/stable/start/overview.html)
+
 ## 🚀 Quick Start
 
 ### 1. Clone and install
@@ -15,10 +20,22 @@ pip install -r requirements.txt
 jupyter-book build rudof
 ```
 
-### 3. Run notebooks on Google Colab
+### 3. Publish books on gh-pages
 
-Each notebook includes a Colab badge:
-```markdown
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](
-https://colab.research.google.com/github/rudof-project/tutorials/blob/main/book/notebooks/example.ipynb)
+```bash
+ghp-import -n -p -f rudof/_build/html
+```
+
+### Cleaning build files and cache
+
+Sometimes it is necessary to clean the cache when there are new versions of the libraries. To clean the built drectory use:
+
+```bash
+jupyter-book clean rudof
+```
+
+If you want to clean also the `jupyter_cache`, use:
+
+```bash
+jupyter-book clean rudof --all
 ```
