@@ -1,0 +1,20 @@
+prefix :       <http://example.org/> 
+prefix sh:     <http://www.w3.org/ns/shacl#> 
+prefix xsd:    <http://www.w3.org/2001/XMLSchema#>
+prefix schema: <http://schema.org/>
+
+:timbl a :User ;
+ :name "Tim Berners Lee";
+ :employer :CERN {|
+   :start 1980; 
+   :end   1980
+  |} {|
+    :start 1984; 
+    :end   1994
+  |} .
+
+:CERN a :Orgasnization ;
+ :code 12345 .
+
+#:other a :User ;
+# :name 23 .

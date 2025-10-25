@@ -1,0 +1,13 @@
+prefix : <http://example.org/>
+
+:timbl a :Human ;
+       :employer :CERN {| 
+          :start 1980 ; 
+          :end 1980 
+        |} {| 
+           :start 1984; 
+           end 1994 
+        |} .
+:CERN a :Organization .
+
+

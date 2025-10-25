@@ -1,0 +1,17 @@
+prefix :       <http://example.org/>
+prefix xsd:    <http://www.w3.org/2001/XMLSchema#>
+prefix schema: <http://schema.org/>
+
+:Book {
+ :name          xsd:string   ;
+ :datePublished xsd:date     ;
+ :numberOfPages MinInclusive 1 ;
+ :author        @:Person       ;
+ :genre         [ :Action :Comedy :NonFiction ] ;  
+ :isbn          /isbn:[0-9X]{10}/ ;
+ :publisher     IRI ;
+ :audio         .   ;
+ :maintainer    @:Person OR @:Organization
+}
+:Person {}
+:Organization {}
