@@ -15,6 +15,3 @@ prefix schema: <http://schema.org/>
 
 :CERN a :Orgasnization ;
  :code 12345 .
-
-#:other a :User ;
-# :name 23 .

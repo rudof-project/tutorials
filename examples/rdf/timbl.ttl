@@ -1,0 +1,22 @@
+prefix :       <http://example.org/>
+prefix xsd:    <http://www.w3.org/2001/XMLSchema#>
+prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix schema: <http://schema.org/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+:timbl  rdf:type    :Human ;
+        rdfs:label  "Tim Berners-Lee" ;
+        :birthPlace :london ;
+        :birthDate  "1955-06-08"^^xsd:date ;
+        :employer   :CERN ;
+        :awarded    :PA   ;
+        :knows      _:1, :sarven .
+_:1     :birthPlace :Spain .
+:CERN   rdf:type    :Organization .
+:london rdf:type    :City, :Metropolis ;
+        :country    :UK .
+:sarven rdf:type    :Human ;
+        :birthPlace :France ;
+        :birthDate "1969" .
+:PA rdfs:label "Princess of Asturias Award"@en, "Premio Princesa de Asturias"@es .
+    

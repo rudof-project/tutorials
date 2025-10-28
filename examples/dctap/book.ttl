@@ -1,0 +1,49 @@
+prefix dct: <http://purl.org/dc/terms/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix sdo: <https://schema.org/>
+prefix ex: <http://example.org/>
+prefix dc: <http://purl.org/dc/elements/1.1/>
+prefix srap: <http://example.org/>
+prefix bibo: <http://purl.org/ontology/bibo/>
+prefix vcard: <http://www.w3.org/2006/vcard/ns#>
+prefix : <http://example.org/>
+
+:book1 dct:creator :alice ;
+ dct:title "The Great Book" ;
+ dct:publisher :pub1 ;
+ dct:date "2023"^^xsd:year .
+:alice a foaf:Person ;
+ foaf:name "Alice Author" ;
+ foaf:mbox <mailto:alice@example.org> ;
+ dct:date "1980"^^xsd:year ;
+ vcard:hasAddress :address1 .
+:address1 a vcard:Address ;
+ vcard:street-address "123 Main St" ;
+ vcard:locality "Anytown" .
+:pub1 a foaf:Organization ;
+ foaf:name "Great Publishing" ;
+ vcard:hasAddress :pubAddress1 .
+:pubAddress1 a vcard:Address ;
+ vcard:street-address "456 Publisher Rd" ;
+ vcard:locality "Publishville" .
+
+:book2 dct:creator :alice ;
+ dct:title 23 ;
+ dct:publisher :pub1 ;
+ dct:date "2023"^^xsd:year .
+:alice a foaf:Person ;
+ foaf:name "Alice Author" ;
+ foaf:mbox <mailto:alice@example.org> ;
+ dct:date "1980"^^xsd:year ;
+ vcard:hasAddress :address1 .
+:address1 a vcard:Address ;
+ vcard:street-address "123 Main St" ;
+ vcard:locality "Anytown" .
+:pub1 a foaf:Organization ;
+ foaf:name "Great Publishing" ;
+ vcard:hasAddress :pubAddress1 .
+:pubAddress1 a vcard:Address ;
+ vcard:street-address "456 Publisher Rd" ;
+ vcard:locality "Publishville" .

@@ -7,8 +7,10 @@ skinparam class {
  BorderColor Black
  ArrowColor Black
 }
-class ":User" as 1 <<(S,#FF7700)>> [[http://example.org/User :User]] { 
+class ":Company" as 2 <<(S,#FF7700)>> [[http://example.org/Company :Company]] { 
 [[http://example.org/name :name]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
+--
+[[http://example.org/code :code]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
 --
 }
 class ":Address" as 3 <<(S,#FF7700)>> [[http://example.org/Address :Address]] { 
@@ -17,10 +19,8 @@ class ":Address" as 3 <<(S,#FF7700)>> [[http://example.org/Address :Address]] {
 [[http://example.org/zip_code :zip_code]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
 --
 }
-class ":Company" as 2 <<(S,#FF7700)>> [[http://example.org/Company :Company]] { 
+class ":User" as 1 <<(S,#FF7700)>> [[http://example.org/User :User]] { 
 [[http://example.org/name :name]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
---
-[[http://example.org/code :code]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
 --
 }
 1 --> "*" 2 : [[http://example.org/worksFor :worksFor]]

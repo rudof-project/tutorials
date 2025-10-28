@@ -25,7 +25,7 @@ prefix schema: <http://schema.org/>
        sh:property [
          sh:path :end ;
          sh:datatype xsd:integer ;
-         sh:minCount 1 ;
+         sh:minCount 1 ; 
          sh:maxCount 1
        ]
      ]
