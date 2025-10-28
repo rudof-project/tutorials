@@ -14,4 +14,5 @@ chapters:
 - file: sparql12
 - file: compare
 - file: service_description
+- file: rudof_generate_tutorial
 
