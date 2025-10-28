@@ -7,24 +7,16 @@ skinparam class {
  BorderColor Black
  ArrowColor Black
 }
-class ":Company" as 2 <<(S,#FF7700)>> [[http://example.org/Company :Company]] { 
-[[http://example.org/name :name]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
+class "ex:Person" as 1 <<(S,#FF7700)>> [[http://example.org/Person ex:Person]] { 
+[[http://example.org/name ex:name]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
 --
-[[http://example.org/code :code]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
---
-}
-class ":Address" as 3 <<(S,#FF7700)>> [[http://example.org/Address :Address]] { 
-[[http://example.org/name :name]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
---
-[[http://example.org/zip_code :zip_code]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
+[[http://example.org/birthdate ex:birthdate]] : [[http://www.w3.org/2001/XMLSchema#date xsd:date]] ?
 --
 }
-class ":User" as 1 <<(S,#FF7700)>> [[http://example.org/User :User]] { 
-[[http://example.org/name :name]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
+class "ex:Company" as 2 <<(S,#FF7700)>> [[http://example.org/Company ex:Company]] { 
+[[http://example.org/name ex:name]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
 --
 }
-1 --> "*" 2 : [[http://example.org/worksFor :worksFor]]
-1 --> " " 3 : [[http://example.org/addres :addres]]
-1 --> " " 1 : [[http://example.org/knows :knows]]
-2 --> " " 1 : [[http://example.org/employee :employee]]
+1 --> "*" 2 : [[http://example.org/worksFor ex:worksFor]]
+2 --> "*" 1 : [[http://example.org/employee ex:employee]]
 @enduml
