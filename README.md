@@ -20,7 +20,10 @@ pip install -r requirements.txt
 jupyter-book build rudof
 ```
 
-### 3. Publish books on gh-pages
+
+### 3. Manually publish books on gh-pages 
+
+Note, this is no longer necessary because we publish the book through github Actions.
 
 ```bash
 ghp-import -n -p -f rudof/_build/html

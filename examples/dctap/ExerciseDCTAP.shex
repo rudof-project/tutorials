@@ -1,0 +1,31 @@
+prefix dct: <http://purl.org/dc/terms/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix sdo: <https://schema.org/>
+prefix ex: <http://example.org/>
+prefix dc: <http://purl.org/dc/elements/1.1/>
+prefix srap: <http://example.org/>
+prefix bibo: <http://purl.org/ontology/bibo/>
+prefix vcard: <http://www.w3.org/2006/vcard/ns#>
+
+ex:book {
+    dct:creator @ex:person + ;
+    dct:title xsd:string ;
+    dct:publisher @ex:pubShape ;
+    dct:date xsd:year ? 
+} 
+ex:person {
+    foaf:name xsd:string ;
+    foaf:mbox . ?  ;
+    dct:date xsd:year ?  ;
+    vcard:hasAddress @ex:address * 
+} 
+ex:pubShape {
+    foaf:name xsd:string ; 
+    vcard:hasAddress @ex:address * 
+} 
+ex:address {
+    vcard:street-address xsd:string ;
+    vcard:locality xsd:string ;
+}
