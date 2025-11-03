@@ -33,6 +33,13 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
+    - name: Set up Java JRE
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17' 
+        distribution: 'temurin' 
+        java-package: 'jre' 
+
     # (optional) Cache your executed notebooks between runs
     # if you have config:
     # execute:
