@@ -48,11 +48,11 @@ jobs:
         echo "Contents of current directory:"
         ls -la .
 
+    # Show jupyter-book version
     - name: Show jupyter-book version
       run: |
         echo "Jupyter-book version:"
         jupyter-book --version
-
         
     # Build the book
     - name: Build the book
