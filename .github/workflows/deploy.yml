@@ -51,7 +51,7 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book build rudof
+        jupyter-book build rudof --builder html
 
     # Upload the book's HTML as an artifact
     - name: Upload artifact

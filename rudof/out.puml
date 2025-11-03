@@ -1,30 +1,133 @@
 @startuml
-hide empty members
-skinparam linetype ortho
-hide circles
-skinparam shadowing true
-skinparam class {
- BorderColor Black
- ArrowColor Black
+
+<style>
+.reifier {
+BackGroundColor Yellow
+LineThickness 1
+LineColor Black
+
 }
-class ":Address" as 3 <<(S,#FF7700)>> [[http://example.org/Address :Address]] { 
-[[http://example.org/name :name]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
---
-[[http://example.org/zip_code :zip_code]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
---
+.literal {
+BackGroundColor Cyan
+LineThickness 1
+LineColor Black
+
 }
-class ":User" as 1 <<(S,#FF7700)>> [[http://example.org/User :User]] { 
-[[http://example.org/name :name]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
---
+.uri {
+BackGroundColor White
+LineThickness 1
+LineColor Blue
+RoundCorner 25
+
 }
-class ":Company" as 2 <<(S,#FF7700)>> [[http://example.org/Company :Company]] { 
-[[http://example.org/name :name]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
---
-[[http://example.org/code :code]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
---
+.bnode {
+BackGroundColor Gray
+LineThickness 1
+LineColor Blue
+RoundCorner 25
+
 }
-1 --> "*" 2 : [[http://example.org/worksFor :worksFor]]
-1 --> " " 3 : [[http://example.org/addres :addres]]
-1 --> " " 1 : [[http://example.org/knows :knows]]
-2 --> " " 1 : [[http://example.org/employee :employee]]
+.asserted {
+BackGroundColor White
+LineThickness 2
+LineColor Black
+
+}
+.non_asserted {
+BackGroundColor White
+LineThickness 2
+LineColor Blue
+RoundCorner 0
+
+}
+</style>
+hide stereotype
+
+
+
+
+
+rectangle ""Tim Berners Lee"" <<literal>> as 6
+
+
+
+
+
+rectangle ""1994"" <<literal>> as 22
+
+
+
+rectangle "[[http://example.org/PA :PA]]" <<uri>> as 4
+
+rectangle " " <<bnode>> as 9
+
+rectangle ""1980"" <<literal>> as 17
+
+rectangle "[[<http://example.org/employer> :employer]]" <<uri>> as 1
+
+rectangle "[[<http://example.org/award> :award]]" <<uri>> as 3
+
+rectangle ""1984"" <<literal>> as 21
+
+
+
+rectangle " " <<asserted>> as 13
+
+
+rectangle "[[http://example.org/CERN :CERN]]" <<uri>> as 2
+
+rectangle ""Vinton Cerf"" <<literal>> as 8
+
+rectangle "[[http://example.org/vint :vint]]" <<uri>> as 7
+
+rectangle " " <<bnode>> as 15
+
+rectangle ""2002"" <<literal>> as 11
+
+rectangle " " <<asserted>> as 18
+
+
+rectangle " " <<bnode>> as 20
+
+rectangle "[[http://example.org/timbl :timbl]]" <<uri>> as 0
+
+0 --> 4 : [[http://example.org/award :award]]
+
+15 --> 17 : [[http://example.org/start :start]]
+
+15 --> 17 : [[http://example.org/end :end]]
+
+0 --> 2 : [[http://example.org/employer :employer]]
+
+9 --> 7 : [[http://example.org/togetherWith :togetherWith]]
+
+20 --> 21 : [[http://example.org/start :start]]
+
+20 --> 18 : [[http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies reifies]]
+
+0 --> 6 : [[http://www.w3.org/2000/01/rdf-schema#label rdfs:label]]
+
+9 --> 11 : [[http://example.org/time :time]]
+
+9 --> 13 : [[http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies reifies]]
+
+15 --> 18 : [[http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies reifies]]
+
+7 --> 8 : [[http://www.w3.org/2000/01/rdf-schema#label rdfs:label]]
+
+20 --> 22 : [[http://example.org/end :end]]
+
+13-->0 #line:blue;line.dashed;text:blue : subj 
+
+13-->3 #line:red;line.dashed;text:red : pred
+
+13-->4 #line:green;line.dashed;text:green : obj
+
+18-->0 #line:blue;line.dashed;text:blue : subj 
+
+18-->1 #line:red;line.dashed;text:red : pred
+
+18-->2 #line:green;line.dashed;text:green : obj
+
 @enduml
+
