@@ -43,10 +43,15 @@ jobs:
         path: _build/.jupyter_cache
         key: jupyter-book-cache-${{ hashFiles('requirements.txt') }}
 
+    - name: Show contents of current directory
+      run: |
+        echo "Contents of current directory:"
+        ls -la .
+    
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book build rudof
+        jupyter-book build rudof/
 
     # Upload the book's HTML as an artifact
     - name: Upload artifact
