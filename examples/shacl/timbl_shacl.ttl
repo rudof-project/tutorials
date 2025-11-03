@@ -3,6 +3,33 @@ prefix xsd:    <http://www.w3.org/2001/XMLSchema#>
 prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix schema: <http://schema.org/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix sh:     <http://www.w3.org/ns/shacl#>
+
+<Researcher> a sh:NodeShape ;
+ sh:targetClass :Human ;
+ sh:property [ 
+         sh:path rdfs:label ; 
+         sh:minCount 1; sh:maxCount 1;
+         sh:datatype xsd:string ;
+        ] ;
+ sh:property [ 
+         sh:path :birthPlace ;
+         sh:node   <Place>
+        ] ;
+ sh:property  [ 
+         sh:path :birthDate ; 
+         sh:maxCount 1; 
+         sh:datatype xsd:date
+        ] ;
+ sh:property [
+         sh:path :employer ;
+         sh:node   <Organization>
+        ] ;
+ sh:property [ 
+         sh:path :knows ;
+         sh:node   <Researcher>
+        ] .
+
 
 :timbl  rdf:type    :Human ;
         rdfs:label  "Tim Berners-Lee" ;

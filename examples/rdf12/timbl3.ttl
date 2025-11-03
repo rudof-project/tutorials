@@ -1,0 +1,34 @@
+prefix : <http://example.org/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+:timbl a :Human ;
+   rdfs:label "Tim Berners Lee" ;
+   :employer :CERN {| :start "1984" {| :accordingTo :wikidata {| :statedIn "2024-05-02"^^xsd:date |} |} ;
+                      :end   "1994" {| :accordingTo :wikidata {| :statedIn "2024-05-02"^^xsd:date |} |}
+                   |}
+                   {| :start "1980" {| :accordingTo :wikidata {| :statedIn "2024-05-01"^^xsd:date |} |};
+                      :end   "1980" {| :accordingTo :wikidata {| :statedIn "2024-05-01"^^xsd:date |} |}
+                    |} ;
+   :award :PA {| :year 2002 {| :accordingTo :wikidata {| :statedIn "2024-05-01"^^xsd:date |} |};
+                 :together_with :vint {| :accordingTo :wikidata {| :statedIn "2024-05-01"^^xsd:date |} |}, 
+                                :robert_kahn {| :accordingTo :wikidata {| :statedIn "2024-05-01"^^xsd:date |} |}, 
+                                :larry {| :accordingTo :wikidata {| :statedIn "2024-05-01"^^xsd:date |} |} 
+               |} 
+   .
+
+:CERN a :Organization ;
+      rdfs:label "CERN" .
+
+:PA a :Award ;
+    rdfs:label "Princess of Asturias Award" .
+
+:vint a :Human ;
+      rdfs:label "Vint Cerf" .
+
+:robert_kahn a :Human ;
+             rdfs:label "Robert Kahn" .
+              
+:larry a :Human ;
+        rdfs:label "Larry Roberts" .

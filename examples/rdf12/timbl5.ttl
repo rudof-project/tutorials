@@ -1,0 +1,16 @@
+prefix : <http://example.org/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+:timbl rdfs:label "Tim Berners Lee" .
+_:1 rdf:reifies   <<( :timbl :employer :CERN )>> ;
+    :accordingTo :Wikidata ;
+    :start        "1984" ;
+    :end          "1994" .
+_:2 rdf:reifies   <<( :timbl :employer :CERN )>> ;
+    :accordingTo :Wikidata ;
+    :start        "1980" ;
+    :end          "1980" .
+
+:CERN a :Organization ;
+      rdfs:label "CERN" .

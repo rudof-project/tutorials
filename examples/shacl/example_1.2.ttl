@@ -15,3 +15,10 @@ prefix schema: <http://schema.org/>
 
 :CERN a :Orgasnization ;
  :code 12345 .
+
+:bad1 a :User ;
+ :name "Bad User" ;
+ :employer :CERN {|
+   :start "Not an integer"; 
+   :end   1994
+  |} .

@@ -1,0 +1,15 @@
+prefix : <http://example.org/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?person ?employer ?start ?end ?award ?year ?together_with ?source WHERE {
+   ?person a :Human ;
+           :employer ?employer {| :start ?start {| :accordingTo ?source |} ;
+                                  :end   ?end {| :accordingTo ?source |} 
+                                |} ;
+           :award ?award  {| :year ?year {| :accordingTo ?source |}  ;
+                            :together_with ?together_with {| :accordingTo ?source |} 
+                          |} 
+           .
+}
