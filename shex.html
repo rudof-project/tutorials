@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -190,7 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="sparql12.html">SPARQL 1.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compare.html">Using rudof to compare schemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_description.html">Service descriptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rudof_generate_tutorial.html">Tutorial: Generating Synthetic RDF Data with rudof_generate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rudof_generate.html">Generating RDF Data from shapes</a></li>
 </ul>
 
     </div>
@@ -448,7 +448,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.128)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.140)
 </pre></div>
 </div>
 </div>
@@ -691,13 +691,13 @@ Appinfo: {&#39;info&#39;: [{&#39;reason&#39;: &#39;Shape passed. Node http://exa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭────────────────────────────────────┬─────────────┬────────┬──────────────────────────────────────────────────────────────────────────────────╮
-│ Node                               │ Shape       │ Status │ Details                                                                          │
-├────────────────────────────────────┼─────────────┼────────┼──────────────────────────────────────────────────────────────────────────────────┤
-│ http://www.wikidata.org/entity/Q80 │ :Researcher │ <span class=" -Color -Color-Green">OK</span>     │ Shape passed. Node http://www.wikidata.org/entity/Q80, shape 0: :Researcher = {( │
-│                                    │             │        │ wdt:P31 [wd:Q5 ] ; wdt:P19 @1 ; )}                                               │
-│                                    │             │        │                                                                                  │
-╰────────────────────────────────────┴─────────────┴────────┴──────────────────────────────────────────────────────────────────────────────────╯
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭──────────────────────────────────────┬─────────────┬────────┬──────────────────────────────────────────────────────────────────────────────────╮
+│ Node                                 │ Shape       │ Status │ Details                                                                          │
+├──────────────────────────────────────┼─────────────┼────────┼──────────────────────────────────────────────────────────────────────────────────┤
+│ &lt;http://www.wikidata.org/entity/Q80&gt; │ :Researcher │ <span class=" -Color -Color-Green">OK</span>     │ Shape passed. Node &lt;http://www.wikidata.org/entity/Q80&gt;, shape 0: :Researcher =  │
+│                                      │             │        │ {(wdt:P31 [wd:Q5 ] ; wdt:P19 @1 ; )}                                             │
+│                                      │             │        │                                                                                  │
+╰──────────────────────────────────────┴─────────────┴────────┴──────────────────────────────────────────────────────────────────────────────────╯
 </pre></div>
 </div>
 </div>
@@ -765,9 +765,7 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ipython in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (9.6.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: decorator in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (5.2.1)
+Requirement already satisfied: decorator in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (5.2.1)
 Requirement already satisfied: ipython-pygments-lexers in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (1.1.1)
 Requirement already satisfied: jedi&gt;=0.16 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (0.19.2)
 Requirement already satisfied: matplotlib-inline in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (0.1.7)
@@ -779,12 +777,34 @@ Requirement already satisfied: traitlets&gt;=5.13.0 in /home/labra/src/python/ru
 Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.4 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from jedi&gt;=0.16-&gt;ipython) (0.8.5)
 Requirement already satisfied: ptyprocess&gt;=0.5 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from pexpect&gt;4.3-&gt;ipython) (0.7.0)
 Requirement already satisfied: wcwidth in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython) (0.2.14)
-Requirement already satisfied: executing&gt;=1.2.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (2.2.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: executing&gt;=1.2.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (2.2.1)
 Requirement already satisfied: asttokens&gt;=2.1.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (3.0.0)
 Requirement already satisfied: pure-eval in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (0.2.3)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+  File &quot;&lt;frozen runpy&gt;&quot;, line 198, in _run_module_as_main
+  File &quot;&lt;frozen runpy&gt;&quot;, line 88, in _run_code
+  File &quot;/home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages/plantuml.py&quot;, line 230, in &lt;module&gt;
+    main()
+  File &quot;/home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages/plantuml.py&quot;, line 225, in main
+    print(list(map(lambda filename: {&#39;filename&#39;: filename,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages/plantuml.py&quot;, line 226, in &lt;lambda&gt;
+    &#39;gen_success&#39;: pl.processes_file(filename, directory=args.out)}, args.files)))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages/plantuml.py&quot;, line 199, in processes_file
+    content = self.processes(data)
+              ^^^^^^^^^^^^^^^^^^^^
+  File &quot;/home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages/plantuml.py&quot;, line 173, in processes
+    raise PlantUMLHTTPError(response, content)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages/plantuml.py&quot;, line 56, in __init__
+    if not self.message:
+           ^^^^^^^^^^^^
+AttributeError: &#39;PlantUMLHTTPError&#39; object has no attribute &#39;message&#39;
 </pre></div>
 </div>
 </div>
@@ -796,7 +816,7 @@ Requirement already satisfied: pure-eval in /home/labra/src/python/rudof/tutoria
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3e83a02b2d2f1de73ceeca6313c9b87834be9b8f88ca31fdae3ed68b507c0f67.png" src="_images/3e83a02b2d2f1de73ceeca6313c9b87834be9b8f88ca31fdae3ed68b507c0f67.png" />
+<img alt="_images/d1636d695c8045443424815b5a04a438e215ba445276462cf23eb4cc33df60aa.png" src="_images/d1636d695c8045443424815b5a04a438e215ba445276462cf23eb4cc33df60aa.png" />
 </div>
 </div>
 </section>

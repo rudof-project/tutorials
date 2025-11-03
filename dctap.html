@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -190,6 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="sparql12.html">SPARQL 1.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compare.html">Using rudof to compare schemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_description.html">Service descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rudof_generate.html">Generating RDF Data from shapes</a></li>
 </ul>
 
     </div>
@@ -446,13 +447,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.128)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.140)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ipython in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (9.6.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: decorator in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (5.2.1)
+Requirement already satisfied: decorator in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (5.2.1)
 Requirement already satisfied: ipython-pygments-lexers in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (1.1.1)
 Requirement already satisfied: jedi&gt;=0.16 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (0.19.2)
 Requirement already satisfied: matplotlib-inline in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (0.1.7)
@@ -464,7 +463,9 @@ Requirement already satisfied: traitlets&gt;=5.13.0 in /home/labra/src/python/ru
 Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.4 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from jedi&gt;=0.16-&gt;ipython) (0.8.5)
 Requirement already satisfied: ptyprocess&gt;=0.5 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from pexpect&gt;4.3-&gt;ipython) (0.7.0)
 Requirement already satisfied: wcwidth in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython) (0.2.14)
-Requirement already satisfied: executing&gt;=1.2.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (2.2.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: executing&gt;=1.2.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (2.2.1)
 Requirement already satisfied: asttokens&gt;=2.1.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (3.0.0)
 Requirement already satisfied: pure-eval in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (0.2.3)
 </pre></div>
@@ -563,9 +564,12 @@ Shape(Company)
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>prefix dct: &lt;http://purl.org/dc/terms/&gt;
 prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;
 prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
 prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
 prefix sdo: &lt;https://schema.org/&gt;
+prefix schema: &lt;http://schema.org/&gt;
 prefix ex: &lt;http://example.org/&gt;
 prefix base: &lt;http://base/&gt;
 ex:Person { ex:name xsd:string; ex:birthdate xsd:date ?; ex:worksFor @ex:Company * }
@@ -661,7 +665,7 @@ ex:Company { ex:name xsd:string; ex:employee @ex:Person * }
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ab06d753e9534e13ddd6ac5aab335b514143ae362587bdff4c48206701d455af.png" src="_images/ab06d753e9534e13ddd6ac5aab335b514143ae362587bdff4c48206701d455af.png" />
+<img alt="_images/fd09e6373e45d9f91752e1630a3c8ae52caba78663a834480d6225fc4e36c540.png" src="_images/fd09e6373e45d9f91752e1630a3c8ae52caba78663a834480d6225fc4e36c540.png" />
 </div>
 </div>
 </section>

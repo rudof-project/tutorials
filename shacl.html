@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -190,7 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="sparql12.html">SPARQL 1.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compare.html">Using rudof to compare schemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_description.html">Service descriptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rudof_generate_tutorial.html">Tutorial: Generating Synthetic RDF Data with rudof_generate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rudof_generate.html">Generating RDF Data from shapes</a></li>
 </ul>
 
     </div>
@@ -446,7 +446,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.128)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.140)
 </pre></div>
 </div>
 </div>
@@ -531,12 +531,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">show_as_table</span><span class="p">())</span>
-
-<span class="ne">AttributeError</span>: &#39;builtins.ValidationReport&#39; object has no attribute &#39;show_as_table&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">No Errors found</span>
 </pre></div>
 </div>
 </div>
@@ -570,13 +565,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭──────────────┬─────────┬─────────────┬─────────────┬───────┬────────────────────────────────────╮
-│ Severity     │ node    │ Component   │ Path        │ value │ Source shape                       │
-├──────────────┼─────────┼─────────────┼─────────────┼───────┼────────────────────────────────────┤
-│ sh:Violation │ :wrong1 │ sh:maxCount │ :birthDate, │       │ _:a2be1ef3e3525520e4d8385beb068da0 │
-├──────────────┼─────────┼─────────────┼─────────────┼───────┼────────────────────────────────────┤
-│ sh:Violation │ :wrong2 │ sh:datatype │ :name,      │ 23    │ _:edc7efa4afe26f7c1b229a48ad7e99a9 │
-╰──────────────┴─────────┴─────────────┴─────────────┴───────┴────────────────────────────────────╯
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭──────────────┬─────────┬─────────────┬────────────┬───────┬────────────────────────────────────╮
+│ Severity     │ node    │ Component   │ Path       │ value │ Source shape                       │
+├──────────────┼─────────┼─────────────┼────────────┼───────┼────────────────────────────────────┤
+│ <span class=" -Color -Color-Red">sh:Violation</span> │ :wrong1 │ sh:maxCount │ :birthDate │       │ _:dc08965c140b31099b2a512404cd977e │
+├──────────────┼─────────┼─────────────┼────────────┼───────┼────────────────────────────────────┤
+│ <span class=" -Color -Color-Red">sh:Violation</span> │ :wrong2 │ sh:datatype │ :name      │ 23    │ _:b12b6581d5c77325445c28d55d309368 │
+╰──────────────┴─────────┴─────────────┴────────────┴───────┴────────────────────────────────────╯
 </pre></div>
 </div>
 </div>

@@ -182,7 +182,6 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="rudof.html">Short introduction to Rudof</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rdf.html">RDF</a></li>
-
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">SPARQL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shex.html">ShEx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shacl.html">SHACL</a></li>
@@ -191,6 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="sparql12.html">SPARQL 1.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compare.html">Using rudof to compare schemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_description.html">Service descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rudof_generate.html">Generating RDF Data from shapes</a></li>
 </ul>
 
     </div>
@@ -451,7 +451,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.128)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.140)
 </pre></div>
 </div>
 </div>
@@ -592,29 +592,29 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭────┬──────────────────────────────────────────┬────────────────────────╮
-│    │ ?person                                  │ ?occupation            │
-├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 1  │ &quot;Leticia Sánchez Ruiz&quot;en                 │ &quot;writer&quot;en             │
-├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 2  │ &quot;Elena Fernández&quot;en                      │ &quot;actor&quot;en              │
-├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 3  │ &quot;Luis López-Doriga&quot;en                    │ &quot;politician&quot;en         │
-├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 4  │ &quot;Fernando Alonso&quot;en                      │ &quot;Formula One driver&quot;en │
-├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 5  │ &quot;Alberto Rionda&quot;en                       │ &quot;composer&quot;en           │
-├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 6  │ &quot;Jesús Lobato de Blas&quot;en                 │ &quot;writer&quot;en             │
-├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 7  │ &quot;Carlos Tartiere de las Alas Pumariño&quot;en │ &quot;businessperson&quot;en     │
-├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 8  │ &quot;Fernando Alonso&quot;en                      │ &quot;vegetarian&quot;en         │
-├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 9  │ &quot;Alberto Rionda&quot;en                       │ &quot;guitarist&quot;en          │
-├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 10 │ &quot;Luis López-Doriga&quot;en                    │ &quot;Catholic priest&quot;en    │
-╰────┴──────────────────────────────────────────┴────────────────────────╯
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭────┬───────────────────────────────────┬─────────────────────────────────╮
+│    │ ?person                           │ ?occupation                     │
+├────┼───────────────────────────────────┼─────────────────────────────────┤
+│ 1  │ &quot;Javier Paredes&quot;en                │ &quot;association football player&quot;en │
+├────┼───────────────────────────────────┼─────────────────────────────────┤
+│ 2  │ &quot;Luis López-Doriga&quot;en             │ &quot;politician&quot;en                  │
+├────┼───────────────────────────────────┼─────────────────────────────────┤
+│ 3  │ &quot;Leticia Sánchez Ruiz&quot;en          │ &quot;writer&quot;en                      │
+├────┼───────────────────────────────────┼─────────────────────────────────┤
+│ 4  │ &quot;Fernando Alonso&quot;en               │ &quot;Formula One driver&quot;en          │
+├────┼───────────────────────────────────┼─────────────────────────────────┤
+│ 5  │ &quot;Fernando Alonso&quot;en               │ &quot;vegetarian&quot;en                  │
+├────┼───────────────────────────────────┼─────────────────────────────────┤
+│ 6  │ &quot;Luis López-Doriga&quot;en             │ &quot;Catholic priest&quot;en             │
+├────┼───────────────────────────────────┼─────────────────────────────────┤
+│ 7  │ &quot;Luis Menéndez-Pidal y Álvarez&quot;en │ &quot;architect&quot;en                   │
+├────┼───────────────────────────────────┼─────────────────────────────────┤
+│ 8  │ &quot;Luis López-Doriga&quot;en             │ &quot;theologian&quot;en                  │
+├────┼───────────────────────────────────┼─────────────────────────────────┤
+│ 9  │ &quot;Luis José de Ávila&quot;en            │ &quot;journalist&quot;en                  │
+├────┼───────────────────────────────────┼─────────────────────────────────┤
+│ 10 │ &quot;Gonzalo Martínez de Oviedo&quot;en    │ &quot;military personnel&quot;en          │
+╰────┴───────────────────────────────────┴─────────────────────────────────╯
 </pre></div>
 </div>
 </div>
@@ -740,37 +740,45 @@ document.write(`
 @prefix dct: &lt;http://purl.org/dc/terms/&gt; .
 @prefix wikibaseqs: &lt;http://wikiba.se/queryService#&gt; .
 
-wd:Q5973925 a :Person ;
-	:name &quot;Leticia SÃ¡nchez Ruiz&quot;@en ;
-	:occupation &quot;writer&quot;@en .
+wd:Q5867627 a :Person ;
+	:name &quot;Francisco Tuero&quot;@en ;
+	:occupation &quot;judge&quot;@en .
 
-wd:Q5983811 a :Person ;
-	:name &quot;Luis LÃ³pez-Doriga&quot;@en ;
+wd:Q5878203 a :Person ;
+	:name &quot;Gerardo Berjano Escobar&quot;@en ;
 	:occupation &quot;politician&quot;@en .
 
-wd:Q5983941 a :Person ;
-	:name &quot;Luis MenÃ©ndez-Pidal y Ãlvarez&quot;@en ;
-	:occupation &quot;architect&quot;@en .
-
-wd:Q5983724 a :Person ;
-	:name &quot;Luis JosÃ© de Ãvila&quot;@en ;
-	:occupation &quot;journalist&quot;@en .
-
-wd:Q5984337 a :Person ;
-	:name &quot;Luis Sela Sampil&quot;@en ;
-	:occupation &quot;jurist&quot;@en .
-
-wd:Q5983811 :occupation &quot;Catholic priest&quot;@en .
-
-wd:Q5984068 a :Person ;
-	:name &quot;Luis Noval Ferrao&quot;@en ;
+wd:Q5883089 a :Person ;
+	:name &quot;Gonzalo MartÃ­nez de Oviedo&quot;@en ;
 	:occupation &quot;military personnel&quot;@en .
 
-wd:Q5983811 :occupation &quot;theologian&quot;@en .
+wd:Q5916316 a :Person ;
+	:name &quot;Inmaculada ConcepciÃ³n GonzÃ¡lez&quot;@en ;
+	:occupation &quot;politician&quot;@en .
 
-wd:Q5992314 a :Person ;
-	:name &quot;Manuel Atienza RodrÃ­guez&quot;@en ;
-	:occupation &quot;jurist&quot;@en , &quot;university teacher&quot;@en .
+wd:Q5197101 a :Person ;
+	:name &quot;Carlos Tartiere de las Alas PumariÃ±o&quot;@en ;
+	:occupation &quot;businessperson&quot;@en .
+
+wd:Q5199463 a :Person ;
+	:name &quot;Alberto Rionda&quot;@en ;
+	:occupation &quot;composer&quot;@en .
+
+wd:Q5392869 a :Person ;
+	:name &quot;Luciano GarcÃ­a del Real&quot;@en ;
+	:occupation &quot;writer&quot;@en .
+
+wd:Q5412158 a :Person ;
+	:name &quot;Mercedes NeuschÃ¤fer-CarlÃ³n&quot;@en ;
+	:occupation &quot;writer&quot;@en .
+
+wd:Q5481143 a :Person ;
+	:name &quot;Javier Almuzara&quot;@en ;
+	:occupation &quot;writer&quot;@en .
+
+wd:Q5359004 a :Person ;
+	:name &quot;Elena FernÃ¡ndez&quot;@en ;
+	:occupation &quot;actor&quot;@en .
 </pre></div>
 </div>
 </div>

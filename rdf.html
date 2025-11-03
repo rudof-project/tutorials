@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -190,7 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="sparql12.html">SPARQL 1.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compare.html">Using rudof to compare schemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_description.html">Service descriptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rudof_generate_tutorial.html">Tutorial: Generating Synthetic RDF Data with rudof_generate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rudof_generate.html">Generating RDF Data from shapes</a></li>
 </ul>
 
     </div>
@@ -454,7 +454,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.128)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.140)
 </pre></div>
 </div>
 </div>
@@ -531,7 +531,7 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/c150b2e2a6db6baa468b35df1c06010ce72aa6d23298e0984636d4561e5e079d.png" src="_images/c150b2e2a6db6baa468b35df1c06010ce72aa6d23298e0984636d4561e5e079d.png" />
+<img alt="_images/ca2abf4f384c76a1ff6840b448b415f2129d6f6bd1f63fd372a8496c59440fbc.png" src="_images/ca2abf4f384c76a1ff6840b448b415f2129d6f6bd1f63fd372a8496c59440fbc.png" />
 </div>
 </div>
 <p>In order to obtain interoperability, it is better to employ IRIs of some agreed vocabularies. In this case, we could use the predicate <a class="reference external" href="https://schema.org/knows"><code class="docutils literal notranslate"><span class="pre">&lt;https://schema.org/knows&gt;</span></code></a>, <a class="reference external" href="https://schema.org/worksFor"><code class="docutils literal notranslate"><span class="pre">https://schema.org/worksFor</span></code></a> and <a class="reference external" href="https://schema.org/birthPlace"><code class="docutils literal notranslate"><span class="pre">https://schema.org/birthPlace</span></code></a> from <a class="reference external" href="https://schema.org/">Schema.org</a>, and [<code class="docutils literal notranslate"><span class="pre">&lt;http://dbpedia.org/resource/Spain</span></code>] from <a class="reference external" href="https://dbpedia.org/">DBpedia</a> to represent Spain.</p>
@@ -562,7 +562,7 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/45c9d497a8a647284ce4df00eb4a2cb80069203e9f3f42bd000808401ef1966e.png" src="_images/45c9d497a8a647284ce4df00eb4a2cb80069203e9f3f42bd000808401ef1966e.png" />
+<img alt="_images/60601f386e86ef3614356e5a13ddf1f256f7d7eceefbfe547ae5d20ee3325ba2.png" src="_images/60601f386e86ef3614356e5a13ddf1f256f7d7eceefbfe547ae5d20ee3325ba2.png" />
 </div>
 </div>
 <p>Having long IRIs can make RDF difficult to read. In order to have more readable RDF documents, it is possible to declare prefixes for some URIs and use qualified names formed by <code class="docutils literal notranslate"><span class="pre">prefix:name</span></code>. So the previous example could be rewritten as:</p>
@@ -599,7 +599,7 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/da83e33639f05dec77d1091ad37d4f22b27006acf49241b3605c8d9b0970f726.png" src="_images/da83e33639f05dec77d1091ad37d4f22b27006acf49241b3605c8d9b0970f726.png" />
+<img alt="_images/114598be2805fdbf0a3dae9a0b854cc5708e1a1c14212f2f157b22c7bb4e3155.png" src="_images/114598be2805fdbf0a3dae9a0b854cc5708e1a1c14212f2f157b22c7bb4e3155.png" />
 </div>
 </div>
 </section>
@@ -646,7 +646,7 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/fb622022427628a5a612b8752664cc33b9e94de9d3fe4e3d986ddc249b0336d7.png" src="_images/fb622022427628a5a612b8752664cc33b9e94de9d3fe4e3d986ddc249b0336d7.png" />
+<img alt="_images/f1666d6e7ef631760e9b03ea13891e1154c4f13d950ef3782bd39bf92f1f0b2f.png" src="_images/f1666d6e7ef631760e9b03ea13891e1154c4f13d950ef3782bd39bf92f1f0b2f.png" />
 </div>
 </div>
 </section>
@@ -684,7 +684,7 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/6b24a3f02a1f5b17796ea1d7df4e7252a81a30865bb5165f18c397965045decb.png" src="_images/6b24a3f02a1f5b17796ea1d7df4e7252a81a30865bb5165f18c397965045decb.png" />
+<img alt="_images/9ecfc1637a3150c1866cb8e61faaa9f1440e900786f6bca0234109cd3931f22b.png" src="_images/9ecfc1637a3150c1866cb8e61faaa9f1440e900786f6bca0234109cd3931f22b.png" />
 </div>
 </div>
 <p>The notation <code class="docutils literal notranslate"><span class="pre">_:id</span></code> represents a blank node. The <code class="docutils literal notranslate"><span class="pre">id</span></code> of the blank node can be used to refer to it in the definition of the RDF graph, but there is no warranty that it will be preserved internally.</p>
@@ -719,7 +719,7 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/18173c39f916da0e7edf50ea8956ba9e8746a18e6b308008c3fd0e861157283b.png" src="_images/18173c39f916da0e7edf50ea8956ba9e8746a18e6b308008c3fd0e861157283b.png" />
+<img alt="_images/90ef17ba5ee0d150d3121a482503c2c9f2f0e6b1e790510ef175222a31047c1f.png" src="_images/90ef17ba5ee0d150d3121a482503c2c9f2f0e6b1e790510ef175222a31047c1f.png" />
 </div>
 </div>
 </section>
@@ -768,24 +768,6 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="s2"> prefix : &lt;http://example.org/&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="s2"> prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="s2"> prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="s2"> </span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span><span class="s2"> :u a :Person     ;</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span><span class="s2">    :name &quot;Dave&quot;  ;</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span><span class="s2">    :knows :x, :y .</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span><span class="s2"> &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">merge</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: Rudof.read_data_str() got an unexpected keyword argument &#39;merge&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -801,7 +783,7 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/8d462b4d7ff5010b08d8261be035f3920db92e870037ce5f792066c3dfd74f22.png" src="_images/8d462b4d7ff5010b08d8261be035f3920db92e870037ce5f792066c3dfd74f22.png" />
+<img alt="_images/0f3a41e0bc4fad938abfaf5cc3d05d5daf4a1290cb8688afd6657bc7813c7335.png" src="_images/0f3a41e0bc4fad938abfaf5cc3d05d5daf4a1290cb8688afd6657bc7813c7335.png" />
 </div>
 </div>
 </section>
@@ -825,16 +807,16 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;http://example.org/u&gt; &lt;http://example.org/name&gt; &quot;Dave&quot; .
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;http://example.org/u&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
 &lt;http://example.org/u&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
 &lt;http://example.org/u&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
-&lt;http://example.org/u&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/y&gt; &lt;http://example.org/name&gt; &quot;Bob&quot; .
-&lt;http://example.org/y&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
+&lt;http://example.org/u&gt; &lt;http://example.org/name&gt; &quot;Dave&quot; .
 &lt;http://example.org/y&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/x&gt; &lt;http://example.org/name&gt; &quot;Alice&quot; .
-&lt;http://example.org/x&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
+&lt;http://example.org/y&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
+&lt;http://example.org/y&gt; &lt;http://example.org/name&gt; &quot;Bob&quot; .
 &lt;http://example.org/x&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
+&lt;http://example.org/x&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
+&lt;http://example.org/x&gt; &lt;http://example.org/name&gt; &quot;Alice&quot; .
 </pre></div>
 </div>
 </div>
@@ -850,22 +832,19 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;rdf:RDF xmlns=&quot;http://example.org/&quot; xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema#&quot;&gt;
-	&lt;rdf:Description rdf:about=&quot;http://example.org/u&quot;&gt;
+	&lt;Person rdf:about=&quot;http://example.org/u&quot;&gt;
+		&lt;knows rdf:resource=&quot;http://example.org/y&quot;/&gt;
+		&lt;knows rdf:resource=&quot;http://example.org/x&quot;/&gt;
 		&lt;name&gt;Dave&lt;/name&gt;
-		&lt;knows rdf:resource=&quot;http://example.org/y&quot;/&gt;
+	&lt;/Person&gt;
+	&lt;Person rdf:about=&quot;http://example.org/y&quot;&gt;
 		&lt;knows rdf:resource=&quot;http://example.org/x&quot;/&gt;
-		&lt;rdf:type rdf:resource=&quot;http://example.org/Person&quot;/&gt;
-	&lt;/rdf:Description&gt;
-	&lt;rdf:Description rdf:about=&quot;http://example.org/y&quot;&gt;
 		&lt;name&gt;Bob&lt;/name&gt;
-		&lt;knows rdf:resource=&quot;http://example.org/x&quot;/&gt;
-		&lt;rdf:type rdf:resource=&quot;http://example.org/Person&quot;/&gt;
-	&lt;/rdf:Description&gt;
-	&lt;rdf:Description rdf:about=&quot;http://example.org/x&quot;&gt;
-		&lt;name&gt;Alice&lt;/name&gt;
+	&lt;/Person&gt;
+	&lt;Person rdf:about=&quot;http://example.org/x&quot;&gt;
 		&lt;knows rdf:resource=&quot;http://example.org/y&quot;/&gt;
-		&lt;rdf:type rdf:resource=&quot;http://example.org/Person&quot;/&gt;
-	&lt;/rdf:Description&gt;
+		&lt;name&gt;Alice&lt;/name&gt;
+	&lt;/Person&gt;
 &lt;/rdf:RDF&gt;
 </pre></div>
 </div>
@@ -880,7 +859,7 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&quot;@id&quot;:&quot;http://example.org/u&quot;,&quot;http://example.org/name&quot;:[{&quot;@value&quot;:&quot;Dave&quot;}],&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/y&quot;},{&quot;@id&quot;:&quot;http://example.org/x&quot;}],&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}]},{&quot;@id&quot;:&quot;http://example.org/y&quot;,&quot;http://example.org/name&quot;:[{&quot;@value&quot;:&quot;Bob&quot;}],&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/x&quot;}],&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}]},{&quot;@id&quot;:&quot;http://example.org/x&quot;,&quot;http://example.org/name&quot;:[{&quot;@value&quot;:&quot;Alice&quot;}],&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/y&quot;}],&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}]}]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&quot;@id&quot;:&quot;http://example.org/u&quot;,&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}],&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/y&quot;},{&quot;@id&quot;:&quot;http://example.org/x&quot;}],&quot;http://example.org/name&quot;:[{&quot;@value&quot;:&quot;Dave&quot;}]},{&quot;@id&quot;:&quot;http://example.org/y&quot;,&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}],&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/x&quot;}],&quot;http://example.org/name&quot;:[{&quot;@value&quot;:&quot;Bob&quot;}]},{&quot;@id&quot;:&quot;http://example.org/x&quot;,&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}],&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/y&quot;}],&quot;http://example.org/name&quot;:[{&quot;@value&quot;:&quot;Alice&quot;}]}]
 </pre></div>
 </div>
 </div>
@@ -930,9 +909,9 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Outgoing arcs
 :alice
-├─── :birthDate ─► &quot;2005-03-01&quot;^^xsd:date
+├─── :birthDate ─► <span class=" -Color -Color-Red">&quot;2005-03-01&quot;^^xsd:date</span>
 ├─── :knows ─► :bob
-├─── :name ─► &quot;Alice&quot;
+├─── :name ─► <span class=" -Color -Color-Red">&quot;Alice&quot;</span>
 ├─── :worksFor ─► :acme
 └─── rdf:type ─► :Person
 </pre></div>
@@ -995,35 +974,35 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Outgoing arcs
 dbr:Oviedo
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo,_Espanha_-_panoramio_(9).jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Real_Monasterio_de_San_Pelayo_(Oviedo).jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Catedral_de_Oviedo_03.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/11._Teatro_Campoamor_(36104135806).jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo_Landscape_(230140305).jpeg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/San_Miguel_de_Lillo_01.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo_Uría.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Mapa_Parroquial_Uviéu_(color).jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Santa_María_Naranco.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Uvieu_flag.svg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/C_44_OVIEDO_OESTE.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo_desde_el_monte_Naranco.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Santa_María_del_Naranco._Oviedo.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Museo_arte_oviedo.jpg&gt;
 ├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Fachada_principal_del_Teatro_Campoamor.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo-ayuntamiento4.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/C_44_OVIEDO_CENTRO.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Ayuntamiento-de-oviedo.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/15._Junta_General_del_Principado_de_Asturias_(36143894785).jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/1._Iglesia_San_Julián_de_los_Prados_(35752657690).jpg&gt;
 ├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Church_of_San_Isidoro_el_Real,_Oviedo_16.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo02.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Ceremonia_de_entrega_de_los_Premios_Príncipe_de_Asturias_2010.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Estadio_Municipal_Carlos_Tartiere_(Real_Oviedo_S.A.D.).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/San_Miguel_de_Lillo_01.jpg&gt;
 ├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo-Plaza_del_Fontán.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/C_44_OVIEDO_CENTRO.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Estadio_Municipal_Carlos_Tartiere_(Real_Oviedo_S.A.D.).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/La-Regenta-y-Catedral.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Mapa_Parroquial_Uviéu_(color).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/11._Teatro_Campoamor_(36104135806).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo_Uría.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo-ayuntamiento4.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo_Landscape_(230140305).jpeg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Escudo_de_Oviedo.svg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo_desde_el_monte_Naranco.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/C_44_OVIEDO_OESTE.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo,_Espanha_-_panoramio_(9).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Ayuntamiento-de-oviedo.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Santa_María_del_Naranco._Oviedo.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo02.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/1._Iglesia_San_Julián_de_los_Prados_(35752657690).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/15._Junta_General_del_Principado_de_Asturias_(36143894785).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Santa_María_Naranco.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Ceremonia_de_entrega_de_los_Premios_Príncipe_de_Asturias_2010.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Real_Monasterio_de_San_Pelayo_(Oviedo).jpg&gt;
 ├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/C_44_OVIEDO_ESTE.jpg&gt;
 ├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Día_de_América_en_Asturias-2015_35.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/La-Regenta-y-Catedral.jpg&gt;
-├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Escudo_de_Oviedo.svg&gt;
-└─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Museo_arte_oviedo.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Uvieu_flag.svg&gt;
+└─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Catedral_de_Oviedo_03.jpg&gt;
 </pre></div>
 </div>
 </div>
@@ -1149,7 +1128,7 @@ dbr:Oviedo
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/3bc4441062e26d6d2e918c64a379cedba650cf5701eea41e52eb91ceb679d1e7.png" src="_images/3bc4441062e26d6d2e918c64a379cedba650cf5701eea41e52eb91ceb679d1e7.png" />
+<img alt="_images/c8748633b080b999d13f56b65d3e24c97d8853bc7c548a3cbb043880e5d1e22a.png" src="_images/c8748633b080b999d13f56b65d3e24c97d8853bc7c548a3cbb043880e5d1e22a.png" />
 </div>
 </div>
 <p>And a simple SPARQL query:</p>

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -573,15 +573,9 @@ prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Create a basic configuration</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Set the number of entities to generate</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-
-<span class="ne">AttributeError</span>: module &#39;pyrudof&#39; has no attribute &#39;GeneratorConfig&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Configuration created
+  Entity count: 10
+  Output path: /tmp/tutorial_output.ttl
 </pre></div>
 </div>
 </div>
@@ -620,23 +614,24 @@ prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generated RDF Data:
 ======================================================================
-&lt;http://example.org/Course-1&gt; &lt;http://example.org/name&gt; &quot;Delta511&quot; ;
+&lt;http://example.org/Course-3&gt; &lt;http://example.org/name&gt; &quot;Beta887&quot; ;
 	a &lt;http://example.org/Course&gt; .
-&lt;http://example.org/Person-5&gt; &lt;http://example.org/name&gt; &quot;Beta128&quot; ;
-	a &lt;http://example.org/Person&gt; .
-&lt;http://example.org/Course-3&gt; &lt;http://example.org/name&gt; &quot;Delta181&quot; ;
+&lt;http://example.org/Course-1-0&gt; &lt;http://example.org/name&gt; &quot;Epsilon848&quot; ;
 	a &lt;http://example.org/Course&gt; .
-&lt;http://example.org/Person-4&gt; &lt;http://example.org/name&gt; &quot;Alpha573&quot; ;
-	&lt;http://example.org/birthdate&gt; &quot;2024-05-28&quot;^^&lt;http://www.w3.org/2001/XMLSchema#date&gt; ;
-	&lt;http://example.org/enrolledIn&gt; &lt;http://example.org/Course-4&gt; , &lt;http://example.org/Course-3-0&gt; ;
-	a &lt;http://example.org/Person&gt; .
-&lt;http://example.org/Person-2&gt; &lt;http://example.org/name&gt; &quot;Epsilon487&quot; ;
-	&lt;http://example.org/birthdate&gt; &quot;1960-11-03&quot;^^&lt;http://www.w3.org/2001/XMLSchema#date&gt; ;
-	&lt;http://example.org/enrolledIn&gt; &lt;http://example.org/Course-2&gt; , &lt;http://example.org/Course-1-0&gt; ;
-	a &lt;http://example.org/Person&gt; .
-&lt;http://example.org/Course-4&gt; &lt;http://example.org/name&gt; &quot;Alpha825&quot; ;
+&lt;http://example.org/Course-5&gt; &lt;http://example.org/name&gt; &quot;Gamma302&quot; ;
 	a &lt;http://example.org/Course&gt; .
-&lt;http://examp
+&lt;http://example.org/Person-5&gt; &lt;http://example.org/name&gt; &quot;Epsilon907&quot; ;
+	a &lt;http://example.org/Person&gt; .
+&lt;http://example.org/Course-3-0&gt; &lt;http://example.org/name&gt; &quot;Epsilon874&quot; ;
+	a &lt;http://example.org/Course&gt; .
+&lt;http://example.org/Person-3&gt; &lt;http://example.org/name&gt; &quot;Alpha514&quot; ;
+	a &lt;http://example.org/Person&gt; .
+&lt;http://example.org/Person-1&gt; &lt;http://example.org/name&gt; &quot;Beta836&quot; ;
+	a &lt;http://example.org/Person&gt; .
+&lt;http://example.org/Person-4&gt; &lt;http://example.org/name&gt; &quot;Beta422&quot; ;
+	&lt;http://example.org/enrolledIn&gt; &lt;http://example.org/Course-3-0&gt; , &lt;http://example.org/Course-4&gt; ;
+	&lt;http://example.org/birthdate&gt; &quot;1985-06-01&quot;^^&lt;http://www.w3.org/2001/XMLSchema#date&gt; ;
+	a &lt;http://example.org/
 ======================================================================
 </pre></div>
 </div>
@@ -781,7 +776,7 @@ prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
 ======================================================================
   Minimum     : 10 triples generated
   Maximum     : 25 triples generated
-  Random      : 15 triples generated
+  Random      : 23 triples generated
   Balanced    : 15 triples generated
 ======================================================================
 
@@ -892,14 +887,14 @@ Minimum Strategy:
   hasLike relationships: 0
 
 Maximum Strategy:
-  hasFriend relationships: 2
-  hasPost relationships: 2
-  hasLike relationships: 3
+  hasFriend relationships: 3
+  hasPost relationships: 3
+  hasLike relationships: 2
 
 Balanced Strategy:
-  hasFriend relationships: 3
-  hasPost relationships: 2
-  hasLike relationships: 1
+  hasFriend relationships: 2
+  hasPost relationships: 1
+  hasLike relationships: 2
 
 ================================================================================
 
@@ -932,18 +927,20 @@ Observations:
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample of generated data with Balanced strategy:
 ================================================================================
-&lt;http://example.org/Post-2-1&gt; a &lt;http://example.org/Post&gt; ;
-	&lt;http://example.org/title&gt; &quot;Beta684&quot; ;
-	&lt;http://example.org/content&gt; &quot;Epsilon369&quot; .
-&lt;http://example.org/User-2&gt; &lt;http://example.org/hasFriend&gt; &lt;http://example.org/User-2&gt; , &lt;http://example.org/User-3&gt; , &lt;http://example.org/User-1&gt; , &lt;http://example.org/User-1-2&gt; , &lt;http://example.org/User-1-0&gt; , &lt;http://example.org/User-1-1&gt; ;
-	a &lt;http://example.org/User&gt; ;
-	&lt;http://example.org/email&gt; &quot;test15@test.org&quot; ;
-	&lt;http://example.org/name&gt; &quot;Delta700&quot; ;
-	&lt;http://example.org/hasPost&gt; &lt;http://example.org/Post-1-0&gt; , &lt;http://example.org/Post-2&gt; .
-&lt;http://example.org/User-0-1&gt; a &lt;http://example.org/User&gt; ;
-	&lt;http://example.org/email&gt; &quot;demo37@test.org&quot; ;
-	&lt;http://example.org/name&gt; &quot;Epsilon675&quot; .
-&lt;http://example.org/User-3&gt; &lt;http://example.org/h
+&lt;http://example.org/Post-2&gt; &lt;http://example.org/hasLike&gt; &lt;http://example.org/User-2&gt; , &lt;http://example.org/User-1-0&gt; ;
+	&lt;http://example.org/title&gt; &quot;Beta621&quot; ;
+	a &lt;http://example.org/Post&gt; ;
+	&lt;http://example.org/content&gt; &quot;Delta718&quot; .
+&lt;http://example.org/User-2-1&gt; &lt;http://example.org/name&gt; &quot;Gamma368&quot; ;
+	&lt;http://example.org/email&gt; &quot;test17@example.com&quot; ;
+	a &lt;http://example.org/User&gt; .
+&lt;http://example.org/User-0-1&gt; &lt;http://example.org/name&gt; &quot;Epsilon804&quot; ;
+	&lt;http://example.org/email&gt; &quot;user42@example.com&quot; ;
+	a &lt;http://example.org/User&gt; .
+&lt;http://example.org/Post-3&gt; &lt;http://example.org/hasLike&gt; &lt;http://example.org/User-2-1&gt; , &lt;http://example.org/User-2&gt; , &lt;http://example.org/User-2-0&gt; , &lt;http://example.org/User-1&gt; ;
+	&lt;http://example.org/title&gt; &quot;Gamma403&quot; ;
+	a &lt;http://example.org/Post&gt; ;
+	&lt;http://e
 ...
 ================================================================================
 
@@ -1075,12 +1072,12 @@ parallel_fields = true
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Turtle Format:
 ======================================================================
-&lt;http://example.org/Person-1&gt; a &lt;http://example.org/Person&gt; ;
-	&lt;http://example.org/name&gt; &quot;Epsilon229&quot; .
-&lt;http://example.org/Course-2&gt; a &lt;http://example.org/Course&gt; ;
-	&lt;http://example.org/name&gt; &quot;Alpha594&quot; .
-&lt;http://example.org/Course-1&gt; a &lt;http://example.org/Course&gt; ;
-	&lt;http://example.org/name&gt; &quot;Gamma310&quot; .
+&lt;http://example.org/Person-1&gt; &lt;http://example.org/name&gt; &quot;Epsilon309&quot; ;
+	a &lt;http://example.org/Person&gt; .
+&lt;http://example.org/Course-2&gt; &lt;http://example.org/name&gt; &quot;Delta497&quot; ;
+	a &lt;http://example.org/Course&gt; .
+&lt;http://example.org/Course-1&gt; &lt;http://example.org/name&gt; &quot;Beta365&quot; ;
+	a &lt;http://example.org/Course&gt; .
 
 ...
 ======================================================================
@@ -1111,12 +1108,12 @@ parallel_fields = true
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NTriples Format:
 ======================================================================
-&lt;http://example.org/Course-2&gt; &lt;http://example.org/name&gt; &quot;Gamma697&quot; .
-&lt;http://example.org/Course-2&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Course&gt; .
-&lt;http://example.org/Course-1&gt; &lt;http://example.org/name&gt; &quot;Delta639&quot; .
-&lt;http://example.org/Course-1&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Course&gt; .
-&lt;http://example.org/Person-1&gt; &lt;http://example.org/name&gt; &quot;Alpha947&quot; .
-&lt;http://example.org/Person-1&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns
+&lt;http://example.org/Person-2&gt; &lt;http://example.org/enrolledIn&gt; &lt;http://example.org/Course-1&gt; .
+&lt;http://example.org/Person-2&gt; &lt;http://example.org/enrolledIn&gt; &lt;http://example.org/Course-1-0&gt; .
+&lt;http://example.org/Person-2&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
+&lt;http://example.org/Person-2&gt; &lt;http://example.org/name&gt; &quot;Epsilon701&quot; .
+&lt;http://example.org/Person-2&gt; &lt;http://example.org/birthdate&gt; &quot;2010-11-02&quot;^^&lt;http://www.w3.org/2001/XMLSchema#date&gt; .
+&lt;http://exam
 ...
 ======================================================================
 </pre></div>
@@ -1187,16 +1184,16 @@ parallel_fields = true
 
 Generated data from SHACL:
 ======================================================================
-&lt;http://example.org/PersonShape-7&gt; &lt;http://example.org/age&gt; 3207 ;
-	a &lt;http://example.org/PersonShape&gt; ;
-	&lt;http://example.org/name&gt; &quot;Gamma259&quot; .
-&lt;http://example.org/PersonShape-3&gt; &lt;http://example.org/age&gt; 1618 ;
-	a &lt;http://example.org/PersonShape&gt; ;
-	&lt;http://example.org/name&gt; &quot;Delta747&quot; .
-&lt;http://example.org/PersonShape-10&gt; &lt;http://example.org/age&gt; 7061 ;
-	a &lt;http://example.org/PersonShape&gt; ;
-	&lt;http://example.org/name&gt; &quot;Alpha725&quot; .
-&lt;http://example.org/PersonShape-8&gt; &lt;http://example.org/age&gt; 1375
+&lt;http://example.org/PersonShape-5&gt; &lt;http://example.org/age&gt; -239 ;
+	&lt;http://example.org/name&gt; &quot;Epsilon844&quot; ;
+	a &lt;http://example.org/PersonShape&gt; .
+&lt;http://example.org/PersonShape-7&gt; &lt;http://example.org/age&gt; 8503 ;
+	&lt;http://example.org/name&gt; &quot;Alpha700&quot; ;
+	a &lt;http://example.org/PersonShape&gt; .
+&lt;http://example.org/PersonShape-8&gt; &lt;http://example.org/age&gt; 8310 ;
+	&lt;http://example.org/name&gt; &quot;Beta687&quot; ;
+	a &lt;http://example.org/PersonShape&gt; .
+&lt;http://example.org/PersonShape-3&gt; &lt;http://example.org/age&gt; 2288
 ...
 ======================================================================
 </pre></div>
@@ -1408,9 +1405,9 @@ All three methods produce equivalent results!
 ✓ Data generated with parallel writing
 
 Generated files:
-  tutorial_parallel_part_003.ttl: 1177 bytes
-  tutorial_parallel_part_002.ttl: 1183 bytes
+  tutorial_parallel_part_002.ttl: 1285 bytes
   tutorial_parallel_part_001.ttl: 1172 bytes
+  tutorial_parallel_part_003.ttl: 1108 bytes
 </pre></div>
 </div>
 </div>
