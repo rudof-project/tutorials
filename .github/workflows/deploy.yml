@@ -47,7 +47,13 @@ jobs:
       run: |
         echo "Contents of current directory:"
         ls -la .
-    
+
+    - name: Show jupyter-book version
+      run: |
+        echo "Jupyter-book version:"
+        jupyter-book --version
+
+        
     # Build the book
     - name: Build the book
       run: |
