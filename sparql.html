@@ -182,6 +182,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="rudof.html">Short introduction to Rudof</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rdf.html">RDF</a></li>
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">SPARQL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shex.html">ShEx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shacl.html">SHACL</a></li>
@@ -450,7 +451,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.120)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.128)
 </pre></div>
 </div>
 </div>
@@ -527,7 +528,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solutions: QuerySolutions { solutions: [QuerySolution { variables: [VarName { str: &quot;person&quot; }, VarName { str: &quot;name&quot; }, VarName { str: &quot;date&quot; }, VarName { str: &quot;company&quot; }], values: [Some(NamedNode(NamedNode { iri: &quot;http://example.org/bob&quot; })), Some(Literal(Literal(String(&quot;Robert Smith&quot;)))), Some(Literal(Literal(TypedLiteral { value: &quot;2003-01-02&quot;, datatype: NamedNode { iri: &quot;http://www.w3.org/2001/XMLSchema#date&quot; } }))), Some(Literal(Literal(String(&quot;Acme Inc.&quot;))))] }, QuerySolution { variables: [VarName { str: &quot;person&quot; }, VarName { str: &quot;name&quot; }, VarName { str: &quot;date&quot; }, VarName { str: &quot;company&quot; }], values: [Some(NamedNode(NamedNode { iri: &quot;http://example.org/alice&quot; })), Some(Literal(Literal(String(&quot;Alice&quot;)))), Some(Literal(Literal(TypedLiteral { value: &quot;2005-03-01&quot;, datatype: NamedNode { iri: &quot;http://www.w3.org/2001/XMLSchema#date&quot; } }))), Some(Literal(Literal(String(&quot;Acme Inc.&quot;))))] }] }
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭───┬─────────┬────────────────┬────────────────────────┬─────────────╮
+│   │ ?person │ ?name          │ ?date                  │ ?company    │
+├───┼─────────┼────────────────┼────────────────────────┼─────────────┤
+│ 1 │ :alice  │ &quot;Alice&quot;        │ &quot;2005-03-01&quot;^^xsd:date │ &quot;Acme Inc.&quot; │
+├───┼─────────┼────────────────┼────────────────────────┼─────────────┤
+│ 2 │ :bob    │ &quot;Robert Smith&quot; │ &quot;2003-01-02&quot;^^xsd:date │ &quot;Acme Inc.&quot; │
+╰───┴─────────┴────────────────┴────────────────────────┴─────────────╯
 </pre></div>
 </div>
 </div>
@@ -570,16 +577,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">rudof</span><span class="o">.</span><span class="n">use_endpoint</span><span class="p">(</span><span class="s2">&quot;https://query.wikidata.org/sparql&quot;</span><span class="p">)</span>
-
-<span class="ne">AttributeError</span>: &#39;builtins.Rudof&#39; object has no attribute &#39;use_endpoint&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -598,25 +595,25 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭────┬──────────────────────────────────────────┬────────────────────────╮
 │    │ ?person                                  │ ?occupation            │
 ├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 1  │ &quot;Luis López-Doriga&quot;en                    │ &quot;politician&quot;en         │
+│ 1  │ &quot;Leticia Sánchez Ruiz&quot;en                 │ &quot;writer&quot;en             │
 ├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 2  │ &quot;Leticia Sánchez Ruiz&quot;en                 │ &quot;writer&quot;en             │
+│ 2  │ &quot;Elena Fernández&quot;en                      │ &quot;actor&quot;en              │
 ├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 3  │ &quot;Luis Menéndez-Pidal y Álvarez&quot;en        │ &quot;architect&quot;en          │
+│ 3  │ &quot;Luis López-Doriga&quot;en                    │ &quot;politician&quot;en         │
 ├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 4  │ &quot;Elena Fernández&quot;en                      │ &quot;actor&quot;en              │
+│ 4  │ &quot;Fernando Alonso&quot;en                      │ &quot;Formula One driver&quot;en │
 ├────┼──────────────────────────────────────────┼────────────────────────┤
 │ 5  │ &quot;Alberto Rionda&quot;en                       │ &quot;composer&quot;en           │
 ├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 6  │ &quot;Fernando Alonso&quot;en                      │ &quot;Formula One driver&quot;en │
+│ 6  │ &quot;Jesús Lobato de Blas&quot;en                 │ &quot;writer&quot;en             │
 ├────┼──────────────────────────────────────────┼────────────────────────┤
 │ 7  │ &quot;Carlos Tartiere de las Alas Pumariño&quot;en │ &quot;businessperson&quot;en     │
 ├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 8  │ &quot;Alberto Rionda&quot;en                       │ &quot;guitarist&quot;en          │
+│ 8  │ &quot;Fernando Alonso&quot;en                      │ &quot;vegetarian&quot;en         │
 ├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 9  │ &quot;Luis López-Doriga&quot;en                    │ &quot;Catholic priest&quot;en    │
+│ 9  │ &quot;Alberto Rionda&quot;en                       │ &quot;guitarist&quot;en          │
 ├────┼──────────────────────────────────────────┼────────────────────────┤
-│ 10 │ &quot;Fernando Alonso&quot;en                      │ &quot;vegetarian&quot;en         │
+│ 10 │ &quot;Luis López-Doriga&quot;en                    │ &quot;Catholic priest&quot;en    │
 ╰────┴──────────────────────────────────────────┴────────────────────────╯
 </pre></div>
 </div>
@@ -751,29 +748,29 @@ wd:Q5983811 a :Person ;
 	:name &quot;Luis LÃ³pez-Doriga&quot;@en ;
 	:occupation &quot;politician&quot;@en .
 
+wd:Q5983941 a :Person ;
+	:name &quot;Luis MenÃ©ndez-Pidal y Ãlvarez&quot;@en ;
+	:occupation &quot;architect&quot;@en .
+
 wd:Q5983724 a :Person ;
 	:name &quot;Luis JosÃ© de Ãvila&quot;@en ;
 	:occupation &quot;journalist&quot;@en .
 
-wd:Q5983811 :occupation &quot;Catholic priest&quot;@en , &quot;theologian&quot;@en .
+wd:Q5984337 a :Person ;
+	:name &quot;Luis Sela Sampil&quot;@en ;
+	:occupation &quot;jurist&quot;@en .
 
-wd:Q6001860 a :Person ;
-	:name &quot;Marta Azcona&quot;@en ;
-	:occupation &quot;screenwriter&quot;@en .
+wd:Q5983811 :occupation &quot;Catholic priest&quot;@en .
 
-wd:Q6003214 a :Person ;
-	:name &quot;Mary Paz Pondal&quot;@en ;
-	:occupation &quot;actor&quot;@en .
+wd:Q5984068 a :Person ;
+	:name &quot;Luis Noval Ferrao&quot;@en ;
+	:occupation &quot;military personnel&quot;@en .
 
-wd:Q10514 a :Person ;
-	:name &quot;Fernando Alonso&quot;@en ;
-	:occupation &quot;vegetarian&quot;@en .
+wd:Q5983811 :occupation &quot;theologian&quot;@en .
 
-wd:Q27688 a :Person ;
-	:name &quot;Javier Paredes&quot;@en ;
-	:occupation &quot;association football player&quot;@en .
-
-wd:Q10514 :occupation &quot;Formula One driver&quot;@en .
+wd:Q5992314 a :Person ;
+	:name &quot;Manuel Atienza RodrÃ­guez&quot;@en ;
+	:occupation &quot;jurist&quot;@en , &quot;university teacher&quot;@en .
 </pre></div>
 </div>
 </div>

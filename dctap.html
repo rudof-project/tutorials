@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -418,6 +418,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-dctap">What is DCTAP?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-dctap-to-shex">Converting DCTAP to ShEx</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validating-data-with-the-shex-generated-from-dctap">Validating data with the ShEx generated from DCTAP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-dctap-content-as-a-uml-diagrams">Visualizing DCTAP content as a UML diagrams</a></li>
 </ul>
             </nav>
         </div>
@@ -437,21 +439,51 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pyrudof
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rudof</span><span class="p">,</span> <span class="n">RudofConfig</span>
 <span class="n">rudof</span> <span class="o">=</span> <span class="n">Rudof</span><span class="p">(</span><span class="n">RudofConfig</span><span class="p">())</span>
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>ipython<span class="w"> </span>#<span class="w"> </span>If<span class="w"> </span>not<span class="w"> </span>already<span class="w"> </span>installed
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>plantuml
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span> <span class="c1"># For displaying images</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.120)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.128)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ipython in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (9.6.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: decorator in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (5.2.1)
+Requirement already satisfied: ipython-pygments-lexers in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (1.1.1)
+Requirement already satisfied: jedi&gt;=0.16 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (0.19.2)
+Requirement already satisfied: matplotlib-inline in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (0.1.7)
+Requirement already satisfied: pexpect&gt;4.3 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (4.9.0)
+Requirement already satisfied: prompt_toolkit&lt;3.1.0,&gt;=3.0.41 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (3.0.52)
+Requirement already satisfied: pygments&gt;=2.4.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (2.19.2)
+Requirement already satisfied: stack_data in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (0.6.3)
+Requirement already satisfied: traitlets&gt;=5.13.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (5.14.3)
+Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.4 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from jedi&gt;=0.16-&gt;ipython) (0.8.5)
+Requirement already satisfied: ptyprocess&gt;=0.5 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from pexpect&gt;4.3-&gt;ipython) (0.7.0)
+Requirement already satisfied: wcwidth in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython) (0.2.14)
+Requirement already satisfied: executing&gt;=1.2.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (2.2.1)
+Requirement already satisfied: asttokens&gt;=2.1.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (3.0.0)
+Requirement already satisfied: pure-eval in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (0.2.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: plantuml in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.3.0)
+Requirement already satisfied: httplib2 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from plantuml) (0.31.0)
+Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from httplib2-&gt;plantuml) (3.2.5)
 </pre></div>
 </div>
 </div>
 </div>
 <section id="what-is-dctap">
 <h2>What is DCTAP?<a class="headerlink" href="#what-is-dctap" title="Link to this heading">#</a></h2>
+<p>DCTAP (Dublin Core Tabular Application Profiles) is a model that can be used to define metadata using a tabular format.</p>
+<p>In this way, it is possible to define models in CSV which can then be converted to other schema technologies like ShEx or SHACL.</p>
 </section>
 <section id="converting-dctap-to-shex">
 <h2>Converting DCTAP to ShEx<a class="headerlink" href="#converting-dctap-to-shex" title="Link to this heading">#</a></h2>
-<p>Rudof can be used to convert <a class="reference external" href="https://www.dublincore.org/specifications/dctap/">DCTAP</a> files to ShEx.</p>
+<p>Rudof has support for <a class="reference external" href="https://www.dublincore.org/specifications/dctap/">DCTAP</a> and can be used to read DCTAP files in CSV or Excel files and convert those models to other schema languages.</p>
 <p>DCTAP can be used to represent shapes using a tabular representation using CSV or an spreadsheet format like XLSX. As an example, the following CSV data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -508,7 +540,7 @@ Shape(Company)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">ShExFormatter</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">ShExFormatter</span><span class="p">,</span> <span class="n">UmlGenerationMode</span>
 </pre></div>
 </div>
 </div>
@@ -517,7 +549,7 @@ Shape(Company)
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shex</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">get_shex</span><span class="p">()</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">serialize_shex</span><span class="p">(</span><span class="n">shex</span><span class="p">,</span> <span class="n">ShExFormatter</span><span class="p">())</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">serialize_shex</span><span class="p">(</span><span class="n">shex</span><span class="p">,</span> <span class="n">ShExFormatter</span><span class="p">()</span><span class="o">.</span><span class="n">without_colors</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -529,23 +561,107 @@ Shape(Company)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>prefix dc: &lt;http://purl.org/dc/elements/1.1/&gt;
-prefix : &lt;http://example.org/&gt;
-prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-prefix sh: &lt;http://www.w3.org/ns/shacl#&gt;
-prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>prefix dct: &lt;http://purl.org/dc/terms/&gt;
 prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-:<span class=" -Color -Color-Black">Person</span> {
-    :<span class=" -Color -Color-Black">name</span> <span class=" -Color -Color-Blue">xsd</span>:<span class=" -Color -Color-Black">string</span>;
-    :<span class=" -Color -Color-Black">birthdate</span> <span class=" -Color -Color-Blue">xsd</span>:<span class=" -Color -Color-Black">date</span> ?;
-    :<span class=" -Color -Color-Black">worksFor</span> @:<span class=" -Color -Color-Black">Company</span> *
-}
-:<span class=" -Color -Color-Black">Company</span> {
-    :<span class=" -Color -Color-Black">name</span> <span class=" -Color -Color-Blue">xsd</span>:<span class=" -Color -Color-Black">string</span>;
-    :<span class=" -Color -Color-Black">employee</span> @:<span class=" -Color -Color-Black">Person</span> *
-}
+prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
+prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix sdo: &lt;https://schema.org/&gt;
+prefix ex: &lt;http://example.org/&gt;
+prefix base: &lt;http://base/&gt;
+ex:Person { ex:name xsd:string; ex:birthdate xsd:date ?; ex:worksFor @ex:Company * }
+ex:Company { ex:name xsd:string; ex:employee @ex:Person * }
 </pre></div>
 </div>
+</div>
+</div>
+</section>
+<section id="validating-data-with-the-shex-generated-from-dctap">
+<h2>Validating data with the ShEx generated from DCTAP<a class="headerlink" href="#validating-data-with-the-shex-generated-from-dctap" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_shex_str</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">prefix : &lt;http://example.org/&gt;</span>
+<span class="s2">prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+<span class="s2">:alice :name &quot;Alice&quot; ;</span>
+<span class="s2">       :birthdate &quot;1970-01-01&quot;^^xsd:date ;</span>
+<span class="s2">       :worksFor :acme .</span>
+<span class="s2">:acme  :name &quot;ACME INC.&quot; .</span>
+
+<span class="s2">:bob   :name 23 .</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_shapemap_str</span><span class="p">(</span><span class="s2">&quot;:alice@ex:Person, :bob@ex:Person&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation_results</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">validate_shex</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">validation_results</span><span class="o">.</span><span class="n">show_as_table</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭────────┬───────────┬────────╮
+│ Node   │ Shape     │ Status │
+├────────┼───────────┼────────┤
+│ :alice │ ex:Person │ <span class=" -Color -Color-Green">OK</span>     │
+├────────┼───────────┼────────┤
+│ :bob   │ ex:Person │ <span class=" -Color -Color-Red">FAIL</span>   │
+╰────────┴───────────┴────────╯
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-dctap-content-as-a-uml-diagrams">
+<h2>Visualizing DCTAP content as a UML diagrams<a class="headerlink" href="#visualizing-dctap-content-as-a-uml-diagrams" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">shex2plantuml_file</span><span class="p">(</span><span class="n">UmlGenerationMode</span><span class="p">(),</span> <span class="s1">&#39;out.puml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python<span class="w"> </span>-m<span class="w"> </span>plantuml<span class="w"> </span>out.puml
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;out.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ab06d753e9534e13ddd6ac5aab335b514143ae362587bdff4c48206701d455af.png" src="_images/ab06d753e9534e13ddd6ac5aab335b514143ae362587bdff4c48206701d455af.png" />
 </div>
 </div>
 </section>
@@ -617,6 +733,8 @@ prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-dctap">What is DCTAP?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-dctap-to-shex">Converting DCTAP to ShEx</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validating-data-with-the-shex-generated-from-dctap">Validating data with the ShEx generated from DCTAP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-dctap-content-as-a-uml-diagrams">Visualizing DCTAP content as a UML diagrams</a></li>
 </ul>
   </nav></div>
 

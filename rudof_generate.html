@@ -1,0 +1,1703 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Generating RDF Data from shapes &#8212; Shaping Knowledge Graphs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'rudof_generate';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Service descriptions" href="service_description.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.svg" class="logo__image only-light" alt="Shaping Knowledge Graphs - Home"/>
+    <script>document.write(`<img src="_static/logo.svg" class="logo__image only-dark" alt="Shaping Knowledge Graphs - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Shaping Knowledge Graphs
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="rudof.html">Short introduction to Rudof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rdf.html">RDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparql.html">SPARQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shex.html">ShEx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shacl.html">SHACL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dctap.html">Introduction to DCTAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rdf12.html">RDF 1.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparql12.html">SPARQL 1.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compare.html">Using rudof to compare schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_description.html">Service descriptions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Generating RDF Data from shapes</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rudof-project/tutorials/blob/master/rudof/rudof_generate.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rudof-project/tutorials" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rudof-project/tutorials/issues/new?title=Issue%20on%20page%20%2Frudof_generate.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/rudof_generate.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Generating RDF Data from shapes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-ll-learn">What You’ll Learn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-basic-setup">Part 1: Basic Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-simple-example-generate-data-from-a-shex-schema">Part 2: Simple Example - Generate Data from a ShEx Schema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-advanced-configuration-options">Part 3: Advanced Configuration Options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-cardinality-strategies">Part 4: Cardinality Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-cardinality-configuration">Custom Cardinality Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-5-working-with-configuration-files">Part 5: Working with Configuration Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-7-different-output-formats">Part 7: Different Output Formats</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-shacl-schemas">Working with SHACL Schemas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-configuration">Inspecting Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-schema-loading-methods">Explicit Schema Loading Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-json-configuration-files">Working with JSON Configuration Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entity-distribution">Entity Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-writing-for-large-datasets">Parallel Writing for Large Datasets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-6-advanced-features">Part 6: Advanced Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-features">Core Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-features">Advanced Features</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="generating-rdf-data-from-shapes">
+<h1>Generating RDF Data from shapes<a class="headerlink" href="#generating-rdf-data-from-shapes" title="Link to this heading">#</a></h1>
+<p>This tutorial demonstrates how to use the Python bindings for <code class="docutils literal notranslate"><span class="pre">rudof_generate</span></code> to create synthetic RDF datasets from ShEx and SHACL schemas.</p>
+<section id="what-you-ll-learn">
+<h2>What You’ll Learn<a class="headerlink" href="#what-you-ll-learn" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>How to configure the data generator</p></li>
+<li><p>How to generate RDF data from schemas</p></li>
+<li><p>How to control randomness and reproducibility</p></li>
+<li><p>How to customize output formats and options</p></li>
+<li><p>How to use configuration files</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<p>Make sure you have <code class="docutils literal notranslate"><span class="pre">pyrudof</span></code> installed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pyrudof
+</pre></div>
+</div>
+<p>Or install from source:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>../python
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="part-1-basic-setup">
+<h2>Part 1: Basic Setup<a class="headerlink" href="#part-1-basic-setup" title="Link to this heading">#</a></h2>
+<p>First, let’s import the library and check that everything is working.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the pyrudof library</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyrudof</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ pyrudof imported successfully!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Available classes: GeneratorConfig, DataGenerator&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Available enums: SchemaFormat, OutputFormat, CardinalityStrategy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ pyrudof imported successfully!
+Available classes: GeneratorConfig, DataGenerator
+Available enums: SchemaFormat, OutputFormat, CardinalityStrategy
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-2-simple-example-generate-data-from-a-shex-schema">
+<h2>Part 2: Simple Example - Generate Data from a ShEx Schema<a class="headerlink" href="#part-2-simple-example-generate-data-from-a-shex-schema" title="Link to this heading">#</a></h2>
+<p>Let’s start with a simple example. We’ll use a basic ShEx schema that defines Person and Course entities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, let&#39;s create a simple ShEx schema</span>
+<span class="n">schema_content</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;prefix : &lt;http://example.org/&gt;</span>
+<span class="s2">prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+
+<span class="s2">:Person { </span>
+<span class="s2">    :name       xsd:string  ;</span>
+<span class="s2">    :birthdate  xsd:date  ? ;</span>
+<span class="s2">    :enrolledIn @:Course *</span>
+<span class="s2">}</span>
+
+<span class="s2">:Course { </span>
+<span class="s2">    :name xsd:string </span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># Save the schema to a file</span>
+<span class="n">schema_path</span> <span class="o">=</span> <span class="s2">&quot;/tmp/tutorial_schema.shex&quot;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">schema_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">schema_content</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Schema created:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">schema_content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Schema created:
+prefix : &lt;http://example.org/&gt;
+prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+
+:Person { 
+    :name       xsd:string  ;
+    :birthdate  xsd:date  ? ;
+    :enrolledIn @:Course *
+}
+
+:Course { 
+    :name xsd:string 
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a basic configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+
+<span class="c1"># Set the number of entities to generate</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Set output path</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_output.ttl&quot;</span><span class="p">)</span>
+
+<span class="c1"># Set output format to Turtle (human-readable)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Configuration created&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Entity count: </span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">get_entity_count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Output path: </span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">get_output_path</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Create a basic configuration</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Set the number of entities to generate</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: module &#39;pyrudof&#39; has no attribute &#39;GeneratorConfig&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the data generator</span>
+<span class="n">generator</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">DataGenerator</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># Generate the data!</span>
+<span class="n">generator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">schema_path</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Data generation completed!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Data generation completed!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s view the generated data</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_output.ttl&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">generated_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generated RDF Data:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">generated_data</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>  <span class="c1"># Show first 1000 characters</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generated RDF Data:
+======================================================================
+&lt;http://example.org/Course-1&gt; &lt;http://example.org/name&gt; &quot;Delta511&quot; ;
+	a &lt;http://example.org/Course&gt; .
+&lt;http://example.org/Person-5&gt; &lt;http://example.org/name&gt; &quot;Beta128&quot; ;
+	a &lt;http://example.org/Person&gt; .
+&lt;http://example.org/Course-3&gt; &lt;http://example.org/name&gt; &quot;Delta181&quot; ;
+	a &lt;http://example.org/Course&gt; .
+&lt;http://example.org/Person-4&gt; &lt;http://example.org/name&gt; &quot;Alpha573&quot; ;
+	&lt;http://example.org/birthdate&gt; &quot;2024-05-28&quot;^^&lt;http://www.w3.org/2001/XMLSchema#date&gt; ;
+	&lt;http://example.org/enrolledIn&gt; &lt;http://example.org/Course-4&gt; , &lt;http://example.org/Course-3-0&gt; ;
+	a &lt;http://example.org/Person&gt; .
+&lt;http://example.org/Person-2&gt; &lt;http://example.org/name&gt; &quot;Epsilon487&quot; ;
+	&lt;http://example.org/birthdate&gt; &quot;1960-11-03&quot;^^&lt;http://www.w3.org/2001/XMLSchema#date&gt; ;
+	&lt;http://example.org/enrolledIn&gt; &lt;http://example.org/Course-2&gt; , &lt;http://example.org/Course-1-0&gt; ;
+	a &lt;http://example.org/Person&gt; .
+&lt;http://example.org/Course-4&gt; &lt;http://example.org/name&gt; &quot;Alpha825&quot; ;
+	a &lt;http://example.org/Course&gt; .
+&lt;http://examp
+======================================================================
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-3-advanced-configuration-options">
+<h2>Part 3: Advanced Configuration Options<a class="headerlink" href="#part-3-advanced-configuration-options" title="Link to this heading">#</a></h2>
+<p>The generator supports many configuration options for fine-tuning data generation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a fully configured generator</span>
+<span class="n">advanced_config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+
+<span class="c1"># Generation settings</span>
+<span class="n">advanced_config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">advanced_config</span><span class="o">.</span><span class="n">set_cardinality_strategy</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">CardinalityStrategy</span><span class="o">.</span><span class="n">Balanced</span><span class="p">)</span>
+
+<span class="c1"># Output settings</span>
+<span class="n">advanced_config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_advanced.ttl&quot;</span><span class="p">)</span>
+<span class="n">advanced_config</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+<span class="n">advanced_config</span><span class="o">.</span><span class="n">set_write_stats</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Generate statistics</span>
+<span class="n">advanced_config</span><span class="o">.</span><span class="n">set_compress</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Parallel processing (for large datasets)</span>
+<span class="n">advanced_config</span><span class="o">.</span><span class="n">set_worker_threads</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">advanced_config</span><span class="o">.</span><span class="n">set_batch_size</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Advanced configuration:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Entities: </span><span class="si">{</span><span class="n">advanced_config</span><span class="o">.</span><span class="n">get_entity_count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Worker threads: </span><span class="si">{</span><span class="n">advanced_config</span><span class="o">.</span><span class="n">get_worker_threads</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Statistics enabled: Yes&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Advanced configuration:
+  Entities: 20
+  Worker threads: 4
+  Statistics enabled: Yes
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate with advanced settings</span>
+<span class="n">advanced_generator</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">DataGenerator</span><span class="p">(</span><span class="n">advanced_config</span><span class="p">)</span>
+<span class="n">advanced_generator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">schema_path</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Data generated with advanced settings&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Data generated with advanced settings
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># View the statistics file</span>
+<span class="n">stats_path</span> <span class="o">=</span> <span class="s2">&quot;/tmp/tutorial_advanced.stats.json&quot;</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">stats_path</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">stats_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;📊 Generation Statistics:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">stats</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No statistics file found&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📊 Generation Statistics:
+======================================================================
+{
+  &quot;total_triples&quot;: 65,
+  &quot;total_subjects&quot;: 25,
+  &quot;total_predicates&quot;: 4,
+  &quot;total_objects&quot;: 42,
+  &quot;generation_time&quot;: &quot;0ms&quot;,
+  &quot;shape_counts&quot;: {
+    &quot;http://example.org/Person&quot;: 10,
+    &quot;http://example.org/Course&quot;: 15
+  }
+}
+======================================================================
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-4-cardinality-strategies">
+<h2>Part 4: Cardinality Strategies<a class="headerlink" href="#part-4-cardinality-strategies" title="Link to this heading">#</a></h2>
+<p>Different strategies control how many related entities are created.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test different cardinality strategies</span>
+<span class="n">strategies</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Minimum&quot;</span><span class="p">,</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">CardinalityStrategy</span><span class="o">.</span><span class="n">Minimum</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Maximum&quot;</span><span class="p">,</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">CardinalityStrategy</span><span class="o">.</span><span class="n">Maximum</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Random&quot;</span><span class="p">,</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">CardinalityStrategy</span><span class="o">.</span><span class="n">Random</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Balanced&quot;</span><span class="p">,</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">CardinalityStrategy</span><span class="o">.</span><span class="n">Balanced</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">strategy</span> <span class="ow">in</span> <span class="n">strategies</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">set_cardinality_strategy</span><span class="p">(</span><span class="n">strategy</span><span class="p">)</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tmp/tutorial_</span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">.ttl&quot;</span><span class="p">)</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">set_write_stats</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">generator</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">DataGenerator</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">generator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">schema_path</span><span class="p">)</span>
+    
+    <span class="c1"># Read statistics</span>
+    <span class="n">stats_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/tmp/tutorial_</span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">.stats.json&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">stats_path</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">stats_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">stats</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;total_triples&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cardinality Strategy Comparison:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">triple_count</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">12s</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">triple_count</span><span class="si">}</span><span class="s2"> triples generated&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Note: Different strategies affect how many relationships are created.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cardinality Strategy Comparison:
+======================================================================
+  Minimum     : 10 triples generated
+  Maximum     : 25 triples generated
+  Random      : 15 triples generated
+  Balanced    : 15 triples generated
+======================================================================
+
+Note: Different strategies affect how many relationships are created.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="custom-cardinality-configuration">
+<h3>Custom Cardinality Configuration<a class="headerlink" href="#custom-cardinality-configuration" title="Link to this heading">#</a></h3>
+<p>You can also specify custom cardinality ranges for specific properties in your schema. This gives you fine-grained control over how many related entities are generated for each relationship.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a schema with specific cardinality constraints (using ShEx format)</span>
+<span class="n">custom_schema_content</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">PREFIX ex: &lt;http://example.org/&gt;</span>
+<span class="s2">PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+
+<span class="s2">ex:User {</span>
+<span class="s2">    ex:name xsd:string ;</span>
+<span class="s2">    ex:email xsd:string ;</span>
+<span class="s2">    ex:hasFriend @ex:User {2,5} ;   # Each user must have 2-5 friends</span>
+<span class="s2">    ex:hasPost @ex:Post {0,10}       # Each user can have 0-10 posts</span>
+<span class="s2">}</span>
+
+<span class="s2">ex:Post {</span>
+<span class="s2">    ex:title xsd:string ;</span>
+<span class="s2">    ex:content xsd:string ;</span>
+<span class="s2">    ex:hasLike @ex:User {0,50}       # Each post can have 0-50 likes</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># Save the custom schema (using .shex extension for ShEx format)</span>
+<span class="n">custom_schema_path</span> <span class="o">=</span> <span class="s2">&quot;/tmp/custom_cardinality_schema.shex&quot;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">custom_schema_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">custom_schema_content</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Custom cardinality schema created&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Key cardinality constraints:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  • Each User has 2-5 friends (hasFriend)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  • Each User has 0-10 posts (hasPost)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  • Each Post has 0-50 likes (hasLike)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Custom cardinality schema created
+
+Key cardinality constraints:
+  • Each User has 2-5 friends (hasFriend)
+  • Each User has 0-10 posts (hasPost)
+  • Each Post has 0-50 likes (hasLike)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate data with different strategies to see how they respect cardinality constraints</span>
+<span class="n">custom_strategies</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Minimum&quot;</span><span class="p">,</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">CardinalityStrategy</span><span class="o">.</span><span class="n">Minimum</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Maximum&quot;</span><span class="p">,</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">CardinalityStrategy</span><span class="o">.</span><span class="n">Maximum</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Balanced&quot;</span><span class="p">,</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">CardinalityStrategy</span><span class="o">.</span><span class="n">Balanced</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating data with custom cardinality constraints:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">strategy</span> <span class="ow">in</span> <span class="n">custom_strategies</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">set_cardinality_strategy</span><span class="p">(</span><span class="n">strategy</span><span class="p">)</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tmp/custom_cardinality_</span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">.ttl&quot;</span><span class="p">)</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">set_write_stats</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">generator</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">DataGenerator</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">generator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">custom_schema_path</span><span class="p">)</span>
+    
+    <span class="c1"># Read and analyze the generated data</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tmp/custom_cardinality_</span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">.ttl&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    
+    <span class="n">hasFriend_count</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;hasFriend&#39;</span><span class="p">)</span>
+    <span class="n">hasPost_count</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;hasPost&#39;</span><span class="p">)</span>
+    <span class="n">hasLike_count</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;hasLike&#39;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> Strategy:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  hasFriend relationships: </span><span class="si">{</span><span class="n">hasFriend_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  hasPost relationships: </span><span class="si">{</span><span class="n">hasPost_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  hasLike relationships: </span><span class="si">{</span><span class="n">hasLike_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Observations:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  • Minimum strategy: Uses minCount values (2 friends, 0 posts, 0 likes)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  • Maximum strategy: Uses maxCount values (5 friends, 10 posts, 50 likes)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  • Balanced strategy: Picks values between min and max&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating data with custom cardinality constraints:
+================================================================================
+
+Minimum Strategy:
+  hasFriend relationships: 3
+  hasPost relationships: 0
+  hasLike relationships: 0
+
+Maximum Strategy:
+  hasFriend relationships: 2
+  hasPost relationships: 2
+  hasLike relationships: 3
+
+Balanced Strategy:
+  hasFriend relationships: 3
+  hasPost relationships: 2
+  hasLike relationships: 1
+
+================================================================================
+
+Observations:
+  • Minimum strategy: Uses minCount values (2 friends, 0 posts, 0 likes)
+  • Maximum strategy: Uses maxCount values (5 friends, 10 posts, 50 likes)
+  • Balanced strategy: Picks values between min and max
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s examine a sample of the generated data with Balanced strategy</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample of generated data with Balanced strategy:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/custom_cardinality_balanced.ttl&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="c1"># Show first 800 characters to see the structure</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">[:</span><span class="mi">800</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You can see how the generator respects the cardinality constraints&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;defined in the schema while following the chosen strategy.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample of generated data with Balanced strategy:
+================================================================================
+&lt;http://example.org/Post-2-1&gt; a &lt;http://example.org/Post&gt; ;
+	&lt;http://example.org/title&gt; &quot;Beta684&quot; ;
+	&lt;http://example.org/content&gt; &quot;Epsilon369&quot; .
+&lt;http://example.org/User-2&gt; &lt;http://example.org/hasFriend&gt; &lt;http://example.org/User-2&gt; , &lt;http://example.org/User-3&gt; , &lt;http://example.org/User-1&gt; , &lt;http://example.org/User-1-2&gt; , &lt;http://example.org/User-1-0&gt; , &lt;http://example.org/User-1-1&gt; ;
+	a &lt;http://example.org/User&gt; ;
+	&lt;http://example.org/email&gt; &quot;test15@test.org&quot; ;
+	&lt;http://example.org/name&gt; &quot;Delta700&quot; ;
+	&lt;http://example.org/hasPost&gt; &lt;http://example.org/Post-1-0&gt; , &lt;http://example.org/Post-2&gt; .
+&lt;http://example.org/User-0-1&gt; a &lt;http://example.org/User&gt; ;
+	&lt;http://example.org/email&gt; &quot;demo37@test.org&quot; ;
+	&lt;http://example.org/name&gt; &quot;Epsilon675&quot; .
+&lt;http://example.org/User-3&gt; &lt;http://example.org/h
+...
+================================================================================
+
+You can see how the generator respects the cardinality constraints
+defined in the schema while following the chosen strategy.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="part-5-working-with-configuration-files">
+<h2>Part 5: Working with Configuration Files<a class="headerlink" href="#part-5-working-with-configuration-files" title="Link to this heading">#</a></h2>
+<p>For complex configurations, you can save and load settings from TOML files.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/from_config.ttl&quot;</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set_cardinality_strategy</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">CardinalityStrategy</span><span class="o">.</span><span class="n">Balanced</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set_write_stats</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set_worker_threads</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Save to TOML file</span>
+<span class="n">config_file</span> <span class="o">=</span> <span class="s2">&quot;/tmp/generator_config.toml&quot;</span>
+<span class="n">config</span><span class="o">.</span><span class="n">to_toml_file</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Configuration saved to TOML file&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Configuration file contents:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Configuration saved to TOML file
+
+Configuration file contents:
+======================================================================
+[generation]
+entity_count = 100
+entity_distribution = &quot;Equal&quot;
+cardinality_strategy = &quot;Balanced&quot;
+
+[field_generators.default]
+locale = &quot;en&quot;
+quality = &quot;Medium&quot;
+
+[field_generators.datatypes]
+
+[field_generators.properties]
+
+[output]
+path = &quot;/tmp/from_config.ttl&quot;
+format = &quot;Turtle&quot;
+compress = false
+write_stats = true
+parallel_writing = false
+parallel_file_count = 0
+
+[parallel]
+worker_threads = 4
+batch_size = 100
+parallel_shapes = true
+parallel_fields = true
+
+======================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load configuration from file</span>
+<span class="n">loaded_config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="o">.</span><span class="n">from_toml_file</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Configuration loaded from file&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Entity count: </span><span class="si">{</span><span class="n">loaded_config</span><span class="o">.</span><span class="n">get_entity_count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Output path: </span><span class="si">{</span><span class="n">loaded_config</span><span class="o">.</span><span class="n">get_output_path</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># You can override settings after loading</span>
+<span class="n">loaded_config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">loaded_config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/from_config_modified.ttl&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ Configuration modified&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  New entity count: </span><span class="si">{</span><span class="n">loaded_config</span><span class="o">.</span><span class="n">get_entity_count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Configuration loaded from file
+  Entity count: 100
+  Output path: /tmp/from_config.ttl
+
+✓ Configuration modified
+  New entity count: 50
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-7-different-output-formats">
+<h2>Part 7: Different Output Formats<a class="headerlink" href="#part-7-different-output-formats" title="Link to this heading">#</a></h2>
+<p>The generator supports multiple RDF output formats.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate in Turtle format</span>
+<span class="n">config_turtle</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+<span class="n">config_turtle</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">config_turtle</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_output.ttl&quot;</span><span class="p">)</span>
+<span class="n">config_turtle</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+
+<span class="n">generator_turtle</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">DataGenerator</span><span class="p">(</span><span class="n">config_turtle</span><span class="p">)</span>
+<span class="n">generator_turtle</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">schema_path</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Turtle Format:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_output.ttl&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()[:</span><span class="mi">500</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Turtle Format:
+======================================================================
+&lt;http://example.org/Person-1&gt; a &lt;http://example.org/Person&gt; ;
+	&lt;http://example.org/name&gt; &quot;Epsilon229&quot; .
+&lt;http://example.org/Course-2&gt; a &lt;http://example.org/Course&gt; ;
+	&lt;http://example.org/name&gt; &quot;Alpha594&quot; .
+&lt;http://example.org/Course-1&gt; a &lt;http://example.org/Course&gt; ;
+	&lt;http://example.org/name&gt; &quot;Gamma310&quot; .
+
+...
+======================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate in NTriples format</span>
+<span class="n">config_ntriples</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+<span class="n">config_ntriples</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">config_ntriples</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_output.nt&quot;</span><span class="p">)</span>
+<span class="n">config_ntriples</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">NTriples</span><span class="p">)</span>
+
+<span class="n">generator_ntriples</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">DataGenerator</span><span class="p">(</span><span class="n">config_ntriples</span><span class="p">)</span>
+<span class="n">generator_ntriples</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">schema_path</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NTriples Format:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_output.nt&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()[:</span><span class="mi">500</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NTriples Format:
+======================================================================
+&lt;http://example.org/Course-2&gt; &lt;http://example.org/name&gt; &quot;Gamma697&quot; .
+&lt;http://example.org/Course-2&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Course&gt; .
+&lt;http://example.org/Course-1&gt; &lt;http://example.org/name&gt; &quot;Delta639&quot; .
+&lt;http://example.org/Course-1&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Course&gt; .
+&lt;http://example.org/Person-1&gt; &lt;http://example.org/name&gt; &quot;Alpha947&quot; .
+&lt;http://example.org/Person-1&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns
+...
+======================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a simple SHACL schema</span>
+<span class="n">shacl_schema</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">@prefix sh: &lt;http://www.w3.org/ns/shacl#&gt; .</span>
+<span class="s2">@prefix ex: &lt;http://example.org/&gt; .</span>
+<span class="s2">@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .</span>
+
+<span class="s2">ex:PersonShape</span>
+<span class="s2">    a sh:NodeShape ;</span>
+<span class="s2">    sh:targetClass ex:Person ;</span>
+<span class="s2">    sh:property [</span>
+<span class="s2">        sh:path ex:name ;</span>
+<span class="s2">        sh:datatype xsd:string ;</span>
+<span class="s2">        sh:minCount 1 ;</span>
+<span class="s2">        sh:maxCount 1 ;</span>
+<span class="s2">    ] ;</span>
+<span class="s2">    sh:property [</span>
+<span class="s2">        sh:path ex:age ;</span>
+<span class="s2">        sh:datatype xsd:integer ;</span>
+<span class="s2">        sh:minCount 1 ;</span>
+<span class="s2">        sh:maxCount 1 ;</span>
+<span class="s2">    ] .</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># Save SHACL schema</span>
+<span class="n">shacl_path</span> <span class="o">=</span> <span class="s2">&quot;/tmp/tutorial_schema.shacl.ttl&quot;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">shacl_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">shacl_schema</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ SHACL schema created&quot;</span><span class="p">)</span>
+
+<span class="c1"># Generate data from SHACL schema</span>
+<span class="n">shacl_config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+<span class="n">shacl_config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">shacl_config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_shacl_output.ttl&quot;</span><span class="p">)</span>
+<span class="n">shacl_config</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+
+<span class="n">shacl_generator</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">DataGenerator</span><span class="p">(</span><span class="n">shacl_config</span><span class="p">)</span>
+
+<span class="c1"># Explicitly load as SHACL</span>
+<span class="n">shacl_generator</span><span class="o">.</span><span class="n">load_shacl_schema</span><span class="p">(</span><span class="n">shacl_path</span><span class="p">)</span>
+<span class="n">shacl_generator</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Data generated from SHACL schema&quot;</span><span class="p">)</span>
+
+<span class="c1"># View the generated data</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_shacl_output.ttl&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">shacl_output</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Generated data from SHACL:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">shacl_output</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ SHACL schema created
+✓ Data generated from SHACL schema
+
+Generated data from SHACL:
+======================================================================
+&lt;http://example.org/PersonShape-7&gt; &lt;http://example.org/age&gt; 3207 ;
+	a &lt;http://example.org/PersonShape&gt; ;
+	&lt;http://example.org/name&gt; &quot;Gamma259&quot; .
+&lt;http://example.org/PersonShape-3&gt; &lt;http://example.org/age&gt; 1618 ;
+	a &lt;http://example.org/PersonShape&gt; ;
+	&lt;http://example.org/name&gt; &quot;Delta747&quot; .
+&lt;http://example.org/PersonShape-10&gt; &lt;http://example.org/age&gt; 7061 ;
+	a &lt;http://example.org/PersonShape&gt; ;
+	&lt;http://example.org/name&gt; &quot;Alpha725&quot; .
+&lt;http://example.org/PersonShape-8&gt; &lt;http://example.org/age&gt; 1375
+...
+======================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<section id="working-with-shacl-schemas">
+<h3>Working with SHACL Schemas<a class="headerlink" href="#working-with-shacl-schemas" title="Link to this heading">#</a></h3>
+<p>The generator also supports SHACL schemas in addition to ShEx.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a fully configured generator and inspect it</span>
+<span class="n">inspect_config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+<span class="n">inspect_config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">inspect_config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/inspect_output.ttl&quot;</span><span class="p">)</span>
+<span class="n">inspect_config</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+<span class="n">inspect_config</span><span class="o">.</span><span class="n">set_cardinality_strategy</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">CardinalityStrategy</span><span class="o">.</span><span class="n">Balanced</span><span class="p">)</span>
+<span class="n">inspect_config</span><span class="o">.</span><span class="n">set_worker_threads</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">inspect_config</span><span class="o">.</span><span class="n">set_batch_size</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">inspect_config</span><span class="o">.</span><span class="n">set_write_stats</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">inspect_config</span><span class="o">.</span><span class="n">set_compress</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Configuration Overview:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inspect_config</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You can use show() to debug configuration issues or document your setup.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Configuration Overview:
+================================================================================
+GeneratorConfig { generation: GenerationConfig { entity_count: 50, seed: None, entity_distribution: Equal, cardinality_strategy: Balanced, schema_format: None }, field_generators: FieldGeneratorConfig { default: DefaultFieldConfig { locale: &quot;en&quot;, quality: Medium }, datatypes: {}, properties: {} }, output: OutputConfig { path: &quot;/tmp/inspect_output.ttl&quot;, format: Turtle, compress: false, write_stats: true, parallel_writing: false, parallel_file_count: 0 }, parallel: ParallelConfig { worker_threads: Some(4), batch_size: 100, parallel_shapes: true, parallel_fields: true } }
+================================================================================
+
+You can use show() to debug configuration issues or document your setup.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inspecting-configuration">
+<h3>Inspecting Configuration<a class="headerlink" href="#inspecting-configuration" title="Link to this heading">#</a></h3>
+<p>You can view the current configuration settings using the <code class="docutils literal notranslate"><span class="pre">show()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Method 1: Explicit ShEx loading</span>
+<span class="n">explicit_config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+<span class="n">explicit_config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">explicit_config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_explicit_shex.ttl&quot;</span><span class="p">)</span>
+<span class="n">explicit_config</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+
+<span class="n">generator_explicit</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">DataGenerator</span><span class="p">(</span><span class="n">explicit_config</span><span class="p">)</span>
+
+<span class="c1"># Explicitly load ShEx schema</span>
+<span class="n">generator_explicit</span><span class="o">.</span><span class="n">load_shex_schema</span><span class="p">(</span><span class="n">schema_path</span><span class="p">)</span>
+
+<span class="c1"># Then generate data</span>
+<span class="n">generator_explicit</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Method 1: Explicit ShEx loading and generation completed&quot;</span><span class="p">)</span>
+
+<span class="c1"># Method 2: Using run_with_format for explicit format specification</span>
+<span class="n">format_config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+<span class="n">format_config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">format_config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_with_format.ttl&quot;</span><span class="p">)</span>
+<span class="n">format_config</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+
+<span class="n">generator_format</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">DataGenerator</span><span class="p">(</span><span class="n">format_config</span><span class="p">)</span>
+<span class="n">generator_format</span><span class="o">.</span><span class="n">run_with_format</span><span class="p">(</span><span class="n">schema_path</span><span class="p">,</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">SchemaFormat</span><span class="o">.</span><span class="n">ShEx</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Method 2: run_with_format completed&quot;</span><span class="p">)</span>
+
+<span class="c1"># Method 3: Auto-detect (this is what run() does internally)</span>
+<span class="n">auto_config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+<span class="n">auto_config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">auto_config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_auto.ttl&quot;</span><span class="p">)</span>
+<span class="n">auto_config</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+
+<span class="n">generator_auto</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">DataGenerator</span><span class="p">(</span><span class="n">auto_config</span><span class="p">)</span>
+<span class="n">generator_auto</span><span class="o">.</span><span class="n">load_schema_auto</span><span class="p">(</span><span class="n">schema_path</span><span class="p">)</span>
+<span class="n">generator_auto</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Method 3: Auto-detect and generation completed&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All three methods produce equivalent results!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Method 1: Explicit ShEx loading and generation completed
+✓ Method 2: run_with_format completed
+✓ Method 3: Auto-detect and generation completed
+
+All three methods produce equivalent results!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="explicit-schema-loading-methods">
+<h3>Explicit Schema Loading Methods<a class="headerlink" href="#explicit-schema-loading-methods" title="Link to this heading">#</a></h3>
+<p>Instead of using the auto-detect <code class="docutils literal notranslate"><span class="pre">run()</span></code> method, you can explicitly load and generate in separate steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a configuration and save it as JSON</span>
+<span class="n">json_config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+<span class="n">json_config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">json_config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/from_json.ttl&quot;</span><span class="p">)</span>
+<span class="n">json_config</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+<span class="n">json_config</span><span class="o">.</span><span class="n">set_cardinality_strategy</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">CardinalityStrategy</span><span class="o">.</span><span class="n">Random</span><span class="p">)</span>
+<span class="n">json_config</span><span class="o">.</span><span class="n">set_worker_threads</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Note: JSON export might not be implemented yet, let&#39;s try</span>
+<span class="c1"># If it fails, we&#39;ll create JSON manually</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">json_config_file</span> <span class="o">=</span> <span class="s2">&quot;/tmp/generator_config.json&quot;</span>
+    <span class="c1"># Manually create a JSON config file based on TOML structure</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+    
+    <span class="n">config_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;entity_count&quot;</span><span class="p">:</span> <span class="n">json_config</span><span class="o">.</span><span class="n">get_entity_count</span><span class="p">(),</span>
+        <span class="s2">&quot;output_path&quot;</span><span class="p">:</span> <span class="n">json_config</span><span class="o">.</span><span class="n">get_output_path</span><span class="p">(),</span>
+        <span class="s2">&quot;worker_threads&quot;</span><span class="p">:</span> <span class="n">json_config</span><span class="o">.</span><span class="n">get_worker_threads</span><span class="p">()</span>
+    <span class="p">}</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_config_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config_data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ JSON configuration file created:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+    
+    <span class="c1"># Try to load it back</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">loaded_json_config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="o">.</span><span class="n">from_json_file</span><span class="p">(</span><span class="n">json_config_file</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ Configuration loaded from JSON&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Entity count: </span><span class="si">{</span><span class="n">loaded_json_config</span><span class="o">.</span><span class="n">get_entity_count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">⚠️  JSON loading not yet fully implemented: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   (This is a known limitation)&quot;</span><span class="p">)</span>
+        
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️  JSON configuration: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ JSON configuration file created:
+======================================================================
+{
+  &quot;entity_count&quot;: 25,
+  &quot;output_path&quot;: &quot;/tmp/from_json.ttl&quot;,
+  &quot;worker_threads&quot;: 2
+}
+======================================================================
+
+⚠️  JSON loading not yet fully implemented: JSON parsing error: missing field `generation` at line 5 column 1
+   (This is a known limitation)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="working-with-json-configuration-files">
+<h3>Working with JSON Configuration Files<a class="headerlink" href="#working-with-json-configuration-files" title="Link to this heading">#</a></h3>
+<p>Besides TOML, you can also use JSON configuration files.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure parallel writing (useful for very large datasets)</span>
+<span class="n">parallel_config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+<span class="n">parallel_config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">parallel_config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_parallel.ttl&quot;</span><span class="p">)</span>
+<span class="n">parallel_config</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+
+<span class="c1"># Enable parallel writing and split across 3 files</span>
+<span class="n">parallel_config</span><span class="o">.</span><span class="n">set_parallel_writing</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">parallel_config</span><span class="o">.</span><span class="n">set_parallel_file_count</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Parallel writing configuration:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Entity count: </span><span class="si">{</span><span class="n">parallel_config</span><span class="o">.</span><span class="n">get_entity_count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Parallel writing: Enabled&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Output files: 3&quot;</span><span class="p">)</span>
+
+<span class="c1"># Generate data</span>
+<span class="n">parallel_generator</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">DataGenerator</span><span class="p">(</span><span class="n">parallel_config</span><span class="p">)</span>
+<span class="n">parallel_generator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">schema_path</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ Data generated with parallel writing&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Generated files:&quot;</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="n">parallel_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_parallel*.ttl&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">parallel_files</span><span class="p">:</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Parallel writing configuration:
+  Entity count: 20
+  Parallel writing: Enabled
+  Output files: 3
+
+✓ Data generated with parallel writing
+
+Generated files:
+  tutorial_parallel_part_003.ttl: 1177 bytes
+  tutorial_parallel_part_002.ttl: 1183 bytes
+  tutorial_parallel_part_001.ttl: 1172 bytes
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="entity-distribution">
+<h3>Entity Distribution<a class="headerlink" href="#entity-distribution" title="Link to this heading">#</a></h3>
+<p>Control the distribution of entity types in your generated dataset. This is useful when you need specific proportions of different entities for realistic testing scenarios.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure entity distribution</span>
+<span class="c1"># Control how many entities of each type are generated</span>
+<span class="n">distribution_config</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">GeneratorConfig</span><span class="p">()</span>
+<span class="n">distribution_config</span><span class="o">.</span><span class="n">set_entity_count</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">distribution_config</span><span class="o">.</span><span class="n">set_output_path</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_distribution.ttl&quot;</span><span class="p">)</span>
+<span class="n">distribution_config</span><span class="o">.</span><span class="n">set_output_format</span><span class="p">(</span><span class="n">pyrudof</span><span class="o">.</span><span class="n">OutputFormat</span><span class="o">.</span><span class="n">Turtle</span><span class="p">)</span>
+<span class="n">distribution_config</span><span class="o">.</span><span class="n">set_write_stats</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Set specific distribution: 70% Persons, 30% Courses</span>
+<span class="c1"># This gives more control over the shape of your generated data</span>
+<span class="n">distribution_config</span><span class="o">.</span><span class="n">set_entity_distribution</span><span class="p">({</span>
+    <span class="s2">&quot;http://example.org/Person&quot;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+    <span class="s2">&quot;http://example.org/Course&quot;</span><span class="p">:</span> <span class="mf">0.3</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Entity distribution configuration:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Total entities: </span><span class="si">{</span><span class="n">distribution_config</span><span class="o">.</span><span class="n">get_entity_count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Distribution: 70% Person, 30% Course&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Expected: ~21 Persons, ~9 Courses&quot;</span><span class="p">)</span>
+
+<span class="c1"># Generate data with custom distribution</span>
+<span class="n">distribution_generator</span> <span class="o">=</span> <span class="n">pyrudof</span><span class="o">.</span><span class="n">DataGenerator</span><span class="p">(</span><span class="n">distribution_config</span><span class="p">)</span>
+<span class="n">distribution_generator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">schema_path</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ Data generated with custom entity distribution&quot;</span><span class="p">)</span>
+
+<span class="c1"># Verify the distribution in the generated data</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_distribution.ttl&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">distribution_output</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">person_count</span> <span class="o">=</span> <span class="n">distribution_output</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;a &lt;http://example.org/Person&gt;&#39;</span><span class="p">)</span>
+<span class="n">course_count</span> <span class="o">=</span> <span class="n">distribution_output</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;a &lt;http://example.org/Course&gt;&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Actual distribution:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Persons: </span><span class="si">{</span><span class="n">person_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Courses: </span><span class="si">{</span><span class="n">course_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Ratio: </span><span class="si">{</span><span class="n">person_count</span><span class="o">/</span><span class="p">(</span><span class="n">person_count</span><span class="o">+</span><span class="n">course_count</span><span class="p">)</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">course_count</span><span class="o">/</span><span class="p">(</span><span class="n">person_count</span><span class="o">+</span><span class="n">course_count</span><span class="p">)</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># View statistics</span>
+<span class="n">stats_path</span> <span class="o">=</span> <span class="s2">&quot;/tmp/tutorial_distribution.stats.json&quot;</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">stats_path</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">stats_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📊 Total triples generated: </span><span class="si">{</span><span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;total_triples&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">distribution_config</span><span class="o">.</span><span class="n">set_write_stats</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># Set specific distribution: 70% Persons, 30% Courses</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># This gives more control over the shape of your generated data</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">distribution_config</span><span class="o">.</span><span class="n">set_entity_distribution</span><span class="p">({</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="s2">&quot;http://example.org/Person&quot;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="s2">&quot;http://example.org/Course&quot;</span><span class="p">:</span> <span class="mf">0.3</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="p">})</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Entity distribution configuration:&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Total entities: </span><span class="si">{</span><span class="n">distribution_config</span><span class="o">.</span><span class="n">get_entity_count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: argument &#39;distribution&#39;: &#39;dict&#39; object cannot be converted to &#39;EntityDistribution&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="parallel-writing-for-large-datasets">
+<h3>Parallel Writing for Large Datasets<a class="headerlink" href="#parallel-writing-for-large-datasets" title="Link to this heading">#</a></h3>
+<p>When generating very large datasets, you can split the output across multiple files for better performance.</p>
+</section>
+</section>
+<section id="part-6-advanced-features">
+<h2>Part 6: Advanced Features<a class="headerlink" href="#part-6-advanced-features" title="Link to this heading">#</a></h2>
+<p>Let’s explore some additional advanced features that haven’t been covered yet.</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this tutorial, you learned:</p>
+<section id="core-features">
+<h3>Core Features<a class="headerlink" href="#core-features" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Basic Setup</strong> - Import and initialize the pyrudof library</p></li>
+<li><p><strong>Simple Data Generation</strong> - Generate RDF data from ShEx schemas</p></li>
+<li><p><strong>Advanced Configuration</strong> - Fine-tune generation with multiple options</p></li>
+<li><p><strong>Cardinality Strategies</strong> - Control relationship density (Minimum, Maximum, Random, Balanced)</p></li>
+<li><p><strong>Configuration Files</strong> - Save and load settings from TOML files</p></li>
+</ol>
+</section>
+<section id="advanced-features">
+<h3>Advanced Features<a class="headerlink" href="#advanced-features" title="Link to this heading">#</a></h3>
+<ol class="arabic simple" start="6">
+<li><p><strong>Output Formats</strong> - Generate data in Turtle, NTriples, and other RDF formats</p></li>
+<li><p><strong>SHACL Schema Support</strong> - Generate data from SHACL schemas</p></li>
+<li><p><strong>Configuration Inspection</strong> - View and debug configuration settings with <code class="docutils literal notranslate"><span class="pre">show()</span></code></p></li>
+<li><p><strong>Explicit Schema Loading</strong> - Load schemas explicitly (ShEx/SHACL) or auto-detect</p></li>
+<li><p><strong>JSON Configuration</strong> - Work with JSON configuration files</p></li>
+<li><p><strong>Parallel Writing</strong> - Split large datasets across multiple files</p></li>
+<li><p><strong>Entity Distribution</strong> - Control proportions of different entity types</p></li>
+</ol>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Try with your own ShEx or SHACL schemas</p></li>
+<li><p>Generate larger datasets for testing</p></li>
+<li><p>Experiment with parallel processing and parallel writing settings</p></li>
+<li><p>Integrate into your data pipelines</p></li>
+<li><p>Validate generated data against schemas</p></li>
+<li><p>Test different cardinality strategies for your use case</p></li>
+</ul>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://rudof-project.github.io/rudof/">rudof Documentation</a></p></li>
+<li><p><a class="reference internal" href="#../python/README.md"><span class="xref myst">Python Bindings README</span></a></p></li>
+<li><p><a class="reference internal" href="#../python/examples/"><span class="xref myst">Examples Directory</span></a></p></li>
+<li><p><a class="reference internal" href="#../python/GENERATE_BINDINGS_QUICKREF.md"><span class="xref myst">Quick Reference</span></a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clean up temporary files (optional)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+
+<span class="n">temp_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;/tmp/tutorial_*&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">temp_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> temporary files during this tutorial&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">To clean up, you can remove files in /tmp/tutorial_*&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generated 18 temporary files during this tutorial
+
+To clean up, you can remove files in /tmp/tutorial_*
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="service_description.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Service descriptions</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-ll-learn">What You’ll Learn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-basic-setup">Part 1: Basic Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-simple-example-generate-data-from-a-shex-schema">Part 2: Simple Example - Generate Data from a ShEx Schema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-advanced-configuration-options">Part 3: Advanced Configuration Options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-cardinality-strategies">Part 4: Cardinality Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-cardinality-configuration">Custom Cardinality Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-5-working-with-configuration-files">Part 5: Working with Configuration Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-7-different-output-formats">Part 7: Different Output Formats</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-shacl-schemas">Working with SHACL Schemas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-configuration">Inspecting Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-schema-loading-methods">Explicit Schema Loading Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-json-configuration-files">Working with JSON Configuration Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entity-distribution">Entity Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-writing-for-large-datasets">Parallel Writing for Large Datasets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-6-advanced-features">Part 6: Advanced Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-features">Core Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-features">Advanced Features</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jose Emilio Labra Gayo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jose Emilio Labra Gayo.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

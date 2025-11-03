@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -190,6 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="sparql12.html">SPARQL 1.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compare.html">Using rudof to compare schemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_description.html">Service descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rudof_generate_tutorial.html">Tutorial: Generating Synthetic RDF Data with rudof_generate</a></li>
 </ul>
 
     </div>
@@ -416,7 +417,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-configure-rudof">Install and configure rudof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminaries-install-and-configure-rudof">Preliminaries: Install and configure rudof</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-using-shacl">Validate using SHACL</a></li>
 </ul>
             </nav>
@@ -432,33 +433,20 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="shacl">
 <h1>SHACL<a class="headerlink" href="#shacl" title="Link to this heading">#</a></h1>
 <p>This document contains a short introduction to <a class="reference external" href="https://www.w3.org/TR/rdf11-primer/">RDF</a> using <a class="reference external" href="https://rudof-project.github.io/">rudof</a>.</p>
-<section id="install-and-configure-rudof">
-<h2>Install and configure rudof<a class="headerlink" href="#install-and-configure-rudof" title="Link to this heading">#</a></h2>
+<section id="preliminaries-install-and-configure-rudof">
+<h2>Preliminaries: Install and configure rudof<a class="headerlink" href="#preliminaries-install-and-configure-rudof" title="Link to this heading">#</a></h2>
 <p>The library is available as <code class="docutils literal notranslate"><span class="pre">pyrudof</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pyrudof
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title</span>
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pyrudof
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rudof</span><span class="p">,</span> <span class="n">RudofConfig</span>
+<span class="n">rudof</span> <span class="o">=</span> <span class="n">Rudof</span><span class="p">(</span><span class="n">RudofConfig</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.120)
-</pre></div>
-</div>
-</div>
-</div>
-<p>The main entry point if a class called <code class="docutils literal notranslate"><span class="pre">Rudof</span></code> through which most of the functionality is provided.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rudof</span><span class="p">,</span> <span class="n">RudofConfig</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>In order to initialize that class, it is possible to pass a RudofConfig instance which contains configuration parameters for customization.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span> <span class="o">=</span> <span class="n">Rudof</span><span class="p">(</span><span class="n">RudofConfig</span><span class="p">())</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.128)
 </pre></div>
 </div>
 </div>
@@ -469,7 +457,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title</span>
-<span class="n">rudof</span><span class="o">.</span><span class="n">reset_all</span><span class="p">()</span>
+<span class="n">rudof</span> <span class="o">=</span> <span class="n">Rudof</span><span class="p">(</span><span class="n">RudofConfig</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -478,18 +466,22 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">prefix : &lt;http://example.org/&gt;</span>
-<span class="s2">prefix sh:     &lt;http://www.w3.org/ns/shacl#&gt;</span>
+<span class="s2">prefix :       &lt;http://example.org/&gt;</span>
 <span class="s2">prefix xsd:    &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+<span class="s2">prefix rdf:    &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
+<span class="s2">prefix schema: &lt;http://schema.org/&gt;</span>
+<span class="s2">prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
 
-<span class="s2">:Person a sh:NodeShape;</span>
-<span class="s2">   sh:targetNode :ok, :ko ;</span>
-<span class="s2">   sh:property [</span>
-<span class="s2">    sh:path     :name ;</span>
-<span class="s2">    sh:minCount 1;</span>
-<span class="s2">    sh:maxCount 1;</span>
-<span class="s2">    sh:datatype xsd:string ;</span>
-<span class="s2">  ] .</span>
+<span class="s2">:timbl  rdf:type    :Human ;</span>
+<span class="s2">        :name       &quot;Tim Berners-Lee&quot; ;</span>
+<span class="s2">        :birthPlace :london ;</span>
+<span class="s2">        :birthDate  &quot;1955-06-08&quot;^^xsd:date ;</span>
+<span class="s2">        :employer   :CERN ;</span>
+<span class="s2">        :knows      _:1 .</span>
+<span class="s2">:london rdf:type    :city, :metropolis ;</span>
+<span class="s2">        :country    :UK .</span>
+<span class="s2">:CERN   rdf:type    :Organization .</span>
+<span class="s2">_:1     :birthPlace :Spain .</span>
 <span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -497,11 +489,29 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">prefix : &lt;http://example.org/&gt;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_shacl_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">prefix :       &lt;http://example.org/&gt;</span>
+<span class="s2">prefix sh:     &lt;http://www.w3.org/ns/shacl#&gt;</span>
+<span class="s2">prefix xsd:    &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+<span class="s2">prefix rdfs:   &lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
+<span class="s2">prefix schema: &lt;http://schema.org/&gt;</span>
 
-<span class="s2">:ok :name &quot;alice&quot; .</span>
-<span class="s2">:ko :name 1 .</span>
+<span class="s2">:Person a sh:NodeShape ;</span>
+<span class="s2"> sh:targetClass :Human ;</span>
+<span class="s2"> sh:property [ sh:path :name ;</span>
+<span class="s2">               sh:datatype xsd:string;</span>
+<span class="s2">               sh:minCount 1 ; sh:maxCount 1 ] ;</span>
+<span class="s2"> sh:property [ sh:path :birthDate ; sh:datatype xsd:date;</span>
+<span class="s2">                                    sh:maxCount 1 ] ;</span>
+<span class="s2"> sh:property [ sh:path :birthPlace ;</span>
+<span class="s2">               sh:node :Place; sh:maxCount 1 ] ;</span>
+<span class="s2"> sh:property [</span>
+<span class="s2">    sh:path :employer ;</span>
+<span class="s2">    sh:node :Organization</span>
+<span class="s2">] .</span>
+
+<span class="s2">:Place a sh:NodeShape .</span>
+<span class="s2">:Organization a sh:NodeShape .</span>
 <span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -516,14 +526,57 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">show_as_table</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">1 errors found</span>
-<span class=" -Color -Color-Red">sh:Violation</span> node: :ko sh:datatype
-Datatype constraint not satisfied. Expected datatype: http://www.w3.org/2001/XMLSchema#string:name,_:f4ee2177cd720ffc628fea098d9aeaef1
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">show_as_table</span><span class="p">())</span>
+
+<span class="ne">AttributeError</span>: &#39;builtins.ValidationReport&#39; object has no attribute &#39;show_as_table&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The previous data didn’t have errors. We can add some data with errors like the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">prefix :       &lt;http://example.org/&gt;</span>
+<span class="s2">prefix xsd:    &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+<span class="s2">prefix rdf:    &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
+<span class="s2">prefix schema: &lt;http://schema.org/&gt;</span>
+<span class="s2">prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
+
+<span class="s2">:wrong1 rdf:type    :Human ;</span>
+<span class="s2">        :name       &quot;John&quot; ;</span>
+<span class="s2">        :birthDate  &quot;1955-06-08&quot;^^xsd:date, &quot;1956-06-08&quot;^^xsd:date .</span>
+<span class="s2">:wrong2 rdf:type    :Human ;</span>
+<span class="s2">        :name       23 ;</span>
+<span class="s2">        :birthDate  &quot;1955-06-08&quot;^^xsd:date .</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">merge</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">validate_shacl</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">show_as_table</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭──────────────┬─────────┬─────────────┬─────────────┬───────┬────────────────────────────────────╮
+│ Severity     │ node    │ Component   │ Path        │ value │ Source shape                       │
+├──────────────┼─────────┼─────────────┼─────────────┼───────┼────────────────────────────────────┤
+│ sh:Violation │ :wrong1 │ sh:maxCount │ :birthDate, │       │ _:a2be1ef3e3525520e4d8385beb068da0 │
+├──────────────┼─────────┼─────────────┼─────────────┼───────┼────────────────────────────────────┤
+│ sh:Violation │ :wrong2 │ sh:datatype │ :name,      │ 23    │ _:edc7efa4afe26f7c1b229a48ad7e99a9 │
+╰──────────────┴─────────┴─────────────┴─────────────┴───────┴────────────────────────────────────╯
 </pre></div>
 </div>
 </div>
@@ -595,7 +648,7 @@ Datatype constraint not satisfied. Expected datatype: http://www.w3.org/2001/XML
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-configure-rudof">Install and configure rudof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminaries-install-and-configure-rudof">Preliminaries: Install and configure rudof</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-using-shacl">Validate using SHACL</a></li>
 </ul>
   </nav></div>

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -190,6 +190,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">SPARQL 1.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compare.html">Using rudof to compare schemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_description.html">Service descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rudof_generate_tutorial.html">Tutorial: Generating Synthetic RDF Data with rudof_generate</a></li>
 </ul>
 
     </div>
@@ -416,8 +417,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-configure-rudof">Install and configure rudof</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-some-rdf-1-2-content">Creating some RDF 1.2 content</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminaries-install-and-configure-rudof">Preliminaries: Install and configure rudof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tim-berners-lee-exampl-in-rdf-1-2">Tim Berners-Lee exampl in RDF 1.2</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">SPARQL 1.2</a></li>
 </ul>
             </nav>
@@ -433,44 +434,24 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="sparql-1-2">
 <h1>SPARQL 1.2<a class="headerlink" href="#sparql-1-2" title="Link to this heading">#</a></h1>
 <p>This document contains a short introduction to <a class="reference external" href="https://www.w3.org/TR/rdf11-primer/">RDF</a> using <a class="reference external" href="https://rudof-project.github.io/">rudof</a>.</p>
-<section id="install-and-configure-rudof">
-<h2>Install and configure rudof<a class="headerlink" href="#install-and-configure-rudof" title="Link to this heading">#</a></h2>
+<section id="preliminaries-install-and-configure-rudof">
+<h2>Preliminaries: Install and configure rudof<a class="headerlink" href="#preliminaries-install-and-configure-rudof" title="Link to this heading">#</a></h2>
 <p>The library is available as <code class="docutils literal notranslate"><span class="pre">pyrudof</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pyrudof
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pyrudof<span class="w">   </span>#<span class="w"> </span>Pyrudof
+<span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>ipython
+<span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>plantuml<span class="w"> </span>#<span class="w"> </span>To<span class="w"> </span>visualize<span class="w"> </span>graphs
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rudof</span><span class="p">,</span> <span class="n">RudofConfig</span>
+<span class="n">rudof</span> <span class="o">=</span> <span class="n">Rudof</span><span class="p">(</span><span class="n">RudofConfig</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.120)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.128)
 </pre></div>
 </div>
-</div>
-</div>
-<p>The main entry point if a class called <code class="docutils literal notranslate"><span class="pre">Rudof</span></code> through which most of the functionality is provided.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rudof</span><span class="p">,</span> <span class="n">RudofConfig</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>In order to initialize that class, it is possible to pass a RudofConfig instance which contains configuration parameters for customization.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span> <span class="o">=</span> <span class="n">Rudof</span><span class="p">(</span><span class="n">RudofConfig</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>ipython
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ipython in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (9.6.0)
 </pre></div>
 </div>
@@ -486,40 +467,49 @@ Requirement already satisfied: traitlets&gt;=5.13.0 in /home/labra/src/python/ru
 Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.4 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from jedi&gt;=0.16-&gt;ipython) (0.8.5)
 Requirement already satisfied: ptyprocess&gt;=0.5 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from pexpect&gt;4.3-&gt;ipython) (0.7.0)
 Requirement already satisfied: wcwidth in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython) (0.2.14)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: executing&gt;=1.2.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (2.2.1)
+Requirement already satisfied: executing&gt;=1.2.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (2.2.1)
 Requirement already satisfied: asttokens&gt;=2.1.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (3.0.0)
 Requirement already satisfied: pure-eval in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (0.2.3)
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: plantuml in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.3.0)
+Requirement already satisfied: httplib2 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from plantuml) (0.31.0)
+Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from httplib2-&gt;plantuml) (3.2.5)
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="creating-some-rdf-1-2-content">
-<h2>Creating some RDF 1.2 content<a class="headerlink" href="#creating-some-rdf-1-2-content" title="Link to this heading">#</a></h2>
-<p>Rudof has added support for <a class="reference external" href="https://www.w3.org/TR/rdf12-primer">RDF 1.2</a>. It is possible, for example, to load some RDF 1.2 files and visualize them.</p>
+<section id="tim-berners-lee-exampl-in-rdf-1-2">
+<h2>Tim Berners-Lee exampl in RDF 1.2<a class="headerlink" href="#tim-berners-lee-exampl-in-rdf-1-2" title="Link to this heading">#</a></h2>
+<p>Rudof supports <a class="reference external" href="https://www.w3.org/TR/rdf12-primer">RDF 1.2</a>.</p>
 <p>RDF 1.2 introduces <a class="reference external" href="https://www.w3.org/TR/rdf12-primer/#section-triple-terms">triple terms</a> which denote statements that can be the object of some triples.</p>
-<p>For example, we can state that <code class="docutils literal notranslate"><span class="pre">:bob</span></code> is interested in <code class="docutils literal notranslate"><span class="pre">:MonaLisa</span></code> since <code class="docutils literal notranslate"><span class="pre">4th</span> <span class="pre">October</span> <span class="pre">1998</span></code> using the following code:</p>
+<p>The following example declares some information about a node <code class="docutils literal notranslate"><span class="pre">:timbl</span></code> that indicates that he worked at CERN between 1984 and 1994, and in 1980, and that he obtained the Princess of Asturias Award in 2002 together with Vinton Cerf,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2"> prefix : &lt;http://example.org/&gt;</span>
-<span class="s2"> prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
-<span class="s2"> prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+<span class="s2">prefix : &lt;http://example.org/&gt;</span>
+<span class="s2">prefix sh:     &lt;http://www.w3.org/ns/shacl#&gt;</span>
+<span class="s2">prefix xsd:    &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+<span class="s2">prefix rdfs:   &lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
+<span class="s2">prefix rdf:    &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
 
-<span class="s2"> :aliceBelief a :Statement ;</span>
-<span class="s2">    rdf:reifies &lt;&lt;( :bob :knows :dave  )&gt;&gt; ;</span>
-<span class="s2">    :since 2025 ;</span>
-<span class="s2">    :accordingTo :dave  .</span>
-<span class="s2"> &quot;&quot;&quot;</span><span class="p">)</span>
+<span class="s2">:timbl    rdfs:label    &quot;Tim Berners Lee&quot; .</span>
+<span class="s2">_:r       rdf:reifies   &lt;&lt;( :timbl :employer :CERN )&gt;&gt; ;</span>
+<span class="s2">          :start        &quot;1984&quot; ;</span>
+<span class="s2">          :end          &quot;1994&quot; .</span>
+<span class="s2">_:s       rdf:reifies   &lt;&lt;( :timbl :employer :CERN )&gt;&gt; ;</span>
+<span class="s2">          :start        &quot;1980&quot; ;</span>
+<span class="s2">          :end          &quot;1980&quot; .</span>
+<span class="s2">_:t       rdf:reifies   &lt;&lt;( :timbl :award :PA )&gt;&gt; ;</span>
+<span class="s2">          :time         &quot;2002&quot; ;</span>
+<span class="s2">          :togetherWith :vint, :bob, :lawrence  .</span>
+<span class="s2">:vint     rdfs:label    &quot;Vinton Cerf&quot; .</span>
+<span class="s2">:bob      rdfs:label    &quot;Bob kahn&quot; .</span>
+<span class="s2">:lawrence rdfs:label    &quot;Lawrence Roberts&quot; .</span>
+<span class="s2">:PA       rdfs:label    &quot;Princess of Asturias Award&quot; .</span>
+<span class="s2">:CERN     rdfs:label    &quot;CERN&quot; .</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -527,6 +517,69 @@ Requirement already satisfied: pure-eval in /home/labra/src/python/rudof/tutoria
 </section>
 <section id="id1">
 <h2>SPARQL 1.2<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">run_query_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">prefix : &lt;http://example.org/&gt;</span>
+<span class="s2">prefix rdfs:   &lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
+<span class="s2">prefix rdf:    &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
+
+<span class="s2">SELECT ?person ?employer ?start ?end WHERE {</span>
+<span class="s2">  ?r rdf:reifies &lt;&lt;( ?person :employer ?employer )&gt;&gt; ;</span>
+<span class="s2">     :start ?start ;</span>
+<span class="s2">     :end ?end .</span>
+<span class="s2"> }</span>
+<span class="s2"> &quot;&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭───┬─────────┬───────────┬────────┬────────╮
+│   │ ?person │ ?employer │ ?start │ ?end   │
+├───┼─────────┼───────────┼────────┼────────┤
+│ 1 │ :timbl  │ :CERN     │ &quot;1980&quot; │ &quot;1980&quot; │
+├───┼─────────┼───────────┼────────┼────────┤
+│ 2 │ :timbl  │ :CERN     │ &quot;1984&quot; │ &quot;1994&quot; │
+╰───┴─────────┴───────────┴────────┴────────╯
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">run_query_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">prefix : &lt;http://example.org/&gt;</span>
+<span class="s2">prefix rdfs:   &lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
+<span class="s2">prefix rdf:    &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
+
+<span class="s2">SELECT ?person ?award ?togetherPerson ?time WHERE {</span>
+<span class="s2">  ?r rdf:reifies &lt;&lt;( ?person :award ?award )&gt;&gt; ;</span>
+<span class="s2">  OPTIONAL {?r :time ?time }</span>
+<span class="s2">  OPTIONAL {</span>
+<span class="s2">    ?r            :togetherWith ?togetherWith .</span>
+<span class="s2">    ?togetherWith rdfs:label    ?togetherPerson</span>
+<span class="s2">  }</span>
+<span class="s2"> }</span>
+<span class="s2"> &quot;&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭───┬─────────┬────────┬────────────────────┬────────╮
+│   │ ?person │ ?award │ ?togetherPerson    │ ?time  │
+├───┼─────────┼────────┼────────────────────┼────────┤
+│ 1 │ :timbl  │ :PA    │ &quot;Bob kahn&quot;         │ &quot;2002&quot; │
+├───┼─────────┼────────┼────────────────────┼────────┤
+│ 2 │ :timbl  │ :PA    │ &quot;Lawrence Roberts&quot; │ &quot;2002&quot; │
+├───┼─────────┼────────┼────────────────────┼────────┤
+│ 3 │ :timbl  │ :PA    │ &quot;Vinton Cerf&quot;      │ &quot;2002&quot; │
+╰───┴─────────┴────────┴────────────────────┴────────╯
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -594,8 +647,8 @@ Requirement already satisfied: pure-eval in /home/labra/src/python/rudof/tutoria
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-configure-rudof">Install and configure rudof</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-some-rdf-1-2-content">Creating some RDF 1.2 content</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminaries-install-and-configure-rudof">Preliminaries: Install and configure rudof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tim-berners-lee-exampl-in-rdf-1-2">Tim Berners-Lee exampl in RDF 1.2</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">SPARQL 1.2</a></li>
 </ul>
   </nav></div>

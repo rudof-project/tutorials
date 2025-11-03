@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -190,6 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="sparql12.html">SPARQL 1.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compare.html">Using rudof to compare schemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_description.html">Service descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rudof_generate.html">Generating RDF Data from shapes</a></li>
 </ul>
 
     </div>
@@ -423,6 +424,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#annotation-syntax">Annotation syntax</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tim-berners-lee-s-example">Tim Berners-Lee’s example</a></li>
 </ul>
             </nav>
         </div>
@@ -447,12 +449,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.120)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.128)
 </pre></div>
 </div>
 </div>
 </div>
-<p>The main entry point if a class called <code class="docutils literal notranslate"><span class="pre">Rudof</span></code> through which most of the functionality is provided.</p>
+<p>The main entry point is a class called <code class="docutils literal notranslate"><span class="pre">Rudof</span></code> through which most of the functionality is provided.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rudof</span><span class="p">,</span> <span class="n">RudofConfig</span>
@@ -471,6 +473,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>ipython<span class="w"> </span>#<span class="w"> </span>If<span class="w"> </span>not<span class="w"> </span>already<span class="w"> </span>installed
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>plantuml
 <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span> <span class="c1"># For displaying images</span>
 </pre></div>
 </div>
@@ -487,13 +490,20 @@ Requirement already satisfied: pygments&gt;=2.4.0 in /home/labra/src/python/rudo
 Requirement already satisfied: stack_data in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (0.6.3)
 Requirement already satisfied: traitlets&gt;=5.13.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from ipython) (5.14.3)
 Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.4 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from jedi&gt;=0.16-&gt;ipython) (0.8.5)
+Requirement already satisfied: ptyprocess&gt;=0.5 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from pexpect&gt;4.3-&gt;ipython) (0.7.0)
+Requirement already satisfied: wcwidth in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython) (0.2.14)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ptyprocess&gt;=0.5 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from pexpect&gt;4.3-&gt;ipython) (0.7.0)
-Requirement already satisfied: wcwidth in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython) (0.2.14)
-Requirement already satisfied: executing&gt;=1.2.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (2.2.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: executing&gt;=1.2.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (2.2.1)
 Requirement already satisfied: asttokens&gt;=2.1.0 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (3.0.0)
 Requirement already satisfied: pure-eval in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from stack_data-&gt;ipython) (0.2.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: plantuml in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.3.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: httplib2 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from plantuml) (0.31.0)
+Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (from httplib2-&gt;plantuml) (3.2.5)
 </pre></div>
 </div>
 </div>
@@ -541,49 +551,6 @@ Requirement already satisfied: pure-eval in /home/labra/src/python/rudof/tutoria
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 11 nodes and 4 edges
-Node 3: Reifies
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 1: Predicate: :since (&lt;http://example.org/since&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 5: Predicate: :knows (&lt;http://example.org/knows&gt;)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 1, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 8: Predicate: rdf:type (&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 9: Iri: :Statement (http://example.org/Statement)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 0: Iri: :aliceBelief (http://example.org/aliceBelief)
-     count: UsageCount { as_predicate: 0, as_subject: 4, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 4: Iri: :bob (http://example.org/bob)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 1, as_object_in_triple: 0 }
-Node 2: Literal: 2025
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 6: Iri: :dave (http://example.org/dave)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 1 }
-Node 7: NonAssertedTriple
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 10: Predicate: :accordingTo (&lt;http://example.org/accordingTo&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Edge reifies: 0 --&gt; 7
-Edge rdf:type (http://www.w3.org/1999/02/22-rdf-syntax-ns#type): 0 --&gt; 9
-Edge :accordingTo (http://example.org/accordingTo): 0 --&gt; 6
-Edge :since (http://example.org/since): 0 --&gt; 2
-Starting conversion...
-Converting node Reifies with node id 3 to plantuml
-Converting node Predicate: :since (&lt;http://example.org/since&gt;) with node id 1 to plantuml
-Converting node Predicate: :knows (&lt;http://example.org/knows&gt;) with node id 5 to plantuml
-Converting node Predicate: rdf:type (&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;) with node id 8 to plantuml
-Converting node Iri: :Statement (http://example.org/Statement) with node id 9 to plantuml
-Converting node Iri: :aliceBelief (http://example.org/aliceBelief) with node id 0 to plantuml
-Converting node Iri: :bob (http://example.org/bob) with node id 4 to plantuml
-Converting node Literal: 2025 with node id 2 to plantuml
-Converting node Iri: :dave (http://example.org/dave) with node id 6 to plantuml
-Converting node NonAssertedTriple with node id 7 to plantuml
-Converting node Predicate: :accordingTo (&lt;http://example.org/accordingTo&gt;) with node id 10 to plantuml
-</pre></div>
-</div>
-</div>
 </div>
 <p>Convert the <code class="docutils literal notranslate"><span class="pre">puml</span></code> to an image.</p>
 <div class="cell docutils container">
@@ -605,7 +572,7 @@ Converting node Predicate: :accordingTo (&lt;http://example.org/accordingTo&gt;)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c2f15af94fda00770258fd9d76be4393766c13a79553817aa8e8461b348779ce.png" src="_images/c2f15af94fda00770258fd9d76be4393766c13a79553817aa8e8461b348779ce.png" />
+<img alt="_images/8995fc93190b6167f8fca48505188c4118149031bb780d96fe25d1f8bdede2df.png" src="_images/8995fc93190b6167f8fca48505188c4118149031bb780d96fe25d1f8bdede2df.png" />
 </div>
 </div>
 <p>In <a class="reference external" href="https://www.w3.org/TR/rdf12-turtle/">RDF 1.2 turtle syntax</a>, there are several possibilities to define triple terms.</p>
@@ -640,45 +607,6 @@ Converting node Predicate: :accordingTo (&lt;http://example.org/accordingTo&gt;)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 10 nodes and 3 edges
-Node 1: Predicate: :familyName (&lt;http://www.example.org/familyName&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 6: Reifies
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 5: Iri: :eric (http://www.example.org/eric)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 2: Literal: &quot;Smith&quot;
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 7: Predicate: :jobTitle (&lt;http://www.example.org/jobTitle&gt;)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 1, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 0: BlankNode: e38
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 1, as_object_in_triple: 0 }
-Node 4: Predicate: :accordingTo (&lt;http://www.example.org/accordingTo&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 9: NonAssertedTriple
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 8: Literal: &quot;Designer&quot;
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 1 }
-Node 3: BlankNode: anno
-     count: UsageCount { as_predicate: 0, as_subject: 2, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Edge :familyName (http://www.example.org/familyName): 0 --&gt; 2
-Edge :accordingTo (http://www.example.org/accordingTo): 3 --&gt; 5
-Edge reifies: 3 --&gt; 9
-Starting conversion...
-Converting node Predicate: :familyName (&lt;http://www.example.org/familyName&gt;) with node id 1 to plantuml
-Converting node Reifies with node id 6 to plantuml
-Converting node Iri: :eric (http://www.example.org/eric) with node id 5 to plantuml
-Converting node Literal: &quot;Smith&quot; with node id 2 to plantuml
-Converting node Predicate: :jobTitle (&lt;http://www.example.org/jobTitle&gt;) with node id 7 to plantuml
-Converting node BlankNode: e38 with node id 0 to plantuml
-Converting node Predicate: :accordingTo (&lt;http://www.example.org/accordingTo&gt;) with node id 4 to plantuml
-Converting node NonAssertedTriple with node id 9 to plantuml
-Converting node Literal: &quot;Designer&quot; with node id 8 to plantuml
-Converting node BlankNode: anno with node id 3 to plantuml
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -699,7 +627,7 @@ Converting node BlankNode: anno with node id 3 to plantuml
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/69d6df2f7a17814f28bbeab24247af1b5fa9eaa66d01a2d0c94122d07b206093.png" src="_images/69d6df2f7a17814f28bbeab24247af1b5fa9eaa66d01a2d0c94122d07b206093.png" />
+<img alt="_images/5a895b0e8023b04c3184e37cfc634e0ff17359c1b79e229a4bf868f569f24f2d.png" src="_images/5a895b0e8023b04c3184e37cfc634e0ff17359c1b79e229a4bf868f569f24f2d.png" />
 </div>
 </div>
 </section>
@@ -737,47 +665,10 @@ Converting node BlankNode: anno with node id 3 to plantuml
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 10 nodes and 3 edges
-Node 0: Iri: :employee38 (http://www.example.org/employee38)
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 1, as_object_in_triple: 0 }
-Node 3: BlankNode: c10ac87a43bbfc20d22a6b48d82d3b7e
-     count: UsageCount { as_predicate: 0, as_subject: 2, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 5: Predicate: :jobTitle (&lt;http://www.example.org/jobTitle&gt;)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 1, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 6: Literal: &quot;Assistant Designer&quot;
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 1 }
-Node 8: Predicate: :accordingTo (&lt;http://www.example.org/accordingTo&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 2: Literal: &quot;Smith&quot;
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 9: Iri: :employee22 (http://www.example.org/employee22)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 4: Reifies
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 1: Predicate: :familyName (&lt;http://www.example.org/familyName&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 7: NonAssertedTriple
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Edge :familyName (http://www.example.org/familyName): 0 --&gt; 2
-Edge reifies: 3 --&gt; 7
-Edge :accordingTo (http://www.example.org/accordingTo): 3 --&gt; 9
-Starting conversion...
-Converting node Iri: :employee38 (http://www.example.org/employee38) with node id 0 to plantuml
-Converting node BlankNode: c10ac87a43bbfc20d22a6b48d82d3b7e with node id 3 to plantuml
-Converting node Predicate: :jobTitle (&lt;http://www.example.org/jobTitle&gt;) with node id 5 to plantuml
-Converting node Literal: &quot;Assistant Designer&quot; with node id 6 to plantuml
-Converting node Predicate: :accordingTo (&lt;http://www.example.org/accordingTo&gt;) with node id 8 to plantuml
-Converting node Literal: &quot;Smith&quot; with node id 2 to plantuml
-Converting node Iri: :employee22 (http://www.example.org/employee22) with node id 9 to plantuml
-Converting node Reifies with node id 4 to plantuml
-Converting node Predicate: :familyName (&lt;http://www.example.org/familyName&gt;) with node id 1 to plantuml
-Converting node NonAssertedTriple with node id 7 to plantuml
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/14f7bf2f38d5848fb1a8452aea9c908fe94210b515ca5b186168db0e57ea42f6.png" src="_images/14f7bf2f38d5848fb1a8452aea9c908fe94210b515ca5b186168db0e57ea42f6.png" />
+<img alt="_images/2b4c8f9a0de66a47d35d879113902bb4d2686970c7306bd98255f478af736f31.png" src="_images/2b4c8f9a0de66a47d35d879113902bb4d2686970c7306bd98255f478af736f31.png" />
 </div>
 </div>
 </section>
@@ -816,72 +707,63 @@ Converting node NonAssertedTriple with node id 7 to plantuml
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 10 nodes and 4 edges
-Node 2: Literal: &quot;Alice&quot;
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 1 }
-Node 9: Literal: &quot;2021-07-07&quot;^^xsd:date
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 0: Iri: :alice (http://example.com/alice)
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 1, as_object_in_triple: 0 }
-Node 6: Reifies
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 5: Iri: :bob (http://example.com/bob)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 4: Predicate: :statedBy (&lt;http://example.com/statedBy&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 1: Predicate: :name (&lt;http://example.com/name&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 1, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 7: AssertedTriple
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 8: Predicate: :recorded (&lt;http://example.com/recorded&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 3: Iri: :t (http://example.com/t)
-     count: UsageCount { as_predicate: 0, as_subject: 3, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Edge :name (http://example.com/name): 0 --&gt; 2
-Edge :recorded (http://example.com/recorded): 3 --&gt; 9
-Edge reifies: 3 --&gt; 7
-Edge :statedBy (http://example.com/statedBy): 3 --&gt; 5
-Starting conversion...
-Converting node Literal: &quot;Alice&quot; with node id 2 to plantuml
-Converting node Literal: &quot;2021-07-07&quot;^^xsd:date with node id 9 to plantuml
-Converting node Iri: :alice (http://example.com/alice) with node id 0 to plantuml
-Converting node Reifies with node id 6 to plantuml
-Converting node Iri: :bob (http://example.com/bob) with node id 5 to plantuml
-Converting node Predicate: :statedBy (&lt;http://example.com/statedBy&gt;) with node id 4 to plantuml
-Converting node Predicate: :name (&lt;http://example.com/name&gt;) with node id 1 to plantuml
-Converting node AssertedTriple with node id 7 to plantuml
-Converting node Predicate: :recorded (&lt;http://example.com/recorded&gt;) with node id 8 to plantuml
-Converting node Iri: :t (http://example.com/t) with node id 3 to plantuml
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
-  File &quot;&lt;frozen runpy&gt;&quot;, line 198, in _run_module_as_main
-  File &quot;&lt;frozen runpy&gt;&quot;, line 88, in _run_code
-  File &quot;/home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages/plantuml.py&quot;, line 230, in &lt;module&gt;
-    main()
-  File &quot;/home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages/plantuml.py&quot;, line 225, in main
-    print(list(map(lambda filename: {&#39;filename&#39;: filename,
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages/plantuml.py&quot;, line 226, in &lt;lambda&gt;
-    &#39;gen_success&#39;: pl.processes_file(filename, directory=args.out)}, args.files)))
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages/plantuml.py&quot;, line 199, in processes_file
-    content = self.processes(data)
-              ^^^^^^^^^^^^^^^^^^^^
-  File &quot;/home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages/plantuml.py&quot;, line 173, in processes
-    raise PlantUMLHTTPError(response, content)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages/plantuml.py&quot;, line 56, in __init__
-    if not self.message:
-           ^^^^^^^^^^^^
-AttributeError: &#39;PlantUMLHTTPError&#39; object has no attribute &#39;message&#39;
-</pre></div>
-</div>
-<img alt="_images/14f7bf2f38d5848fb1a8452aea9c908fe94210b515ca5b186168db0e57ea42f6.png" src="_images/14f7bf2f38d5848fb1a8452aea9c908fe94210b515ca5b186168db0e57ea42f6.png" />
+<img alt="_images/323d8abc0088e0f8836951568883addbecfaf6b87a33d842fd8bbcfbcd247b1e.png" src="_images/323d8abc0088e0f8836951568883addbecfaf6b87a33d842fd8bbcfbcd247b1e.png" />
 </div>
 </div>
 <p>Notice that in the visualization, we differentiate between a statement that is part of the graph which is represented by a box from a statement that is not part of the graph, which is represented by a cloud symbol.</p>
 </section>
+</section>
+<section id="tim-berners-lee-s-example">
+<h2>Tim Berners-Lee’s example<a class="headerlink" href="#tim-berners-lee-s-example" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title</span>
+<span class="n">rudof</span><span class="o">.</span><span class="n">reset_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Example declaring that Tim Berners-Lee worked for the CERN between 1984 and 1994 and in 1980, and that he received the Princess of Asturias Award in 2002 together with Vinton-Cerf.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">prefix : &lt;http://example.org/&gt;</span>
+<span class="s2">prefix sh:     &lt;http://www.w3.org/ns/shacl#&gt;</span>
+<span class="s2">prefix xsd:    &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+<span class="s2">prefix rdfs:   &lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
+
+<span class="s2">:timbl rdfs:label &quot;Tim Berners Lee&quot; ;</span>
+<span class="s2">       :employer :CERN {| :start &quot;1984&quot; ;</span>
+<span class="s2">                          :end   &quot;1994&quot; |}</span>
+<span class="s2">                       {| :start &quot;1980&quot; ;</span>
+<span class="s2">                          :end   &quot;1980&quot; |} ;</span>
+<span class="s2">       :award :PA {| :time &quot;2002&quot; ;</span>
+<span class="s2">                     :togetherWith :vint |} .</span>
+<span class="s2">:vint  rdfs:label &quot;Vinton Cerf&quot; .</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Visualization:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uml</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">data2plantuml_file</span><span class="p">(</span><span class="s1">&#39;out.puml&#39;</span><span class="p">)</span>
+<span class="o">!</span>python<span class="w"> </span>-m<span class="w"> </span>plantuml<span class="w"> </span>out.puml
+<span class="n">Image</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;out.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
+</pre></div>
+</div>
+<img alt="_images/f52d2a0559b7a1f35caac1a81b5020f6d3d1f590eab704e89ad98eb52fe16d1f.png" src="_images/f52d2a0559b7a1f35caac1a81b5020f6d3d1f590eab704e89ad98eb52fe16d1f.png" />
+</div>
+</div>
 </section>
 </section>
 
@@ -956,6 +838,7 @@ AttributeError: &#39;PlantUMLHTTPError&#39; object has no attribute &#39;message
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#annotation-syntax">Annotation syntax</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tim-berners-lee-s-example">Tim Berners-Lee’s example</a></li>
 </ul>
   </nav></div>
 

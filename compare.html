@@ -182,6 +182,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="rudof.html">Short introduction to Rudof</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rdf.html">RDF</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="sparql.html">SPARQL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shex.html">ShEx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shacl.html">SHACL</a></li>
@@ -438,7 +439,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.120)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.128)
 </pre></div>
 </div>
 </div>
@@ -508,14 +509,6 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result of comparison:
 {
   &quot;equal_properties&quot;: {
-    &quot;http://example.org/worksFor&quot;: {
-      &quot;description1&quot;: {
-        &quot;iri_ref&quot;: &quot;http://example.org/worksFor&quot;
-      },
-      &quot;description2&quot;: {
-        &quot;iri_ref&quot;: &quot;http://example.org/worksFor&quot;
-      }
-    },
     &quot;http://example.org/name&quot;: {
       &quot;description1&quot;: {
         &quot;iri_ref&quot;: &quot;http://example.org/name&quot;,
@@ -528,6 +521,14 @@ document.write(`
         &quot;value_constraint&quot;: {
           &quot;Datatype&quot;: &quot;http://www.w3.org/2001/XMLSchema#string&quot;
         }
+      }
+    },
+    &quot;http://example.org/worksFor&quot;: {
+      &quot;description1&quot;: {
+        &quot;iri_ref&quot;: &quot;http://example.org/worksFor&quot;
+      },
+      &quot;description2&quot;: {
+        &quot;iri_ref&quot;: &quot;http://example.org/worksFor&quot;
       }
     }
   },

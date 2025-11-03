@@ -25,15 +25,31 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-rudof.use_endpoint("https://query.wikidata.org/sparql")
+# Create a basic configuration
+config = pyrudof.GeneratorConfig()
 
+# Set the number of entities to generate
+config.set_entity_count(10)
+
+# Set output path
+config.set_output_path("/tmp/tutorial_output.ttl")
+
+# Set output format to Turtle (human-readable)
+config.set_output_format(pyrudof.OutputFormat.Turtle)
+
+print("✓ Configuration created")
+print(f"  Entity count: {config.get_entity_count()}")
+print(f"  Output path: {config.get_output_path()}")
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
 [31mAttributeError[39m                            Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[9][39m[32m, line 1[39m
-[32m----> [39m[32m1[39m [43mrudof[49m[43m.[49m[43muse_endpoint[49m([33m"[39m[33mhttps://query.wikidata.org/sparql[39m[33m"[39m)
+[36mCell[39m[36m [39m[32mIn[3][39m[32m, line 2[39m
+[32m      1[39m [38;5;66;03m# Create a basic configuration[39;00m
+[32m----> [39m[32m2[39m config = [43mpyrudof[49m[43m.[49m[43mGeneratorConfig[49m()
+[32m      4[39m [38;5;66;03m# Set the number of entities to generate[39;00m
+[32m      5[39m config.set_entity_count([32m10[39m)
 
-[31mAttributeError[39m: 'builtins.Rudof' object has no attribute 'use_endpoint'
+[31mAttributeError[39m: module 'pyrudof' has no attribute 'GeneratorConfig'
 

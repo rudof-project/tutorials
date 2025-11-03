@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -190,6 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="sparql12.html">SPARQL 1.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compare.html">Using rudof to compare schemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service_description.html">Service descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rudof_generate_tutorial.html">Tutorial: Generating Synthetic RDF Data with rudof_generate</a></li>
 </ul>
 
     </div>
@@ -423,9 +424,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blank-nodes">Blank nodes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-rdf-data">Merging RDF data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-rdf-data-formats">Different RDF data formats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-about-a-node-in-an-rdf-graph">Information about a node in an RDF graph</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-sparql-queries">Running SPARQL queries</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-sparql-queries">Running SPARQL queries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-about-tim-berners-lee">Example about Tim Berners-Lee</a></li>
 </ul>
             </nav>
         </div>
@@ -451,7 +454,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.120)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyrudof in /home/labra/src/python/rudof/tutorials/.venv/lib/python3.12/site-packages (0.1.128)
 </pre></div>
 </div>
 </div>
@@ -489,13 +492,6 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 </div>
 </div>
 <p>The method <code class="docutils literal notranslate"><span class="pre">reset_all()</span></code> can be useful to clean the previous contents of <code class="docutils literal notranslate"><span class="pre">rudof</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">reset_all</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="rdf-data-model">
 <h2>RDF data model<a class="headerlink" href="#rdf-data-model" title="Link to this heading">#</a></h2>
@@ -532,44 +528,10 @@ Requirement already satisfied: pyparsing&lt;4,&gt;=3.0.4 in /home/labra/src/pyth
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 8 nodes and 6 edges
-Node 7: Iri: &lt;http://example.org/acme&gt; (http://example.org/acme)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 5: Iri: &lt;http://example.org/spain&gt; (http://example.org/spain)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 6: Predicate: &lt;http://example.org/worksFor&gt; (&lt;http://example.org/worksFor&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 0: Iri: &lt;http://example.org/carol&gt; (http://example.org/carol)
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 3: Iri: &lt;http://example.org/alice&gt; (http://example.org/alice)
-     count: UsageCount { as_predicate: 0, as_subject: 4, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 2: Iri: &lt;http://example.org/bob&gt; (http://example.org/bob)
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 2, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 1: Predicate: &lt;http://example.org/knows&gt; (&lt;http://example.org/knows&gt;)
-     count: UsageCount { as_predicate: 4, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 4: Predicate: &lt;http://example.org/birthPlace&gt; (&lt;http://example.org/birthPlace&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Edge &lt;http://example.org/birthPlace&gt; (http://example.org/birthPlace): 3 --&gt; 5
-Edge &lt;http://example.org/knows&gt; (http://example.org/knows): 3 --&gt; 2
-Edge &lt;http://example.org/worksFor&gt; (http://example.org/worksFor): 3 --&gt; 7
-Edge &lt;http://example.org/knows&gt; (http://example.org/knows): 3 --&gt; 0
-Edge &lt;http://example.org/knows&gt; (http://example.org/knows): 2 --&gt; 3
-Edge &lt;http://example.org/knows&gt; (http://example.org/knows): 0 --&gt; 2
-Starting conversion...
-Converting node Iri: &lt;http://example.org/acme&gt; (http://example.org/acme) with node id 7 to plantuml
-Converting node Iri: &lt;http://example.org/spain&gt; (http://example.org/spain) with node id 5 to plantuml
-Converting node Predicate: &lt;http://example.org/worksFor&gt; (&lt;http://example.org/worksFor&gt;) with node id 6 to plantuml
-Converting node Iri: &lt;http://example.org/carol&gt; (http://example.org/carol) with node id 0 to plantuml
-Converting node Iri: &lt;http://example.org/alice&gt; (http://example.org/alice) with node id 3 to plantuml
-Converting node Iri: &lt;http://example.org/bob&gt; (http://example.org/bob) with node id 2 to plantuml
-Converting node Predicate: &lt;http://example.org/knows&gt; (&lt;http://example.org/knows&gt;) with node id 1 to plantuml
-Converting node Predicate: &lt;http://example.org/birthPlace&gt; (&lt;http://example.org/birthPlace&gt;) with node id 4 to plantuml
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/36fb1cde84cf09aa25c607a2cf93aa53fc063cf556d54cadf5fd5bbc2ecdb2f9.png" src="_images/36fb1cde84cf09aa25c607a2cf93aa53fc063cf556d54cadf5fd5bbc2ecdb2f9.png" />
+<img alt="_images/c150b2e2a6db6baa468b35df1c06010ce72aa6d23298e0984636d4561e5e079d.png" src="_images/c150b2e2a6db6baa468b35df1c06010ce72aa6d23298e0984636d4561e5e079d.png" />
 </div>
 </div>
 <p>In order to obtain interoperability, it is better to employ IRIs of some agreed vocabularies. In this case, we could use the predicate <a class="reference external" href="https://schema.org/knows"><code class="docutils literal notranslate"><span class="pre">&lt;https://schema.org/knows&gt;</span></code></a>, <a class="reference external" href="https://schema.org/worksFor"><code class="docutils literal notranslate"><span class="pre">https://schema.org/worksFor</span></code></a> and <a class="reference external" href="https://schema.org/birthPlace"><code class="docutils literal notranslate"><span class="pre">https://schema.org/birthPlace</span></code></a> from <a class="reference external" href="https://schema.org/">Schema.org</a>, and [<code class="docutils literal notranslate"><span class="pre">&lt;http://dbpedia.org/resource/Spain</span></code>] from <a class="reference external" href="https://dbpedia.org/">DBpedia</a> to represent Spain.</p>
@@ -597,46 +559,10 @@ Converting node Predicate: &lt;http://example.org/birthPlace&gt; (&lt;http://exa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 9 nodes and 5 edges
-Node 0: Iri: &lt;http://example.org/carol&gt; (http://example.org/carol)
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 4: Iri: &lt;http://example.org/alice&gt; (http://example.org/alice)
-     count: UsageCount { as_predicate: 0, as_subject: 3, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 8: Iri: &lt;http://dbpedia.org/resource/Spain&gt; (http://dbpedia.org/resource/Spain)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 1: Predicate: &lt;https://schema.org/knows&gt; (&lt;https://schema.org/knows&gt;)
-     count: UsageCount { as_predicate: 2, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 2: Iri: &lt;http://example.org/bob&gt; (http://example.org/bob)
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 3: Predicate: &lt;http://schema.org/knows&gt; (&lt;http://schema.org/knows&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 5: Predicate: &lt;https://schema.org/worksFor&gt; (&lt;https://schema.org/worksFor&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 6: Iri: &lt;http://example.org/acme&gt; (http://example.org/acme)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 7: Predicate: &lt;https://schema.org/birthPlace&gt; (&lt;https://schema.org/birthPlace&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Edge &lt;https://schema.org/knows&gt; (https://schema.org/knows): 4 --&gt; 0
-Edge &lt;https://schema.org/birthPlace&gt; (https://schema.org/birthPlace): 4 --&gt; 8
-Edge &lt;https://schema.org/knows&gt; (https://schema.org/knows): 0 --&gt; 2
-Edge &lt;http://schema.org/knows&gt; (http://schema.org/knows): 2 --&gt; 4
-Edge &lt;https://schema.org/worksFor&gt; (https://schema.org/worksFor): 4 --&gt; 6
-Starting conversion...
-Converting node Iri: &lt;http://example.org/carol&gt; (http://example.org/carol) with node id 0 to plantuml
-Converting node Iri: &lt;http://example.org/alice&gt; (http://example.org/alice) with node id 4 to plantuml
-Converting node Iri: &lt;http://dbpedia.org/resource/Spain&gt; (http://dbpedia.org/resource/Spain) with node id 8 to plantuml
-Converting node Predicate: &lt;https://schema.org/knows&gt; (&lt;https://schema.org/knows&gt;) with node id 1 to plantuml
-Converting node Iri: &lt;http://example.org/bob&gt; (http://example.org/bob) with node id 2 to plantuml
-Converting node Predicate: &lt;http://schema.org/knows&gt; (&lt;http://schema.org/knows&gt;) with node id 3 to plantuml
-Converting node Predicate: &lt;https://schema.org/worksFor&gt; (&lt;https://schema.org/worksFor&gt;) with node id 5 to plantuml
-Converting node Iri: &lt;http://example.org/acme&gt; (http://example.org/acme) with node id 6 to plantuml
-Converting node Predicate: &lt;https://schema.org/birthPlace&gt; (&lt;https://schema.org/birthPlace&gt;) with node id 7 to plantuml
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/140c30fb9590d4530abc790caa8237ae526650ecaba442fc0fc9bba09549c410.png" src="_images/140c30fb9590d4530abc790caa8237ae526650ecaba442fc0fc9bba09549c410.png" />
+<img alt="_images/45c9d497a8a647284ce4df00eb4a2cb80069203e9f3f42bd000808401ef1966e.png" src="_images/45c9d497a8a647284ce4df00eb4a2cb80069203e9f3f42bd000808401ef1966e.png" />
 </div>
 </div>
 <p>Having long IRIs can make RDF difficult to read. In order to have more readable RDF documents, it is possible to declare prefixes for some URIs and use qualified names formed by <code class="docutils literal notranslate"><span class="pre">prefix:name</span></code>. So the previous example could be rewritten as:</p>
@@ -670,43 +596,10 @@ Converting node Predicate: &lt;https://schema.org/birthPlace&gt; (&lt;https://sc
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 8 nodes and 5 edges
-Node 5: Iri: :spain (http://example.org/spain)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 7: Iri: :acme (http://example.org/acme)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 3: Iri: :alice (http://example.org/alice)
-     count: UsageCount { as_predicate: 0, as_subject: 3, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 6: Predicate: schema:worksFor (&lt;http://schema.org/worksFor&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 0: Iri: :carol (http://example.org/carol)
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 4: Predicate: schema:birthPlace (&lt;http://schema.org/birthPlace&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 1: Predicate: schema:knows (&lt;http://schema.org/knows&gt;)
-     count: UsageCount { as_predicate: 3, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 2: Iri: :bob (http://example.org/bob)
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Edge schema:knows (http://schema.org/knows): 0 --&gt; 2
-Edge schema:knows (http://schema.org/knows): 3 --&gt; 0
-Edge schema:knows (http://schema.org/knows): 2 --&gt; 3
-Edge schema:birthPlace (http://schema.org/birthPlace): 3 --&gt; 5
-Edge schema:worksFor (http://schema.org/worksFor): 3 --&gt; 7
-Starting conversion...
-Converting node Iri: :spain (http://example.org/spain) with node id 5 to plantuml
-Converting node Iri: :acme (http://example.org/acme) with node id 7 to plantuml
-Converting node Iri: :alice (http://example.org/alice) with node id 3 to plantuml
-Converting node Predicate: schema:worksFor (&lt;http://schema.org/worksFor&gt;) with node id 6 to plantuml
-Converting node Iri: :carol (http://example.org/carol) with node id 0 to plantuml
-Converting node Predicate: schema:birthPlace (&lt;http://schema.org/birthPlace&gt;) with node id 4 to plantuml
-Converting node Predicate: schema:knows (&lt;http://schema.org/knows&gt;) with node id 1 to plantuml
-Converting node Iri: :bob (http://example.org/bob) with node id 2 to plantuml
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/4ff83c69b36f9301d28771e81a767e0b883970c69f3f2d9036272f241be4fd56.png" src="_images/4ff83c69b36f9301d28771e81a767e0b883970c69f3f2d9036272f241be4fd56.png" />
+<img alt="_images/da83e33639f05dec77d1091ad37d4f22b27006acf49241b3605c8d9b0970f726.png" src="_images/da83e33639f05dec77d1091ad37d4f22b27006acf49241b3605c8d9b0970f726.png" />
 </div>
 </div>
 </section>
@@ -750,61 +643,10 @@ Converting node Iri: :bob (http://example.org/bob) with node id 2 to plantuml
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 13 nodes and 8 edges
-Node 3: Iri: :alice (http://example.org/alice)
-     count: UsageCount { as_predicate: 0, as_subject: 4, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 9: Iri: dbr:Spain (http://dbpedia.org/resource/Spain)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 7: Iri: :acme (http://example.org/acme)
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 2: Iri: :bob (http://example.org/bob)
-     count: UsageCount { as_predicate: 0, as_subject: 2, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 10: Predicate: schema:name (&lt;http://schema.org/name&gt;)
-     count: UsageCount { as_predicate: 2, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 0: Iri: :carol (http://example.org/carol)
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 8: Predicate: schema:birthPlace (&lt;http://schema.org/birthPlace&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 11: Literal: &quot;Acme Inc.&quot;
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 1: Predicate: schema:knows (&lt;http://schema.org/knows&gt;)
-     count: UsageCount { as_predicate: 3, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 5: Literal: &quot;1990-01-01&quot;^^xsd:date
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 4: Predicate: schema:birthDate (&lt;http://schema.org/birthDate&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 12: Literal: &quot;Robert Smith&quot;
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 6: Predicate: schema:worksFor (&lt;http://schema.org/worksFor&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Edge schema:knows (http://schema.org/knows): 2 --&gt; 3
-Edge schema:birthDate (http://schema.org/birthDate): 3 --&gt; 5
-Edge schema:name (http://schema.org/name): 7 --&gt; 11
-Edge schema:worksFor (http://schema.org/worksFor): 3 --&gt; 7
-Edge schema:knows (http://schema.org/knows): 3 --&gt; 0
-Edge schema:birthPlace (http://schema.org/birthPlace): 3 --&gt; 9
-Edge schema:knows (http://schema.org/knows): 0 --&gt; 2
-Edge schema:name (http://schema.org/name): 2 --&gt; 12
-Starting conversion...
-Converting node Iri: :alice (http://example.org/alice) with node id 3 to plantuml
-Converting node Iri: dbr:Spain (http://dbpedia.org/resource/Spain) with node id 9 to plantuml
-Converting node Iri: :acme (http://example.org/acme) with node id 7 to plantuml
-Converting node Iri: :bob (http://example.org/bob) with node id 2 to plantuml
-Converting node Predicate: schema:name (&lt;http://schema.org/name&gt;) with node id 10 to plantuml
-Converting node Iri: :carol (http://example.org/carol) with node id 0 to plantuml
-Converting node Predicate: schema:birthPlace (&lt;http://schema.org/birthPlace&gt;) with node id 8 to plantuml
-Converting node Literal: &quot;Acme Inc.&quot; with node id 11 to plantuml
-Converting node Predicate: schema:knows (&lt;http://schema.org/knows&gt;) with node id 1 to plantuml
-Converting node Literal: &quot;1990-01-01&quot;^^xsd:date with node id 5 to plantuml
-Converting node Predicate: schema:birthDate (&lt;http://schema.org/birthDate&gt;) with node id 4 to plantuml
-Converting node Literal: &quot;Robert Smith&quot; with node id 12 to plantuml
-Converting node Predicate: schema:worksFor (&lt;http://schema.org/worksFor&gt;) with node id 6 to plantuml
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/ed5c42ce680b1f5f6c6941e85eb52e5a00401106a92a94f395e66dafa013caf3.png" src="_images/ed5c42ce680b1f5f6c6941e85eb52e5a00401106a92a94f395e66dafa013caf3.png" />
+<img alt="_images/fb622022427628a5a612b8752664cc33b9e94de9d3fe4e3d986ddc249b0336d7.png" src="_images/fb622022427628a5a612b8752664cc33b9e94de9d3fe4e3d986ddc249b0336d7.png" />
 </div>
 </div>
 </section>
@@ -839,38 +681,10 @@ Converting node Predicate: schema:worksFor (&lt;http://schema.org/worksFor&gt;) 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 7 nodes and 3 edges
-Node 1: Predicate: schema:knows (&lt;http://schema.org/knows&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 2: BlankNode: 1
-     count: UsageCount { as_predicate: 0, as_subject: 2, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 0: Iri: :alice (http://example.org/alice)
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 4: Iri: dbr:Italy (http://dbpedia.org/resource/Italy)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 5: Predicate: schema:worksFor (&lt;http://schema.org/worksFor&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 6: Iri: :acme (http://example.org/acme)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 3: Predicate: schema:birthPlace (&lt;http://schema.org/birthPlace&gt;)
-     count: UsageCount { as_predicate: 1, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Edge schema:worksFor (http://schema.org/worksFor): 2 --&gt; 6
-Edge schema:knows (http://schema.org/knows): 0 --&gt; 2
-Edge schema:birthPlace (http://schema.org/birthPlace): 2 --&gt; 4
-Starting conversion...
-Converting node Predicate: schema:knows (&lt;http://schema.org/knows&gt;) with node id 1 to plantuml
-Converting node BlankNode: 1 with node id 2 to plantuml
-Converting node Iri: :alice (http://example.org/alice) with node id 0 to plantuml
-Converting node Iri: dbr:Italy (http://dbpedia.org/resource/Italy) with node id 4 to plantuml
-Converting node Predicate: schema:worksFor (&lt;http://schema.org/worksFor&gt;) with node id 5 to plantuml
-Converting node Iri: :acme (http://example.org/acme) with node id 6 to plantuml
-Converting node Predicate: schema:birthPlace (&lt;http://schema.org/birthPlace&gt;) with node id 3 to plantuml
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/70c2fdc70758c9d41a31fb64f86544abd9e78edf1bb08bd148b3e06ae184a32d.png" src="_images/70c2fdc70758c9d41a31fb64f86544abd9e78edf1bb08bd148b3e06ae184a32d.png" />
+<img alt="_images/6b24a3f02a1f5b17796ea1d7df4e7252a81a30865bb5165f18c397965045decb.png" src="_images/6b24a3f02a1f5b17796ea1d7df4e7252a81a30865bb5165f18c397965045decb.png" />
 </div>
 </div>
 <p>The notation <code class="docutils literal notranslate"><span class="pre">_:id</span></code> represents a blank node. The <code class="docutils literal notranslate"><span class="pre">id</span></code> of the blank node can be used to refer to it in the definition of the RDF graph, but there is no warranty that it will be preserved internally.</p>
@@ -902,50 +716,10 @@ Converting node Predicate: schema:birthPlace (&lt;http://schema.org/birthPlace&g
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 10 nodes and 6 edges
-Node 3: Iri: :bob (http://example.org/bob)
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 6: Iri: dbr:Italy (http://dbpedia.org/resource/Italy)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 7: Predicate: schema:worksFor (&lt;http://schema.org/worksFor&gt;)
-     count: UsageCount { as_predicate: 2, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 2: BlankNode: 1
-     count: UsageCount { as_predicate: 0, as_subject: 2, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 4: BlankNode: 2
-     count: UsageCount { as_predicate: 0, as_subject: 2, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 8: Iri: :acme (http://example.org/acme)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 2, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 0: Iri: :alice (http://example.org/alice)
-     count: UsageCount { as_predicate: 0, as_subject: 1, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 5: Predicate: schema:birthPlace (&lt;http://schema.org/birthPlace&gt;)
-     count: UsageCount { as_predicate: 2, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 1: Predicate: schema:knows (&lt;http://schema.org/knows&gt;)
-     count: UsageCount { as_predicate: 2, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 9: Iri: dbr:Germany (http://dbpedia.org/resource/Germany)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Edge schema:worksFor (http://schema.org/worksFor): 2 --&gt; 8
-Edge schema:birthPlace (http://schema.org/birthPlace): 4 --&gt; 9
-Edge schema:worksFor (http://schema.org/worksFor): 4 --&gt; 8
-Edge schema:knows (http://schema.org/knows): 3 --&gt; 4
-Edge schema:birthPlace (http://schema.org/birthPlace): 2 --&gt; 6
-Edge schema:knows (http://schema.org/knows): 0 --&gt; 2
-Starting conversion...
-Converting node Iri: :bob (http://example.org/bob) with node id 3 to plantuml
-Converting node Iri: dbr:Italy (http://dbpedia.org/resource/Italy) with node id 6 to plantuml
-Converting node Predicate: schema:worksFor (&lt;http://schema.org/worksFor&gt;) with node id 7 to plantuml
-Converting node BlankNode: 1 with node id 2 to plantuml
-Converting node BlankNode: 2 with node id 4 to plantuml
-Converting node Iri: :acme (http://example.org/acme) with node id 8 to plantuml
-Converting node Iri: :alice (http://example.org/alice) with node id 0 to plantuml
-Converting node Predicate: schema:birthPlace (&lt;http://schema.org/birthPlace&gt;) with node id 5 to plantuml
-Converting node Predicate: schema:knows (&lt;http://schema.org/knows&gt;) with node id 1 to plantuml
-Converting node Iri: dbr:Germany (http://dbpedia.org/resource/Germany) with node id 9 to plantuml
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/2f64da95167e2a69f527f6056977020663c587809adc6b60ebfead3746b2fe8e.png" src="_images/2f64da95167e2a69f527f6056977020663c587809adc6b60ebfead3746b2fe8e.png" />
+<img alt="_images/18173c39f916da0e7edf50ea8956ba9e8746a18e6b308008c3fd0e861157283b.png" src="_images/18173c39f916da0e7edf50ea8956ba9e8746a18e6b308008c3fd0e861157283b.png" />
 </div>
 </div>
 </section>
@@ -966,14 +740,13 @@ Converting node Iri: dbr:Germany (http://dbpedia.org/resource/Germany) with node
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">prefix : &lt;http://example.org/&gt;</span>
 <span class="s2">prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+<span class="s2">prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
 
 <span class="s2">:x a :Person     ;</span>
 <span class="s2">   :name &quot;Alice&quot; ;</span>
 <span class="s2">   :knows :y     .</span>
 <span class="s2">:y a :Person     ;</span>
 <span class="s2">   :name &quot;Bob&quot;   ;</span>
-<span class="s2">   :knows :z     .</span>
-<span class="s2">:z a :Person     ;</span>
 <span class="s2">   :knows :x     .</span>
 <span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 </pre></div>
@@ -986,23 +759,38 @@ Converting node Iri: dbr:Germany (http://dbpedia.org/resource/Germany) with node
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">prefix : &lt;http://example.org/&gt;</span>
 <span class="s2">prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+<span class="s2">prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
 
 <span class="s2">:u a :Person     ;</span>
-<span class="s2">   :name &quot;Dave&quot; ;</span>
-<span class="s2">   :knows :y     .</span>
-<span class="s2">:v a :Person     ;</span>
-<span class="s2">   :name &quot;Emily&quot; ;</span>
-<span class="s2">   :knows _:1    .</span>
-<span class="s2">_:1 a :Person     ;</span>
-<span class="s2">   :knows :x     .</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="s2">   :name &quot;Dave&quot;  ;</span>
+<span class="s2">   :knows :x, :y .</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">merge</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="s2"> prefix : &lt;http://example.org/&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="s2"> prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="s2"> prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="s2"> </span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span><span class="s2"> :u a :Person     ;</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span><span class="s2">    :name &quot;Dave&quot;  ;</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span><span class="s2">    :knows :x, :y .</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span><span class="s2"> &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">merge</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: Rudof.read_data_str() got an unexpected keyword argument &#39;merge&#39;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>rm<span class="w"> </span>-f<span class="w"> </span>out.puml<span class="w"> </span>out.png
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title</span>
+<span class="o">!</span>rm<span class="w"> </span>-f<span class="w"> </span>out.puml<span class="w"> </span>out.png
 <span class="n">uml</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">data2plantuml_file</span><span class="p">(</span><span class="s1">&#39;out.puml&#39;</span><span class="p">)</span>
 <span class="o">!</span>python<span class="w"> </span>-m<span class="w"> </span>plantuml<span class="w"> </span>out.puml
 <span class="n">Image</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;out.png&quot;</span><span class="p">)</span>
@@ -1010,72 +798,10 @@ Converting node Iri: dbr:Germany (http://dbpedia.org/resource/Germany) with node
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visual graph: VisualRDFGraph with 14 nodes and 16 edges
-Node 1: Predicate: :knows (&lt;http://example.org/knows&gt;)
-     count: UsageCount { as_predicate: 6, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 8: Iri: :u (http://example.org/u)
-     count: UsageCount { as_predicate: 0, as_subject: 3, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 7: Literal: &quot;Bob&quot;
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 9: Literal: &quot;Dave&quot;
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 10: Iri: :v (http://example.org/v)
-     count: UsageCount { as_predicate: 0, as_subject: 3, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 3: Predicate: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; (&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;)
-     count: UsageCount { as_predicate: 6, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 12: Literal: &quot;Emily&quot;
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 11: BlankNode: 1
-     count: UsageCount { as_predicate: 0, as_subject: 2, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 5: Iri: :y (http://example.org/y)
-     count: UsageCount { as_predicate: 0, as_subject: 3, as_object: 2, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 6: Predicate: :name (&lt;http://example.org/name&gt;)
-     count: UsageCount { as_predicate: 4, as_subject: 0, as_object: 0, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 4: Iri: :Person (http://example.org/Person)
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 6, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 13: Literal: &quot;Alice&quot;
-     count: UsageCount { as_predicate: 0, as_subject: 0, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 2: Iri: :x (http://example.org/x)
-     count: UsageCount { as_predicate: 0, as_subject: 3, as_object: 2, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Node 0: Iri: :z (http://example.org/z)
-     count: UsageCount { as_predicate: 0, as_subject: 2, as_object: 1, as_predicate_in_triple: 0, as_subject_in_triple: 0, as_object_in_triple: 0 }
-Edge :knows (http://example.org/knows): 2 --&gt; 5
-Edge :knows (http://example.org/knows): 8 --&gt; 5
-Edge :knows (http://example.org/knows): 10 --&gt; 11
-Edge &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; (http://www.w3.org/1999/02/22-rdf-syntax-ns#type): 5 --&gt; 4
-Edge &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; (http://www.w3.org/1999/02/22-rdf-syntax-ns#type): 0 --&gt; 4
-Edge :name (http://example.org/name): 2 --&gt; 13
-Edge :knows (http://example.org/knows): 5 --&gt; 0
-Edge &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; (http://www.w3.org/1999/02/22-rdf-syntax-ns#type): 2 --&gt; 4
-Edge :knows (http://example.org/knows): 11 --&gt; 2
-Edge :name (http://example.org/name): 8 --&gt; 9
-Edge &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; (http://www.w3.org/1999/02/22-rdf-syntax-ns#type): 11 --&gt; 4
-Edge &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; (http://www.w3.org/1999/02/22-rdf-syntax-ns#type): 8 --&gt; 4
-Edge :name (http://example.org/name): 5 --&gt; 7
-Edge :knows (http://example.org/knows): 0 --&gt; 2
-Edge &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; (http://www.w3.org/1999/02/22-rdf-syntax-ns#type): 10 --&gt; 4
-Edge :name (http://example.org/name): 10 --&gt; 12
-Starting conversion...
-Converting node Predicate: :knows (&lt;http://example.org/knows&gt;) with node id 1 to plantuml
-Converting node Iri: :u (http://example.org/u) with node id 8 to plantuml
-Converting node Literal: &quot;Bob&quot; with node id 7 to plantuml
-Converting node Literal: &quot;Dave&quot; with node id 9 to plantuml
-Converting node Iri: :v (http://example.org/v) with node id 10 to plantuml
-Converting node Predicate: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; (&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt;) with node id 3 to plantuml
-Converting node Literal: &quot;Emily&quot; with node id 12 to plantuml
-Converting node BlankNode: 1 with node id 11 to plantuml
-Converting node Iri: :y (http://example.org/y) with node id 5 to plantuml
-Converting node Predicate: :name (&lt;http://example.org/name&gt;) with node id 6 to plantuml
-Converting node Iri: :Person (http://example.org/Person) with node id 4 to plantuml
-Converting node Literal: &quot;Alice&quot; with node id 13 to plantuml
-Converting node Iri: :x (http://example.org/x) with node id 2 to plantuml
-Converting node Iri: :z (http://example.org/z) with node id 0 to plantuml
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
 </pre></div>
 </div>
-<img alt="_images/101cb9b1d4c2ed9f3ee20a24bf647399f0dec3818d9fe170ee3dfbd947c73d5c.png" src="_images/101cb9b1d4c2ed9f3ee20a24bf647399f0dec3818d9fe170ee3dfbd947c73d5c.png" />
+<img alt="_images/8d462b4d7ff5010b08d8261be035f3920db92e870037ce5f792066c3dfd74f22.png" src="_images/8d462b4d7ff5010b08d8261be035f3920db92e870037ce5f792066c3dfd74f22.png" />
 </div>
 </div>
 </section>
@@ -1099,22 +825,16 @@ Converting node Iri: :z (http://example.org/z) with node id 0 to plantuml
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;http://example.org/z&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
-&lt;http://example.org/z&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/y&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/z&gt; .
-&lt;http://example.org/y&gt; &lt;http://example.org/name&gt; &quot;Bob&quot; .
-&lt;http://example.org/y&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;http://example.org/u&gt; &lt;http://example.org/name&gt; &quot;Dave&quot; .
 &lt;http://example.org/u&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
-&lt;http://example.org/u&gt; &lt;http://example.org/name&gt; &quot;Dave&quot; .
+&lt;http://example.org/u&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
 &lt;http://example.org/u&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/v&gt; &lt;http://example.org/knows&gt; _:1 .
-&lt;http://example.org/v&gt; &lt;http://example.org/name&gt; &quot;Emily&quot; .
-&lt;http://example.org/v&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-&lt;http://example.org/x&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
+&lt;http://example.org/y&gt; &lt;http://example.org/name&gt; &quot;Bob&quot; .
+&lt;http://example.org/y&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
+&lt;http://example.org/y&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
 &lt;http://example.org/x&gt; &lt;http://example.org/name&gt; &quot;Alice&quot; .
+&lt;http://example.org/x&gt; &lt;http://example.org/knows&gt; &lt;http://example.org/y&gt; .
 &lt;http://example.org/x&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
-_:1 &lt;http://example.org/knows&gt; &lt;http://example.org/x&gt; .
-_:1 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.org/Person&gt; .
 </pre></div>
 </div>
 </div>
@@ -1130,32 +850,20 @@ _:1 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.o
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;rdf:RDF xmlns=&quot;http://example.org/&quot; xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema#&quot;&gt;
-	&lt;rdf:Description rdf:about=&quot;http://example.org/z&quot;&gt;
+	&lt;rdf:Description rdf:about=&quot;http://example.org/u&quot;&gt;
+		&lt;name&gt;Dave&lt;/name&gt;
+		&lt;knows rdf:resource=&quot;http://example.org/y&quot;/&gt;
 		&lt;knows rdf:resource=&quot;http://example.org/x&quot;/&gt;
 		&lt;rdf:type rdf:resource=&quot;http://example.org/Person&quot;/&gt;
 	&lt;/rdf:Description&gt;
 	&lt;rdf:Description rdf:about=&quot;http://example.org/y&quot;&gt;
-		&lt;knows rdf:resource=&quot;http://example.org/z&quot;/&gt;
 		&lt;name&gt;Bob&lt;/name&gt;
-		&lt;rdf:type rdf:resource=&quot;http://example.org/Person&quot;/&gt;
-	&lt;/rdf:Description&gt;
-	&lt;rdf:Description rdf:about=&quot;http://example.org/u&quot;&gt;
-		&lt;knows rdf:resource=&quot;http://example.org/y&quot;/&gt;
-		&lt;name&gt;Dave&lt;/name&gt;
-		&lt;rdf:type rdf:resource=&quot;http://example.org/Person&quot;/&gt;
-	&lt;/rdf:Description&gt;
-	&lt;rdf:Description rdf:about=&quot;http://example.org/v&quot;&gt;
-		&lt;knows rdf:nodeID=&quot;1&quot;/&gt;
-		&lt;name&gt;Emily&lt;/name&gt;
+		&lt;knows rdf:resource=&quot;http://example.org/x&quot;/&gt;
 		&lt;rdf:type rdf:resource=&quot;http://example.org/Person&quot;/&gt;
 	&lt;/rdf:Description&gt;
 	&lt;rdf:Description rdf:about=&quot;http://example.org/x&quot;&gt;
-		&lt;knows rdf:resource=&quot;http://example.org/y&quot;/&gt;
 		&lt;name&gt;Alice&lt;/name&gt;
-		&lt;rdf:type rdf:resource=&quot;http://example.org/Person&quot;/&gt;
-	&lt;/rdf:Description&gt;
-	&lt;rdf:Description rdf:nodeID=&quot;1&quot;&gt;
-		&lt;knows rdf:resource=&quot;http://example.org/x&quot;/&gt;
+		&lt;knows rdf:resource=&quot;http://example.org/y&quot;/&gt;
 		&lt;rdf:type rdf:resource=&quot;http://example.org/Person&quot;/&gt;
 	&lt;/rdf:Description&gt;
 &lt;/rdf:RDF&gt;
@@ -1172,19 +880,165 @@ _:1 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.o
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&quot;@id&quot;:&quot;http://example.org/z&quot;,&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/x&quot;}],&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}]},{&quot;@id&quot;:&quot;http://example.org/y&quot;,&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/z&quot;}],&quot;http://example.org/name&quot;:[{&quot;@value&quot;:&quot;Bob&quot;}],&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}]},{&quot;@id&quot;:&quot;http://example.org/u&quot;,&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/y&quot;}],&quot;http://example.org/name&quot;:[{&quot;@value&quot;:&quot;Dave&quot;}],&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}]},{&quot;@id&quot;:&quot;http://example.org/v&quot;,&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;_:1&quot;}],&quot;http://example.org/name&quot;:[{&quot;@value&quot;:&quot;Emily&quot;}],&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}]},{&quot;@id&quot;:&quot;http://example.org/x&quot;,&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/y&quot;}],&quot;http://example.org/name&quot;:[{&quot;@value&quot;:&quot;Alice&quot;}],&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}]},{&quot;@id&quot;:&quot;_:1&quot;,&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/x&quot;}],&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}]}]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&quot;@id&quot;:&quot;http://example.org/u&quot;,&quot;http://example.org/name&quot;:[{&quot;@value&quot;:&quot;Dave&quot;}],&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/y&quot;},{&quot;@id&quot;:&quot;http://example.org/x&quot;}],&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}]},{&quot;@id&quot;:&quot;http://example.org/y&quot;,&quot;http://example.org/name&quot;:[{&quot;@value&quot;:&quot;Bob&quot;}],&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/x&quot;}],&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}]},{&quot;@id&quot;:&quot;http://example.org/x&quot;,&quot;http://example.org/name&quot;:[{&quot;@value&quot;:&quot;Alice&quot;}],&quot;http://example.org/knows&quot;:[{&quot;@id&quot;:&quot;http://example.org/y&quot;}],&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&quot;:[{&quot;@id&quot;:&quot;http://example.org/Person&quot;}]}]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">reset_all</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+<section id="information-about-a-node-in-an-rdf-graph">
+<h3>Information about a node in an RDF graph<a class="headerlink" href="#information-about-a-node-in-an-rdf-graph" title="Link to this heading">#</a></h3>
+<p>rudof provides a command to get information about the neighbours of a node in an RDF graph. The neighbours are the outgoing arcs or the incoming arcs.</p>
+<p>For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">prefix : &lt;http://example.org/&gt;</span>
+<span class="s2">prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
+<span class="s2">prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+
+<span class="s2">:alice a :Person ;</span>
+<span class="s2"> :name      &quot;Alice&quot;                ;</span>
+<span class="s2"> :birthDate &quot;2005-03-01&quot;^^xsd:date ;</span>
+<span class="s2"> :worksFor  :acme                  ;</span>
+<span class="s2"> :knows     :bob                   .</span>
+<span class="s2">:bob a :Person   ;</span>
+<span class="s2"> :name      &quot;Robert Smith&quot;         ;</span>
+<span class="s2"> :birthDate &quot;2003-01-02&quot;^^xsd:date ;</span>
+<span class="s2"> :worksFor  :acme                  ;</span>
+<span class="s2"> :knows     :alice                 .</span>
+<span class="s2">:acme a :Company ;</span>
+<span class="s2"> :name &quot;Acme Inc.&quot; .</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">rudof</span><span class="o">.</span><span class="n">node_info</span><span class="p">(</span><span class="s2">&quot;:alice&quot;</span><span class="p">,</span> <span class="p">[]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Outgoing arcs
+:alice
+├─── :birthDate ─► &quot;2005-03-01&quot;^^xsd:date
+├─── :knows ─► :bob
+├─── :name ─► &quot;Alice&quot;
+├─── :worksFor ─► :acme
+└─── rdf:type ─► :Person
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you want to get the incoming edges, you can use:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">rudof</span><span class="o">.</span><span class="n">node_info</span><span class="p">(</span><span class="s2">&quot;:alice&quot;</span><span class="p">,</span> <span class="p">[],</span> <span class="n">show_incoming</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">show_outgoing</span> <span class="o">=</span> <span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Incoming arcs
+:alice
+▲
+└─── :knows ── :bob
+</pre></div>
+</div>
+</div>
+</div>
+<p>The list of predicates can be used to filter only the predicates that we are interested in:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">rudof</span><span class="o">.</span><span class="n">node_info</span><span class="p">(</span><span class="s2">&quot;:alice&quot;</span><span class="p">,</span> <span class="p">[</span> <span class="s2">&quot;rdf:type&quot;</span><span class="p">,</span> <span class="s2">&quot;:worksFor&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Outgoing arcs
+:alice
+├─── :worksFor ─► :acme
+└─── rdf:type ─► :Person
+</pre></div>
+</div>
+</div>
+</div>
+<p>The command <code class="docutils literal notranslate"><span class="pre">node_info</span></code> can be useful when you work with SPARQL endpoints, for example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span> <span class="o">=</span> <span class="n">Rudof</span><span class="p">(</span><span class="n">RudofConfig</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">use_endpoint</span><span class="p">(</span><span class="s2">&quot;dbpedia&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">rudof</span><span class="o">.</span><span class="n">node_info</span><span class="p">(</span><span class="s2">&quot;dbr:Oviedo&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;foaf:depiction&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Outgoing arcs
+dbr:Oviedo
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo,_Espanha_-_panoramio_(9).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Real_Monasterio_de_San_Pelayo_(Oviedo).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Catedral_de_Oviedo_03.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/11._Teatro_Campoamor_(36104135806).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo_Landscape_(230140305).jpeg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/San_Miguel_de_Lillo_01.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo_Uría.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Mapa_Parroquial_Uviéu_(color).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Santa_María_Naranco.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Uvieu_flag.svg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/C_44_OVIEDO_OESTE.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo_desde_el_monte_Naranco.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Santa_María_del_Naranco._Oviedo.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Fachada_principal_del_Teatro_Campoamor.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo-ayuntamiento4.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/C_44_OVIEDO_CENTRO.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Ayuntamiento-de-oviedo.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/15._Junta_General_del_Principado_de_Asturias_(36143894785).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/1._Iglesia_San_Julián_de_los_Prados_(35752657690).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Church_of_San_Isidoro_el_Real,_Oviedo_16.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo02.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Ceremonia_de_entrega_de_los_Premios_Príncipe_de_Asturias_2010.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Estadio_Municipal_Carlos_Tartiere_(Real_Oviedo_S.A.D.).jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Oviedo-Plaza_del_Fontán.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/C_44_OVIEDO_ESTE.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Día_de_América_en_Asturias-2015_35.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/La-Regenta-y-Catedral.jpg&gt;
+├─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Escudo_de_Oviedo.svg&gt;
+└─── foaf:depiction ─► &lt;http://commons.wikimedia.org/wiki/Special:FilePath/Museo_arte_oviedo.jpg&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>Notice that the command <code class="docutils literal notranslate"><span class="pre">node_info</span></code> can be simulated with SPARQL queries (see next chapter). Nevertheless, it can be useful as a nice and easy way to get the neighborhood of a node when you want to validate it.</p>
+</div></blockquote>
 </section>
 <section id="running-sparql-queries">
-<h2>Running SPARQL queries<a class="headerlink" href="#running-sparql-queries" title="Link to this heading">#</a></h2>
+<h3>Running SPARQL queries<a class="headerlink" href="#running-sparql-queries" title="Link to this heading">#</a></h3>
 <p>SPARQL is an RDF query language which is also available in rudof:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rudof</span><span class="p">,</span> <span class="n">RudofConfig</span><span class="p">,</span> <span class="n">QuerySolutions</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyrudof</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rudof</span><span class="p">,</span> <span class="n">RudofConfig</span><span class="p">,</span> <span class="n">QuerySolutions</span>
 <span class="n">rudof</span> <span class="o">=</span> <span class="n">Rudof</span><span class="p">(</span><span class="n">RudofConfig</span><span class="p">())</span>
 <span class="n">rudof</span><span class="o">.</span><span class="n">reset_all</span><span class="p">()</span>
 </pre></div>
@@ -1240,7 +1094,95 @@ _:1 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.o
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solutions: QuerySolutions { solutions: [QuerySolution { variables: [VarName { str: &quot;person&quot; }, VarName { str: &quot;name&quot; }, VarName { str: &quot;date&quot; }, VarName { str: &quot;company&quot; }], values: [Some(NamedNode(NamedNode { iri: &quot;http://example.org/bob&quot; })), Some(Literal(Literal(String(&quot;Robert Smith&quot;)))), Some(Literal(Literal(TypedLiteral { value: &quot;2003-01-02&quot;, datatype: NamedNode { iri: &quot;http://www.w3.org/2001/XMLSchema#date&quot; } }))), Some(Literal(Literal(String(&quot;Acme Inc.&quot;))))] }, QuerySolution { variables: [VarName { str: &quot;person&quot; }, VarName { str: &quot;name&quot; }, VarName { str: &quot;date&quot; }, VarName { str: &quot;company&quot; }], values: [Some(NamedNode(NamedNode { iri: &quot;http://example.org/alice&quot; })), Some(Literal(Literal(String(&quot;Alice&quot;)))), Some(Literal(Literal(TypedLiteral { value: &quot;2005-03-01&quot;, datatype: NamedNode { iri: &quot;http://www.w3.org/2001/XMLSchema#date&quot; } }))), Some(Literal(Literal(String(&quot;Acme Inc.&quot;))))] }] }
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭───┬─────────┬────────────────┬────────────────────────┬─────────────╮
+│   │ ?person │ ?name          │ ?date                  │ ?company    │
+├───┼─────────┼────────────────┼────────────────────────┼─────────────┤
+│ 1 │ :alice  │ &quot;Alice&quot;        │ &quot;2005-03-01&quot;^^xsd:date │ &quot;Acme Inc.&quot; │
+├───┼─────────┼────────────────┼────────────────────────┼─────────────┤
+│ 2 │ :bob    │ &quot;Robert Smith&quot; │ &quot;2003-01-02&quot;^^xsd:date │ &quot;Acme Inc.&quot; │
+╰───┴─────────┴────────────────┴────────────────────────┴─────────────╯
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="example-about-tim-berners-lee">
+<h2>Example about Tim Berners-Lee<a class="headerlink" href="#example-about-tim-berners-lee" title="Link to this heading">#</a></h2>
+<p>The following is an example of RDF used in some slides.</p>
+<p>It describes a node <code class="docutils literal notranslate"><span class="pre">:timbl</span></code> which represents information about Tim Berners-Lee, declaring that he was born in London, in 1955 and knows someone who is from Spain.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_data_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">prefix :       &lt;http://example.org/&gt;</span>
+<span class="s2">prefix xsd:    &lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+<span class="s2">prefix rdf:    &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
+<span class="s2">prefix schema: &lt;http://schema.org/&gt;</span>
+<span class="s2">prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
+
+<span class="s2">:timbl  rdf:type    :Human ;</span>
+<span class="s2">        rdfs:label  &quot;Tim Berners-Lee&quot; ;</span>
+<span class="s2">        :birthPlace :london ;</span>
+<span class="s2">        :birthDate  &quot;1955-06-08&quot;^^xsd:date ;</span>
+<span class="s2">        :employer   :CERN ;</span>
+<span class="s2">        :knows      _:1 .</span>
+<span class="s2">_:1     :birthPlace :Spain .</span>
+<span class="s2">:CERN   rdf:type    :Organization .</span>
+<span class="s2">:london rdf:type    :City, :Metropolis ;</span>
+<span class="s2">        :country    :UK .</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Which can be visualized as:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>rm<span class="w"> </span>-f<span class="w"> </span>out.puml<span class="w"> </span>out.png
+<span class="n">uml</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">data2plantuml_file</span><span class="p">(</span><span class="s1">&#39;out.puml&#39;</span><span class="p">)</span>
+<span class="o">!</span>python<span class="w"> </span>-m<span class="w"> </span>plantuml<span class="w"> </span>out.puml
+<span class="n">Image</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;out.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;filename&#39;: &#39;out.puml&#39;, &#39;gen_success&#39;: True}]
+</pre></div>
+</div>
+<img alt="_images/3bc4441062e26d6d2e918c64a379cedba650cf5701eea41e52eb91ceb679d1e7.png" src="_images/3bc4441062e26d6d2e918c64a379cedba650cf5701eea41e52eb91ceb679d1e7.png" />
+</div>
+</div>
+<p>And a simple SPARQL query:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rudof</span><span class="o">.</span><span class="n">read_query_str</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">prefix :       &lt;http://example.org/&gt;</span>
+<span class="s2">prefix rdf:    &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
+
+<span class="s2">SELECT ?person ?date ?place ?country WHERE {</span>
+<span class="s2">  ?person rdf:type    :Human    ;</span>
+<span class="s2">          :birthDate  ?date     ;</span>
+<span class="s2">          :birthPlace ?place .</span>
+<span class="s2">  ?place  :country    ?country .</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">rudof</span><span class="o">.</span><span class="n">run_current_query_select</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>╭───┬─────────┬────────────────────────┬─────────┬──────────╮
+│   │ ?person │ ?date                  │ ?place  │ ?country │
+├───┼─────────┼────────────────────────┼─────────┼──────────┤
+│ 1 │ :timbl  │ &quot;1955-06-08&quot;^^xsd:date │ :london │ :UK      │
+╰───┴─────────┴────────────────────────┴─────────┴──────────╯
 </pre></div>
 </div>
 </div>
@@ -1319,9 +1261,11 @@ _:1 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://example.o
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blank-nodes">Blank nodes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-rdf-data">Merging RDF data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-rdf-data-formats">Different RDF data formats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-about-a-node-in-an-rdf-graph">Information about a node in an RDF graph</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-sparql-queries">Running SPARQL queries</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-sparql-queries">Running SPARQL queries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-about-tim-berners-lee">Example about Tim Berners-Lee</a></li>
 </ul>
   </nav></div>
 
