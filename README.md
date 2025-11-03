@@ -42,3 +42,8 @@ If you want to clean also the `jupyter_cache`, use:
 ```bash
 jupyter-book clean rudof --all
 ```
+and to locally install an updated dependency on rudof:
+
+```
+pip install pyrudof -U
+```
