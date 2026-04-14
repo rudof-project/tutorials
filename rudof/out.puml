@@ -1,20 +1,21 @@
 @startuml
 hide empty members
-skinparam linetype ortho
+top to bottom direction
+skinparam linetype polyline
 hide circles
 skinparam shadowing true
 skinparam class {
  BorderColor Black
  ArrowColor Black
 }
-class "ex:Person" as 1 <<(S,#FF7700)>> [[http://example.org/Person ex:Person]] { 
-[[http://example.org/name ex:name]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
---
-[[http://example.org/birthdate ex:birthdate]] : [[http://www.w3.org/2001/XMLSchema#date xsd:date]] ?
+class "ex:Company" as 2 <<(S,#FF7700)>> [[http://example.org/Company ex:Company]] { 
+[[http://example.org/name ex:name]] : .  
 --
 }
-class "ex:Company" as 2 <<(S,#FF7700)>> [[http://example.org/Company ex:Company]] { 
-[[http://example.org/name ex:name]] : [[http://www.w3.org/2001/XMLSchema#string xsd:string]]  
+class "ex:Person" as 1 <<(S,#FF7700)>> [[http://example.org/Person ex:Person]] { 
+[[http://example.org/name ex:name]] : .  
+--
+[[http://example.org/birthdate ex:birthdate]] : . ?
 --
 }
 1 --> "*" 2 : [[http://example.org/worksFor ex:worksFor]]
