@@ -3,16 +3,36 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: rudof
-- file: rdf
-- file: sparql
-- file: shex
-- file: shacl
-- file: dctap
-- file: rdf12
-- file: sparql12
-- file: compare
-- file: service_description
-- file: rudof_generate
-
+parts:
+- caption: Getting Started
+  chapters:
+  - file: rudof
+- caption: RDF
+  chapters:
+  - file: rdf
+  - file: querying
+    sections:
+    - file: sparql
+    - file: service_description
+  - file: validating
+    sections:
+    - file: shex
+    - file: shacl
+    - file: dctap
+    - file: compare
+    - file: rudof_generate
+  - file: statements
+    sections:
+    - file: rdf12
+    - file: sparql12
+    - file: shacl12
+- caption: Property Graphs
+  chapters:
+  - file: property_graphs
+  - file: pg_querying
+    sections:
+    - file: cypher
+  - file: pg_validating
+    sections:
+    - file: pgschema
+  - file: rdf2pg
