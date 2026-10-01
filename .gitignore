@@ -4,7 +4,13 @@ __pycache__/
 *$py.class
 
 # Jupyter notebook build files
-_build/ 
+_build/
+
+# Diagram intermediates written by the notebooks at run time. Committing these
+# is actively harmful: a stale out.png gets displayed when the PlantUML step
+# fails, so a broken diagram looks like a working one.
+out.puml
+out.png
 
 # C extensions
 *.so

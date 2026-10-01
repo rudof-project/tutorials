@@ -1,3 +1,5 @@
+# Dependencies for building this book on its own (e.g. on Binder).
+# The repository root requirements.txt is what CI installs.
 jupyter-book==1.0.4
-matplotlib
-numpy
+pyrudof>=0.3.22
+plantuml

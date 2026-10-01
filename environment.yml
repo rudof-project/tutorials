@@ -3,7 +3,9 @@ dependencies:
   - python=3.12
   - pip
   - pip:
-      - jupyter-book
+      - jupyter-book==1.0.4
       - ghp-import
       - jupyter
       - notebook
+      - pyrudof>=0.3.22
+      - plantuml

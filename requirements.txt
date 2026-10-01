@@ -2,3 +2,10 @@ jupyter-book==1.0.4
 ghp-import
 jupyter
 notebook
+
+# The library the tutorials are about. 0.3.22 is the first release with the
+# restructured Python bindings (result objects, RudofError hierarchy, Rudof()).
+pyrudof>=0.3.22
+
+# Used by several notebooks to render RDF graphs and schemas as diagrams.
+plantuml
